@@ -31,13 +31,20 @@ namespace EventSourcing.CodeGenerator.Infrastructure.Services
             foreach(var assemblyName in Assembly.GetExecutingAssembly().GetReferencedAssemblies())
             {
                 foreach(Assembly _assembly in AppDomain.CurrentDomain.GetAssemblies())
-                {                    
-                    var embededResourceNames = _assembly.GetManifestResourceNames();
-                    
-                    if (embededResourceNames.Length > 0 && _assembly.GetManifestResourceNames().SingleOrDefault(x => x.Contains(name)) != null)
+                {
+                    try
                     {
-                        fullName = _assembly.GetManifestResourceNames().Single(x => x.Contains(name));
-                        assembly = _assembly;
+                        var embededResourceNames = _assembly.GetManifestResourceNames();
+
+                        if (embededResourceNames.Length > 0 && _assembly.GetManifestResourceNames().SingleOrDefault(x => x.Contains(name)) != null)
+                        {
+                            fullName = _assembly.GetManifestResourceNames().Single(x => x.Contains(name));
+                            assembly = _assembly;
+                        }
+                    }
+                    catch (System.NotSupportedException notSupportedException)
+                    {
+                        //swallow
                     }
                 }                
             }

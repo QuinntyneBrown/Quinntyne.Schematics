@@ -1,4 +1,6 @@
-﻿using EventSourcing.CodeGenerator.Infrastructure.Services;
+﻿using EventSourcing.CodeGenerator.Infrastructure.Behaviours;
+using EventSourcing.CodeGenerator.Infrastructure.Services;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace EventSourcing.CodeGenerator.Extensions
@@ -12,6 +14,8 @@ namespace EventSourcing.CodeGenerator.Extensions
             services.AddSingleton<ITemplateProcessor, TemplateProcessor>();
             services.AddSingleton<ITemplateRepository, TemplateRepository>();
             services.AddSingleton<IConfigurationProvider, ConfigurationProvider>();
+            services.AddSingleton<INamespaceProvider, NamespaceProvider>();
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(NamespaceResolverBehaviour<,>));
         }
     }
 }

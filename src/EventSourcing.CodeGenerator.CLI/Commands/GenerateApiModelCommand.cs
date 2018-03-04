@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using CommandLine;
+using EventSourcing.CodeGenerator.Infrastructure.Interfaces;
 using EventSourcing.CodeGenerator.Infrastructure.Services;
 using MediatR;
 
@@ -16,18 +17,28 @@ namespace EventSourcing.CodeGenerator.CLI.Commands
             public string Entity { get; set; }
 
             public string Directory = System.Environment.CurrentDirectory;
+
+            public string Namespace { get; set; }
+
+            public string RootNamespace { get; set; }
         }
 
-        public class Request: IRequest
+        public class Request: Options, IRequest, ICodeGeneratorCommandRequest
         {
             public Request(string[] args)
             {                
                 Parser.Default.ParseArguments<Options>(args)
-                    .MapResult(x => { Options = x; return 1; }, x => 0);
+                    .MapResult(x => {
+                        Entity = x.Entity;
+                        Directory = x.Directory;
+                        Namespace = x.Namespace;
+                        RootNamespace = x.RootNamespace;
+                        return 1;
+                    }, x => 0);
             }
+            
 
-            public Options Options { get; set; }
-
+            public dynamic Settings { get; set; }
         }
 
         public class Handler : IRequestHandler<Request>
@@ -41,7 +52,8 @@ namespace EventSourcing.CodeGenerator.CLI.Commands
                 IFileWriter fileWriter,
                 INamingConventionConverter namingConventionConverter,
                 ITemplateRepository templateRepository, 
-                ITemplateProcessor templateProcessor)
+                ITemplateProcessor templateProcessor
+                )
             {
                 _fileWriter = fileWriter;
                 _namingConventionConverter = namingConventionConverter;
@@ -50,19 +62,23 @@ namespace EventSourcing.CodeGenerator.CLI.Commands
             }
 
             public Task Handle(Request request, CancellationToken cancellationToken)
-            {
-                var entityNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Options.Entity);
+            {                
+                var entityNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity);
+                var entityNameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity);
 
                 var template = _templateRepository.Get("GenerateApiModelCommand");
 
                 var tokens = new Dictionary<string, string>
                 {
-                    { "{{ entityNamePascalCase }}", entityNamePascalCase }
+                    { "{{ entityNamePascalCase }}", entityNamePascalCase },
+                    { "{{ entityNameCamelCase }}", entityNameCamelCase },
+                    { "{{ namespace }}", request.Namespace },
+                    { "{{ rootNamespace }}", request.RootNamespace }
                 };
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
                 
-                _fileWriter.WriteAllLines($"{request.Options.Directory}//{entityNamePascalCase}ApiModel.cs", result);
+                _fileWriter.WriteAllLines($"{request.Directory}//{entityNamePascalCase}ApiModel.cs", result);
                
                 return Task.CompletedTask;
             }

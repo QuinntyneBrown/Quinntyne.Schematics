@@ -1,6 +1,6 @@
-﻿using {{ rootNamespacename }}.Core.Entities;
+﻿using {{ rootNamespace }}.Core.Entities;
 
-namespace {{ namespacename }}
+namespace {{ namespace }}
 {
     public class {{ entityNamePascalCase }}ApiModel
     {        

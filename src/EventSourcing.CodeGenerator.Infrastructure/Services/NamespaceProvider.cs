@@ -1,72 +1,96 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using static System.String;
+using static System.Xml.Linq.XDocument;
+using static System.IO.Directory;
+using static System.IO.Path;
+using System.IO;
+using Newtonsoft.Json;
 
-//namespace EventSourcing.CodeGenerator.Infrastructure.Services
-//{
-//    public interface INamespaceProvider
-//    {
-//        FileNamespace GetNamespace(string path);
-//    }
+namespace EventSourcing.CodeGenerator.Infrastructure.Services
+{
+    public class Namespace {
+        public Namespace(string root)
+        {
+            Root = root;
+            Value = root;
+        }
 
-//    public class NamespaceProvider : INamespaceProvider
-//    {
-//        protected readonly XNamespace msbuild = "http://schemas.microsoft.com/developer/msbuild/2003";
-//        protected readonly INamingConventionConverter _namingConventionConverter;
-//        protected readonly ILeoraJSONFileManager _leoraJSONFileManager;
-//        public NamespaceProvider(INamingConventionConverter namingConventionConverter, ILeoraJSONFileManager leoraJSONFileManager)
-//        {
-//            _namingConventionConverter = namingConventionConverter;
-//            _leoraJSONFileManager = leoraJSONFileManager;
-//        }
+        public Namespace(string root, string value)
+        {
+            Root = root;
+            Value = value;
+        }
 
-//        public NamespaceProvider()
-//        {
-//            _namingConventionConverter = new NamingConventionConverter();
-//            _leoraJSONFileManager = new LeoraJSONFileManager();
-//        }
+        public string Value { get; set; }
+        public string Root { get; set; }
+    }
 
-//        public FileNamespace GetNamespace(string path)
-//        {
-//            var rootNamespace = _leoraJSONFileManager.GetLeoraJSONFile(path, -1).RootNamespace;
+    public interface INamespaceProvider
+    {
+        Namespace GetNamespace(string path);
+    }
 
-//            var projectPath = GetProjectPath(path);
+    public class NamespaceProvider : INamespaceProvider
+    {
+        private INamingConventionConverter _namingConventionConverter;
+        public NamespaceProvider(INamingConventionConverter namingConventionConverter)
+        {
+            _namingConventionConverter = namingConventionConverter;
+        }
 
-//            var subNamespaces = GetSubNamespaces(path, projectPath);
+        public Namespace GetNamespace(string path)
+        {
+            var rootNamespace = GetRootNamespace(path);
 
-//            if (subNamespaces.Count() < 1)
-//                return new FileNamespace() { Namespace = rootNamespace, RootNamespace = rootNamespace };
+            var projectPath = GetProjectPath(path);
 
-//            return new FileNamespace() { Namespace = $"{rootNamespace}.{Join(".", subNamespaces)}", RootNamespace = rootNamespace };
-//        }
+            var subNamespaces = GetSubNamespaces(path, projectPath);
 
-//        public string GetProjectPath(string path, int depth = 0)
-//        {
-//            var directories = path.Split(DirectorySeparatorChar);
+            if (subNamespaces.Count() < 1)
+                return new Namespace(rootNamespace);
 
-//            if (directories.Length <= depth)
-//                return null;
+            return new Namespace(rootNamespace, $"{rootNamespace}.{Join(".", subNamespaces)}");
+        }
 
-//            var newDirectories = directories.Take(directories.Length - depth);
-//            var computedPath = Join(DirectorySeparatorChar.ToString(), newDirectories);
-//            var projectFiles = GetFiles(computedPath, "*.csproj");
-//            depth = depth + 1;
-//            return (projectFiles.FirstOrDefault() != null) ? projectFiles.First() : GetProjectPath(path, depth);
-//        }
+        public string GetRootNamespace(string path)
+        {
+            using (var settings = new StreamReader($"{System.IO.Path.GetDirectoryName(GetProjectPath(path))}\\codeGeneratorSettings.json"))
+            {
+                string json = settings.ReadToEnd();
+                return JsonConvert.DeserializeObject<dynamic>(json).RootNamespace;
+            }            
+        }
 
-//        public List<string> GetSubNamespaces(string path, string projectPath)
-//        {
-//            var pathDirectories = path.Split(DirectorySeparatorChar);
-//            var skip = GetDirectoryName(projectPath).Split(DirectorySeparatorChar).Count();
-//            var subNamespaces = pathDirectories.Skip(skip).Take(pathDirectories.Length - skip).ToList();
-//            List<string> subNamespacesPascalCase = new List<string>();
-//            foreach (var subNamespace in subNamespaces)
-//            {
-//                subNamespacesPascalCase.Add(_namingConventionConverter.Convert(NamingConvention.PascalCase, subNamespace));
-//            }
-//            return subNamespacesPascalCase;
-//        }
+        public string GetProjectPath(string path, int depth = 0)
+        {
+            var directories = path.Split(DirectorySeparatorChar);
 
-//        public bool IsDirectory(string path) => File.GetAttributes(path).HasFlag(FileAttributes.Directory);
-//    }
-//}
+            if (directories.Length <= depth)
+                return null;
+
+            var newDirectories = directories.Take(directories.Length - depth);
+            var computedPath = Join(DirectorySeparatorChar.ToString(), newDirectories);
+            var projectFiles = GetFiles(computedPath, "*.csproj");
+            depth = depth + 1;
+            return (projectFiles.FirstOrDefault() != null) ? projectFiles.First() : GetProjectPath(path, depth);
+        }
+
+        public List<string> GetSubNamespaces(string path, string projectPath)
+        {
+            var pathDirectories = path.Split(DirectorySeparatorChar);
+            var skip = GetDirectoryName(projectPath).Split(DirectorySeparatorChar).Count();
+            var subNamespaces = pathDirectories.Skip(skip).Take(pathDirectories.Length - skip).ToList();
+            List<string> subNamespacesPascalCase = new List<string>();
+            foreach (var subNamespace in subNamespaces)
+            {
+                subNamespacesPascalCase.Add(_namingConventionConverter.Convert(NamingConvention.PascalCase, subNamespace));
+            }
+            return subNamespacesPascalCase;
+        }
+
+        public bool IsDirectory(string path) => File.GetAttributes(path).HasFlag(FileAttributes.Directory);
+    }
+}
