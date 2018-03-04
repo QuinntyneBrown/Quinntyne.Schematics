@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using CommandLine;
+using EventSourcing.CodeGenerator.Infrastructure.Services;
 using MediatR;
 
 namespace EventSourcing.CodeGenerator.CLI.Commands
@@ -22,7 +24,6 @@ namespace EventSourcing.CodeGenerator.CLI.Commands
             {                
                 Parser.Default.ParseArguments<Options>(args)
                     .MapResult(x => { Options = x; return 1; }, x => 0);
-
             }
 
             public Options Options { get; set; }
@@ -31,12 +32,37 @@ namespace EventSourcing.CodeGenerator.CLI.Commands
 
         public class Handler : IRequestHandler<Request>
         {
-            public Task Handle(Request message, CancellationToken cancellationToken)
+            private readonly IFileWriter _fileWriter;
+            private readonly ITemplateRepository _templateRepository;
+            private readonly ITemplateProcessor _templateProcessor;
+            private readonly INamingConventionConverter _namingConventionConverter;
+            public Handler(
+                IFileWriter fileWriter,
+                INamingConventionConverter namingConventionConverter,
+                ITemplateRepository templateRepository, 
+                ITemplateProcessor templateProcessor)
             {
-                Console.WriteLine("works?");
+                _fileWriter = fileWriter;
+                _namingConventionConverter = namingConventionConverter;
+                _templateProcessor = templateProcessor;
+                _templateRepository = templateRepository;
+            }
 
-                Console.ReadLine();
+            public Task Handle(Request request, CancellationToken cancellationToken)
+            {
+                var entityNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Options.Entity);
 
+                var template = _templateRepository.Get("ApiModel.txt");
+
+                var tokens = new Dictionary<string, string>
+                {
+                    { "{{ entityNamePascalCase }}",entityNamePascalCase }
+                };
+
+                var result = _templateProcessor.ProcessTemplate(template, tokens);
+                
+                _fileWriter.WriteAllLines($"{request.Options.Directory}//{entityNamePascalCase}ApiModel.cs", result);
+               
                 return Task.CompletedTask;
             }
         }

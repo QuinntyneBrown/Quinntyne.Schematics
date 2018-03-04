@@ -1,0 +1,18 @@
+﻿using {{ rootNamespacename }}.Core.Entities;
+
+namespace {{ namespacename }}
+{
+    public class {{ entityNamePascalCase }}ApiModel
+    {        
+        public int {{ entityNamePascalCase }}Id { get; set; }
+        public string Name { get; set; }
+
+        public static {{ entityNamePascalCase }}ApiModel From{{ entityNamePascalCase }}({{ entityNamePascalCase }} {{ entityNameCamelCase }})
+        {
+            var model = new {{ entityNamePascalCase }}ApiModel();
+            model.{{ entityNamePascalCase }}Id = {{ entityNameCamelCase }}.{{ entityNamePascalCase }}Id;
+            model.Name = {{ entityNameCamelCase }}.Name;
+            return model;
+        }
+    }
+}
