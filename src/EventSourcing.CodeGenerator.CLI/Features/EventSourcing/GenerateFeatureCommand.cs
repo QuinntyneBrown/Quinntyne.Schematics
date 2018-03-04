@@ -1,15 +1,15 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using CommandLine;
-using {{ *rootNamespace }}.Infrastructure.Interfaces;
-using {{ *rootNamespace }}.Infrastructure.Services;
+using EventSourcing.CodeGenerator.Infrastructure.Interfaces;
+using EventSourcing.CodeGenerator.Infrastructure.Services;
 using MediatR;
 
-namespace {{ *namespace }}
+namespace EventSourcing.CodeGenerator.CLI.Features.EventSourcing
 {
-    public class {{ name }}
+    public class GenerateFeatureCommand
     {
         public class Options
         {
@@ -66,7 +66,7 @@ namespace {{ *namespace }}
                 var entityNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity);
                 var entityNameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity);
 
-                var template = _templateRepository.Get("{{ name }}");
+                var template = _templateRepository.Get("GenerateFeatureCommand");
 
                 var tokens = new Dictionary<string, string>
                 {
@@ -78,7 +78,7 @@ namespace {{ *namespace }}
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
                 
-                _fileWriter.WriteAllLines($"{request.Directory}//{{ name }}.cs", result);
+                _fileWriter.WriteAllLines($"{request.Directory}//GenerateFeatureCommand.cs", result);
                
                 return Task.CompletedTask;
             }

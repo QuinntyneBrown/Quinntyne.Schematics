@@ -69,14 +69,15 @@ namespace EventSourcing.CodeGenerator.CLI.Features.CodeGenerator
                 var tokens = new Dictionary<string, string>
                 {
                     { "{{ name }}", request.Name },
-                    { "{{ namespace }}", request.Namespace },
-                    { "{{ rootNamespace }}", request.RootNamespace }
+                    { "{{ *namespace }}", request.Namespace },
+                    { "{{ *rootNamespace }}", request.RootNamespace }
                 };
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
                 
                 _fileWriter.WriteAllLines($"{request.Directory}//{request.Name}.cs", result);
-               
+                _fileWriter.WriteAllLines($"{request.Directory}//{request.Name}.txt", new string[0]);
+
                 return Task.CompletedTask;
             }
         }

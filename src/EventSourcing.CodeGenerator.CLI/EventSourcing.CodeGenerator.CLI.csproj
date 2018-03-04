@@ -9,6 +9,8 @@
   <ItemGroup>
     <None Remove="Features\CodeGenerator\GenerateApiModelCommand.txt" />
     <None Remove="Features\CodeGenerator\GenerateCodeGeneratorCommand.txt" />
+    <None Remove="Features\EventSourcing\GenerateModelCommand.txt" />
+    <None Remove="Features\EventSourcing\GenerateSaveCommand.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +19,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Features\EventSourcing\GenerateApiModelCommand.txt">
       <DependentUpon>GenerateApiModelCommand.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\EventSourcing\GenerateModelCommand.txt">
+      <DependentUpon>GenerateModelCommand.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\EventSourcing\GenerateSaveCommand.txt">
+      <DependentUpon>GenerateSaveCommand.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
 
@@ -31,6 +39,21 @@
   <ItemGroup>
     <ProjectReference Include="..\EventSourcing.CodeGenerator.Extensions\EventSourcing.CodeGenerator.Extensions.csproj" />
     <ProjectReference Include="..\EventSourcing.CodeGenerator.Infrastructure\EventSourcing.CodeGenerator.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Features\EventSourcing\GenerateControllerCommand.txt">
+      <DependentUpon>GenerateControllerCommand.cs</DependentUpon>
+    </None>
+    <None Update="Features\EventSourcing\GenerateGetByIdQueryCommand.txt">
+      <DependentUpon>GenerateGetByIdQueryCommand.cs</DependentUpon>
+    </None>
+    <None Update="Features\EventSourcing\GenerateGetQueryCommand.txt">
+      <DependentUpon>GenerateGetQueryCommand.cs</DependentUpon>
+    </None>
+    <None Update="Features\EventSourcing\GenerateRemoveCommand.txt">
+      <DependentUpon>GenerateRemoveCommand.cs</DependentUpon>
+    </None>
   </ItemGroup>
 
 </Project>
