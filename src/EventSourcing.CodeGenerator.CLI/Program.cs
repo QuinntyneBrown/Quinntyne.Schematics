@@ -4,6 +4,8 @@ using MediatR;
 using System.Collections.Generic;
 using System.Linq;
 using EventSourcing.CodeGenerator.Extensions;
+using EventSourcing.CodeGenerator.CLI.Features.EventSourcing;
+using EventSourcing.CodeGenerator.CLI.Features.CodeGenerator;
 
 namespace EventSourcing.CodeGenerator.CLI
 {
@@ -67,10 +69,12 @@ namespace EventSourcing.CodeGenerator.CLI
 
         public Dictionary<string, Func<string[], IRequest>> BuildCommandRequestDictionary()
         {
-            return new Dictionary<string, Func<string[], IRequest>>
-            {
-                { "api-model", new Func<string[], IRequest>((args) => new Commands.GenerateApiModelCommand.Request(args)) }
-            };
+            var dictionary = new Dictionary<string, Func<string[], IRequest>>();
+
+            RegisterCodeGeneratorCommands.Register(dictionary);
+            RegisterEventSourcingCommands.Register(dictionary);
+
+            return dictionary;
         }
     }
 

@@ -7,11 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Commands\GenerateApiModelCommand.txt" />
+    <None Remove="Features\CodeGenerator\GenerateApiModelCommand.txt" />
+    <None Remove="Features\CodeGenerator\GenerateCodeGeneratorCommand.txt" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Commands\GenerateApiModelCommand.txt">
+    <EmbeddedResource Include="Features\CodeGenerator\GenerateCodeGeneratorCommand.txt">
+      <DependentUpon>GenerateCodeGeneratorCommand.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\EventSourcing\GenerateApiModelCommand.txt">
       <DependentUpon>GenerateApiModelCommand.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

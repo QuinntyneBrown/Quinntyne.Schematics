@@ -48,11 +48,8 @@ namespace EventSourcing.CodeGenerator.Infrastructure.Services
             var projectPath = GetProjectPath(path);
 
             var subNamespaces = GetSubNamespaces(path, projectPath);
-
-            if (subNamespaces.Count() < 1)
-                return new Namespace(rootNamespace);
-
-            return new Namespace(rootNamespace, $"{rootNamespace}.{Join(".", subNamespaces)}");
+            
+            return new Namespace(rootNamespace, $"{Join(".", subNamespaces)}");
         }
 
         public string GetRootNamespace(string path)
@@ -81,8 +78,8 @@ namespace EventSourcing.CodeGenerator.Infrastructure.Services
         public List<string> GetSubNamespaces(string path, string projectPath)
         {
             var pathDirectories = path.Split(DirectorySeparatorChar);
-            var skip = GetDirectoryName(projectPath).Split(DirectorySeparatorChar).Count();
-            var subNamespaces = pathDirectories.Skip(skip).Take(pathDirectories.Length - skip).ToList();
+            var skip = GetProjectPath(path).Split(DirectorySeparatorChar).Length - 2;
+            var subNamespaces = pathDirectories.Skip(skip).Take(pathDirectories.Length).ToList();
             List<string> subNamespacesPascalCase = new List<string>();
             foreach (var subNamespace in subNamespaces)
             {

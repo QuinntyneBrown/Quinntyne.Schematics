@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,9 +7,9 @@ using EventSourcing.CodeGenerator.Infrastructure.Interfaces;
 using EventSourcing.CodeGenerator.Infrastructure.Services;
 using MediatR;
 
-namespace EventSourcing.CodeGenerator.CLI.Commands
+namespace EventSourcing.CodeGenerator.CLI.Features.EventSourcing
 {
-    public class GenerateApiModelCommand
+    public class GenerateModelCommand
     {
         public class Options
         {
@@ -66,7 +66,7 @@ namespace EventSourcing.CodeGenerator.CLI.Commands
                 var entityNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity);
                 var entityNameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity);
 
-                var template = _templateRepository.Get("GenerateApiModelCommand");
+                var template = _templateRepository.Get("GenerateModelCommand");
 
                 var tokens = new Dictionary<string, string>
                 {
@@ -78,7 +78,7 @@ namespace EventSourcing.CodeGenerator.CLI.Commands
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
                 
-                _fileWriter.WriteAllLines($"{request.Directory}//{entityNamePascalCase}ApiModel.cs", result);
+                _fileWriter.WriteAllLines($"{request.Directory}//GenerateModelCommand.cs", result);
                
                 return Task.CompletedTask;
             }
