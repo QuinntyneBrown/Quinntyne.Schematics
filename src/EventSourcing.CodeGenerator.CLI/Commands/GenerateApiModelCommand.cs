@@ -36,6 +36,7 @@ namespace EventSourcing.CodeGenerator.CLI.Commands
             private readonly ITemplateRepository _templateRepository;
             private readonly ITemplateProcessor _templateProcessor;
             private readonly INamingConventionConverter _namingConventionConverter;
+
             public Handler(
                 IFileWriter fileWriter,
                 INamingConventionConverter namingConventionConverter,
@@ -52,11 +53,11 @@ namespace EventSourcing.CodeGenerator.CLI.Commands
             {
                 var entityNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Options.Entity);
 
-                var template = _templateRepository.Get("ApiModel.txt");
+                var template = _templateRepository.Get("GenerateApiModelCommand");
 
                 var tokens = new Dictionary<string, string>
                 {
-                    { "{{ entityNamePascalCase }}",entityNamePascalCase }
+                    { "{{ entityNamePascalCase }}", entityNamePascalCase }
                 };
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
