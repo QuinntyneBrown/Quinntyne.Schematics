@@ -7,15 +7,17 @@ namespace Quinntyne.CodeGenerator.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static void UseEventSourcingCodeGenerator(this IServiceCollection services)
+        public static void UseCodeGenerator(this IServiceCollection services)
         {
             services.AddSingleton<INamingConventionConverter, NamingConventionConverter>();
             services.AddSingleton<IFileWriter, FileWriter>();
             services.AddSingleton<ITemplateProcessor, TemplateProcessor>();
-            services.AddSingleton<ITemplateRepository, TemplateRepository>();
+            services.AddSingleton<ITemplateLocator, TemplateLocator>();
             services.AddSingleton<IConfigurationProvider, ConfigurationProvider>();
             services.AddSingleton<INamespaceProvider, NamespaceProvider>();
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(NamespaceResolverBehaviour<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
         }
     }
 }

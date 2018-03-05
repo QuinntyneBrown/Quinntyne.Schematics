@@ -37,28 +37,27 @@ namespace Quinntyne.CodeGenerator.CLI.Features.EventSourcing
                     }, x => 0);
             }
             
-
             public dynamic Settings { get; set; }
         }
 
         public class Handler : IRequestHandler<Request>
         {
             private readonly IFileWriter _fileWriter;
-            private readonly ITemplateRepository _templateRepository;
+            private readonly ITemplateLocator _templateLocator;
             private readonly ITemplateProcessor _templateProcessor;
             private readonly INamingConventionConverter _namingConventionConverter;
 
             public Handler(
                 IFileWriter fileWriter,
                 INamingConventionConverter namingConventionConverter,
-                ITemplateRepository templateRepository, 
+                ITemplateLocator templateLocator, 
                 ITemplateProcessor templateProcessor
                 )
             {
                 _fileWriter = fileWriter;
                 _namingConventionConverter = namingConventionConverter;
                 _templateProcessor = templateProcessor;
-                _templateRepository = templateRepository;
+                _templateLocator = templateLocator;
             }
 
             public Task Handle(Request request, CancellationToken cancellationToken)
@@ -66,7 +65,7 @@ namespace Quinntyne.CodeGenerator.CLI.Features.EventSourcing
                 var entityNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity);
                 var entityNameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity);
 
-                var template = _templateRepository.Get("GenerateApiModelCommand");
+                var template = _templateLocator.Get("GenerateApiModelCommand");
 
                 var tokens = new Dictionary<string, string>
                 {

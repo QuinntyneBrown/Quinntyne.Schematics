@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -6,16 +6,15 @@ using CommandLine;
 using Quinntyne.CodeGenerator.Infrastructure.Interfaces;
 using Quinntyne.CodeGenerator.Infrastructure.Services;
 using MediatR;
-using FluentValidation;
 
-namespace Quinntyne.CodeGenerator.CLI.Features.CodeGenerator
+namespace Quinntyne.CodeGenerator.CLI.Features.EventSourcing
 {
-    public class GenerateCodeGeneratorCommand
+    public class GenerateTestsCommand
     {
         public class Options
         {
-            [Option("name", Required = false, HelpText = "Entity")]
-            public string Name { get; set; }
+            [Option("entity", Required = false, HelpText = "Entity")]
+            public string Entity { get; set; }
 
             public string Directory = System.Environment.CurrentDirectory;
 
@@ -24,21 +23,13 @@ namespace Quinntyne.CodeGenerator.CLI.Features.CodeGenerator
             public string RootNamespace { get; set; }
         }
 
-        public class Validator : AbstractValidator<Request>
-        {
-            public Validator()
-            {
-                RuleFor(request => request.Name).NotNull();
-            }
-        }
-
         public class Request: Options, IRequest, ICodeGeneratorCommandRequest
         {
             public Request(string[] args)
             {                
                 Parser.Default.ParseArguments<Options>(args)
                     .MapResult(x => {
-                        Name = x.Name;
+                        Entity = x.Entity;
                         Directory = x.Directory;
                         Namespace = x.Namespace;
                         RootNamespace = x.RootNamespace;
@@ -72,20 +63,23 @@ namespace Quinntyne.CodeGenerator.CLI.Features.CodeGenerator
 
             public Task Handle(Request request, CancellationToken cancellationToken)
             {                
-                var template = _templateLocator.Get("GenerateCodeGeneratorCommand");
+                var entityNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity);
+                var entityNameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity);
+
+                var template = _templateLocator.Get("GenerateTestsCommand");
 
                 var tokens = new Dictionary<string, string>
                 {
-                    { "{{ name }}", request.Name },
-                    { "{{ *namespace }}", request.Namespace },
-                    { "{{ *rootNamespace }}", request.RootNamespace }
+                    { "{{ entityNamePascalCase }}", entityNamePascalCase },
+                    { "{{ entityNameCamelCase }}", entityNameCamelCase },
+                    { "{{ namespace }}", request.Namespace },
+                    { "{{ rootNamespace }}", request.RootNamespace }
                 };
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
                 
-                _fileWriter.WriteAllLines($"{request.Directory}//{request.Name}.cs", result);
-                _fileWriter.WriteAllLines($"{request.Directory}//{request.Name}.txt", new string[0]);
-
+                _fileWriter.WriteAllLines($"{request.Directory}//{entityNamePascalCase}Tests.cs", result);
+               
                 return Task.CompletedTask;
             }
         }

@@ -11,6 +11,7 @@
     <None Remove="Features\CodeGenerator\GenerateCodeGeneratorCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateModelCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateSaveCommand.txt" />
+    <None Remove="Features\EventSourcing\GenerateTestsCommand.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,10 +27,14 @@
     <EmbeddedResource Include="Features\EventSourcing\GenerateSaveCommand.txt">
       <DependentUpon>GenerateSaveCommand.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Features\EventSourcing\GenerateTestsCommand.txt">
+      <DependentUpon>GenerateTestsCommand.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.2.1" />
+    <PackageReference Include="FluentValidation" Version="7.5.0" />
     <PackageReference Include="MediatR" Version="4.0.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="4.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.0.0" />
@@ -49,10 +54,6 @@
     <None Update="Features\EventSourcing\GenerateRemoveCommand.txt">
       <DependentUpon>GenerateRemoveCommand.cs</DependentUpon>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Features\SinglePageApplication\" />
   </ItemGroup>
 
   <ItemGroup>

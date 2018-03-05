@@ -1,27 +1,18 @@
-﻿using Quinntyne.CodeGenerator.Infrastructure.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace Quinntyne.CodeGenerator.Infrastructure.Services
 {
-    public interface ITemplateRepository
+    public interface ITemplateLocator
     {
         string[] Get(string filename);
     }
 
-    public class TemplateRepository : ITemplateRepository
-    {
-        protected readonly INamingConventionConverter _namingConventionConverter;
-
-        public TemplateRepository(INamingConventionConverter namingConventionConverter)
-        {
-            _namingConventionConverter = namingConventionConverter;
-        }
-
+    public class TemplateLocator : ITemplateLocator
+    {        
         public string[] Get(string name)
         {
             var lines = new List<string>();
@@ -66,10 +57,7 @@ namespace Quinntyne.CodeGenerator.Infrastructure.Services
             }
             catch (Exception exception)
             {
-                Console.WriteLine("Error:" + fullName);
-
                 throw exception;
-
             }
         }
     }

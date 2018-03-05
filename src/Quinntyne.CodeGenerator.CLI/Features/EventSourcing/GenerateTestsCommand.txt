@@ -1,0 +1,41 @@
+using System.Threading.Tasks;
+using Xunit;
+using TestUtilities.Extensions;
+// using {{ rootNamespace }}.API.Features.{{ entityNamePascalCase }}s;
+
+namespace IntegrationTests.Features.{{ entityNamePascalCase }}s
+{
+    public class {{ entityNamePascalCase }}Tests: TestBase
+    {
+        [Fact]
+        public async Task CanSave()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        [Fact]
+        public async Task CanDelete()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        [Fact]
+        public async Task CanGet()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        [Fact]
+        public async Task CanGetById()
+        {
+            throw new System.NotImplementedException();
+        }
+
+
+        [Fact]
+        public async Task CanUpdate()
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+}

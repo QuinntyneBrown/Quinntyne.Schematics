@@ -14,6 +14,7 @@ namespace Quinntyne.CodeGenerator.CLI.Features.EventSourcing
             dictionary.Add("get-query", new Func<string[], IRequest>((args) => new GenerateGetQueryCommand.Request(args)));
             dictionary.Add("getbyid-query", new Func<string[], IRequest>((args) => new GenerateGetByIdQueryCommand.Request(args)));
             dictionary.Add("feature", new Func<string[], IRequest>((args) => new GenerateFeatureCommand.Request(args)));
+            dictionary.Add("tests", new Func<string[], IRequest>((args) => new GenerateTestsCommand.Request(args)));
             dictionary.Add("controller", new Func<string[], IRequest>((args) => new GenerateControllerCommand.Request(args)));
         }
     }

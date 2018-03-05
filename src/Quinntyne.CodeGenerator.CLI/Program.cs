@@ -59,10 +59,12 @@ namespace Quinntyne.CodeGenerator.CLI
 
             services.AddLogging();
 
+            services.UseCodeGenerator();
+
+            services.UseCodeGeneratorFeature();
+
             services.AddMediatR(typeof(Program));
-
-            services.UseEventSourcingCodeGenerator();
-
+            
             return services.BuildServiceProvider();            
         }
 
@@ -77,6 +79,4 @@ namespace Quinntyne.CodeGenerator.CLI
             return dictionary;
         }
     }
-
-
 }
