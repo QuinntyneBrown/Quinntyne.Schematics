@@ -6,6 +6,7 @@ using System.Linq;
 using Quinntyne.CodeGenerator.Extensions;
 using Quinntyne.CodeGenerator.CLI.Features.EventSourcing;
 using Quinntyne.CodeGenerator.CLI.Features.CodeGenerator;
+using Microsoft.Extensions.Logging;
 
 namespace Quinntyne.CodeGenerator.CLI
 {
@@ -17,13 +18,22 @@ namespace Quinntyne.CodeGenerator.CLI
 
         static void Main(string[] args)
         {
-            new Program().ProcessArgs(args);
+            new Program().ProcessArgs(args);            
         }
 
         public Program()
         {
             _serviceProvider = BuildServiceProvider();
             _commands = BuildCommandRequestDictionary();
+
+            _serviceProvider
+                .GetService<ILoggerFactory>()
+                .AddConsole(LogLevel.Debug);
+
+            var logger = _serviceProvider.GetService<ILoggerFactory>()
+                .CreateLogger<Program>();
+
+            logger.LogInformation("Starting Quinntyne.CodeGenerator");
         }
 
         public int ProcessArgs(string[] args)
