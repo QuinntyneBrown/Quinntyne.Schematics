@@ -1,0 +1,36 @@
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+
+namespace {{ namespace }}
+{
+    [Authorize]
+    [ApiController]
+    [Route("api/{{ entityNameCamelCasePlural }}")]
+    public class {{ entityNamePascalCasePlural }}Controller
+    {
+        private readonly IMediator _mediator;
+
+        public {{ entityNamePascalCasePlural }}Controller(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+
+        [HttpPost("save")]
+        public async Task<ActionResult<Save{{ entityNamePascalCase }}Command.Response>> Add(Save{{ entityNamePascalCase }}Command.Request request)
+            => await _mediator.Send(request);
+        
+        [HttpDelete("remove/{{{ entityNameCamelCase }}Id}")]
+        public async Task Remove(Remove{{ entityNamePascalCase }}Command.Request request)
+            => await _mediator.Send(request);            
+
+        [HttpGet("getbyid/{{{ entityNameCamelCase }}Id}")]
+        public async Task<ActionResult<Get{{ entityNamePascalCase }}ByIdQuery.Response>> GetById([FromRoute]Get{{ entityNamePascalCase }}ByIdQuery.Request request)
+            => await _mediator.Send(request);
+
+        [HttpGet("get")]
+        public async Task<ActionResult<Get{{ entityNamePascalCasePlural }}Query.Response>> Get()
+            => await _mediator.Send(new Get{{ entityNamePascalCasePlural }}Query.Request());
+    }
+}

@@ -1,0 +1,43 @@
+using MediatR;
+using System.Threading.Tasks;
+using System.Threading;
+using {{ rootNamespace }}.Infrastructure.Data;
+using FluentValidation;
+
+namespace {{ namespace }}
+{
+    public class Get{{ entityNamePascalCase }}ByIdQuery
+    {
+        public class Validator : AbstractValidator<Request>
+        {
+            public Validator()
+            {
+                RuleFor(request => request.{{ entityNamePascalCase }}Id).NotEqual(0);
+            }
+        }
+
+        public class Request : IRequest<Response> {
+            public int {{ entityNamePascalCase }}Id { get; set; }
+        }
+
+        public class Response
+        {
+            public {{ entityNamePascalCase }}ApiModel {{ entityNamePascalCase }} { get; set; }
+        }
+
+        public class Handler : IRequestHandler<Request, Response>
+        {
+            public I{{ rootNamespace }}Context _context { get; set; }
+            public Handler(I{{ rootNamespace }}Context context)
+            {
+                _context = context;
+            }
+
+            public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
+                => new Response()
+                {
+                    {{ entityNamePascalCase }} = {{ entityNamePascalCase }}ApiModel.From{{ entityNamePascalCase }}(await _context.{{ entityNamePascalCase }}s.FindAsync(request.{{ entityNamePascalCase }}Id))
+                };
+        }
+    }
+}

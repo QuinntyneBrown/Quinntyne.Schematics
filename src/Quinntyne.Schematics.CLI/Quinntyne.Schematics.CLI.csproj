@@ -3,13 +3,21 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <AssemblyName>q</AssemblyName>
+    <AssemblyName>quinntyne</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Features\CodeGenerator\GenerateApiModelCommand.txt" />
     <None Remove="Features\CodeGenerator\GenerateCodeGeneratorCommand.txt" />
+    <None Remove="Features\EventSourcing\GenerateApiModelCommand.txt" />
+    <None Remove="Features\EventSourcing\GenerateCommand.txt" />
+    <None Remove="Features\EventSourcing\GenerateControllerCommand.txt" />
+    <None Remove="Features\EventSourcing\GenerateFeatureCommand.txt" />
+    <None Remove="Features\EventSourcing\GenerateGetByIdQueryCommand.txt" />
+    <None Remove="Features\EventSourcing\GenerateGetQueryCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateModelCommand.txt" />
+    <None Remove="Features\EventSourcing\GenerateQueryCommand.txt" />
+    <None Remove="Features\EventSourcing\GenerateRemoveCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateSaveCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateTestsCommand.txt" />
   </ItemGroup>
@@ -21,8 +29,29 @@
     <EmbeddedResource Include="Features\EventSourcing\GenerateApiModelCommand.txt">
       <DependentUpon>GenerateApiModelCommand.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Features\EventSourcing\GenerateCommand.txt">
+      <DependentUpon>GenerateCommand.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\EventSourcing\GenerateControllerCommand.txt">
+      <DependentUpon>GenerateControllerCommand.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\EventSourcing\GenerateFeatureCommand.txt">
+      <DependentUpon>GenerateFeatureCommand.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\EventSourcing\GenerateGetByIdQueryCommand.txt">
+      <DependentUpon>GenerateGetByIdQueryCommand.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\EventSourcing\GenerateGetQueryCommand.txt">
+      <DependentUpon>GenerateGetQueryCommand.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Features\EventSourcing\GenerateModelCommand.txt">
       <DependentUpon>GenerateModelCommand.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\EventSourcing\GenerateQueryCommand.txt">
+      <DependentUpon>GenerateQueryCommand.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\EventSourcing\GenerateRemoveCommand.txt">
+      <DependentUpon>GenerateRemoveCommand.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Features\EventSourcing\GenerateSaveCommand.txt">
       <DependentUpon>GenerateSaveCommand.cs</DependentUpon>
@@ -47,18 +76,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Features\EventSourcing\GenerateControllerCommand.txt">
-      <DependentUpon>GenerateControllerCommand.cs</DependentUpon>
-    </None>
-    <None Update="Features\EventSourcing\GenerateGetByIdQueryCommand.txt">
-      <DependentUpon>GenerateGetByIdQueryCommand.cs</DependentUpon>
-    </None>
-    <None Update="Features\EventSourcing\GenerateGetQueryCommand.txt">
-      <DependentUpon>GenerateGetQueryCommand.cs</DependentUpon>
-    </None>
-    <None Update="Features\EventSourcing\GenerateRemoveCommand.txt">
-      <DependentUpon>GenerateRemoveCommand.cs</DependentUpon>
-    </None>
+    <Folder Include="Features\API\" />
   </ItemGroup>
 
 </Project>

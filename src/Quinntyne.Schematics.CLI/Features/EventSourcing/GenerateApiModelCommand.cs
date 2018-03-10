@@ -1,43 +1,34 @@
-﻿using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using CommandLine;
 using Quinntyne.Schematics.Infrastructure.Interfaces;
 using Quinntyne.Schematics.Infrastructure.Services;
 using MediatR;
+using FluentValidation;
 
 namespace Quinntyne.Schematics.CLI.Features.EventSourcing
 {
     public class GenerateApiModelCommand
     {
-        public class Options
-        {
-            [Option("entity", Required = false, HelpText = "Entity")]
-            public string Entity { get; set; }
-
-            public string Directory = System.Environment.CurrentDirectory;
-
-            public string Namespace { get; set; }
-
-            public string RootNamespace { get; set; }
-        }
-
         public class Request: Options, IRequest, ICodeGeneratorCommandRequest
         {
-            public Request(string[] args)
+            public Request(IOptions options)
             {                
-                Parser.Default.ParseArguments<Options>(args)
-                    .MapResult(x => {
-                        Entity = x.Entity;
-                        Directory = x.Directory;
-                        Namespace = x.Namespace;
-                        RootNamespace = x.RootNamespace;
-                        return 1;
-                    }, x => 0);
+                Entity = options.Entity;
+                Directory = options.Directory;
+                Namespace = options.Namespace;
+                RootNamespace = options.RootNamespace;
             }
-            
+
             public dynamic Settings { get; set; }
+        }
+
+        public class Validator : AbstractValidator<Request>
+        {
+            public Validator()
+            {
+                RuleFor(request => request.Entity).NotNull();
+            }
         }
 
         public class Handler : IRequestHandler<Request>
@@ -76,9 +67,9 @@ namespace Quinntyne.Schematics.CLI.Features.EventSourcing
                 };
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
-                
+
                 _fileWriter.WriteAllLines($"{request.Directory}//{entityNamePascalCase}ApiModel.cs", result);
-               
+
                 return Task.CompletedTask;
             }
         }

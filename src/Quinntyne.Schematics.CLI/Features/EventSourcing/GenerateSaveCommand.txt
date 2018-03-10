@@ -1,0 +1,50 @@
+using MediatR;
+using System.Threading.Tasks;
+using System.Threading;
+using FluentValidation;
+using {{ rootNamespace }}.Infrastructure.Data;
+using {{ rootNamespace }}.Core.Entities;
+
+namespace {{ namespace }}
+{
+    public class Save{{ entityNamePascalCase }}Command
+    {
+        public class Validator: AbstractValidator<Request> {
+            public Validator()
+            {
+                RuleFor(request => request.{{ entityNamePascalCase }}.{{ entityNamePascalCase }}Id).NotNull();
+            }
+        }
+
+        public class Request : IRequest<Response> {
+            public {{ entityNamePascalCase }}ApiModel {{ entityNamePascalCase }} { get; set; }
+        }
+
+        public class Response
+        {			
+            public int {{ entityNamePascalCase }}Id { get; set; }
+        }
+
+        public class Handler : IRequestHandler<Request, Response>
+        {
+            public I{{ rootNamespace }}Context _context { get; set; }
+            public Handler(I{{ rootNamespace }}Context context)
+            {
+                _context = context;
+            }
+
+            public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
+            {
+                var {{ entityNameCamelCase }} = await _context.{{ entityNamePascalCasePlural }}.FindAsync(request.{{ entityNamePascalCase }}.{{ entityNamePascalCase }}Id);
+
+                if ({{ entityNameCamelCase }} == null) _context.{{ entityNamePascalCasePlural }}.Add({{ entityNameCamelCase }} = new {{ entityNamePascalCase }}());
+
+                {{ entityNameCamelCase }}.Name = request.{{ entityNamePascalCase }}.Name;
+
+                await _context.SaveChangesAsync(cancellationToken);
+
+                return new Response() { {{ entityNamePascalCase }}Id = {{ entityNameCamelCase }}.{{ entityNamePascalCase }}Id };
+            }
+        }
+    }
+}

@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Quinntyne.CodeGenerator.Infrastructure\Quinntyne.CodeGenerator.Infrastructure.csproj" />
+    <ProjectReference Include="..\Quinntyne.Schematics.Infrastructure\Quinntyne.Schematics.Infrastructure.csproj" />
   </ItemGroup>
   
 </Project>

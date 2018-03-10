@@ -1,0 +1,8 @@
+namespace {{ namespace }}
+{
+    public class {{ entityNamePascalCase }}
+    {
+        public int {{ entityNamePascalCase }}Id { get; set; }           
+		public string Code { get; set; }        
+    }
+}

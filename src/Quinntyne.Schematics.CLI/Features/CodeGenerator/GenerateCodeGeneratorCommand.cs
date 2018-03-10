@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using CommandLine;
 using Quinntyne.Schematics.Infrastructure.Interfaces;
 using Quinntyne.Schematics.Infrastructure.Services;
 using MediatR;
@@ -12,18 +10,6 @@ namespace Quinntyne.Schematics.CLI.Features.CodeGenerator
 {
     public class GenerateCodeGeneratorCommand
     {
-        public class Options
-        {
-            [Option("name", Required = false, HelpText = "Entity")]
-            public string Name { get; set; }
-
-            public string Directory = System.Environment.CurrentDirectory;
-
-            public string Namespace { get; set; }
-
-            public string RootNamespace { get; set; }
-        }
-
         public class Validator : AbstractValidator<Request>
         {
             public Validator()
@@ -34,18 +20,17 @@ namespace Quinntyne.Schematics.CLI.Features.CodeGenerator
 
         public class Request: Options, IRequest, ICodeGeneratorCommandRequest
         {
-            public Request(string[] args)
-            {                
-                Parser.Default.ParseArguments<Options>(args)
-                    .MapResult(x => {
-                        Name = x.Name;
-                        Directory = x.Directory;
-                        Namespace = x.Namespace;
-                        RootNamespace = x.RootNamespace;
-                        return 1;
-                    }, x => 0);
+            public Request()
+            {
+
             }
-            
+
+            public Request(IOptions options)
+            {
+                Name = options.Name;
+                Namespace = options.Namespace;
+                RootNamespace = options.RootNamespace;
+            }
 
             public dynamic Settings { get; set; }
         }

@@ -1,0 +1,39 @@
+using MediatR;
+using System.Threading.Tasks;
+using System.Threading;
+using {{ rootNamespace }}.Infrastructure.Data;
+using FluentValidation;
+
+namespace {{ namespace }}
+{
+    public class Remove{{ entityNamePascalCase }}Command
+    {
+        public class Validator : AbstractValidator<Request>
+        {
+            public Validator()
+            {
+                RuleFor(request => request.{{ entityNamePascalCase }}Id).NotEqual(0);
+            }
+        }
+        public class Request : IRequest
+        {
+            public int {{ entityNamePascalCase }}Id { get; set; }
+        }
+
+        public class Handler : IRequestHandler<Request>
+        {
+            public IMacariaContext _context { get; set; }
+            public Handler(IMacariaContext context)
+            {
+                _context = context;
+            }
+
+            public async Task Handle(Request request, CancellationToken cancellationToken)
+            {
+                _context.{{ entityNamePascalCasePlural }}.Remove(await _context.{{ entityNamePascalCasePlural }}.FindAsync(request.{{ entityNamePascalCase }}Id));
+                await _context.SaveChangesAsync(cancellationToken);
+            }
+
+        }
+    }
+}

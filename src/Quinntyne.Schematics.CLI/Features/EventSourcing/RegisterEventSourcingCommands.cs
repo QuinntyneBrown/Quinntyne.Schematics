@@ -6,16 +6,18 @@ namespace Quinntyne.Schematics.CLI.Features.EventSourcing
 {
     public class RegisterEventSourcingCommands
     {
-        public static void Register(Dictionary<string, Func<string[], IRequest>> dictionary)
+        public static void Register(Dictionary<string, Func<IOptions, IRequest>> dictionary)
         {
-            dictionary.Add("api-model", new Func<string[], IRequest>((args) => new GenerateApiModelCommand.Request(args)));
-            dictionary.Add("model", new Func<string[], IRequest>((args) => new GenerateModelCommand.Request(args)));
-            dictionary.Add("save-command", new Func<string[], IRequest>((args) => new GenerateSaveCommand.Request(args)));
-            dictionary.Add("get-query", new Func<string[], IRequest>((args) => new GenerateGetQueryCommand.Request(args)));
-            dictionary.Add("getbyid-query", new Func<string[], IRequest>((args) => new GenerateGetByIdQueryCommand.Request(args)));
-            dictionary.Add("feature", new Func<string[], IRequest>((args) => new GenerateFeatureCommand.Request(args)));
-            dictionary.Add("tests", new Func<string[], IRequest>((args) => new GenerateTestsCommand.Request(args)));
-            dictionary.Add("controller", new Func<string[], IRequest>((args) => new GenerateControllerCommand.Request(args)));
+            dictionary.Add("api-model", new Func<IOptions, IRequest>((options) => new GenerateApiModelCommand.Request(options)));
+            dictionary.Add("model", new Func<IOptions, IRequest>((options) => new GenerateModelCommand.Request(options)));
+            dictionary.Add("save", new Func<IOptions, IRequest>((options) => new GenerateSaveCommand.Request(options)));
+            dictionary.Add("get", new Func<IOptions, IRequest>((options) => new GenerateGetQueryCommand.Request(options)));
+            dictionary.Add("getbyid", new Func<IOptions, IRequest>((options) => new GenerateGetByIdQueryCommand.Request(options)));
+            dictionary.Add("feature", new Func<IOptions, IRequest>((options) => new GenerateFeatureCommand.Request(options)));
+            dictionary.Add("remove", new Func<IOptions, IRequest>((options) => new GenerateRemoveCommand.Request(options)));
+            dictionary.Add("tests", new Func<IOptions, IRequest>((options) => new GenerateTestsCommand.Request(options)));
+            dictionary.Add("controller", new Func<IOptions, IRequest>((options) => new GenerateControllerCommand.Request(options)));
+            dictionary.Add("query", new Func<IOptions, IRequest>((options) => new GenerateQueryCommand.Request(options)));
         }
     }
 }

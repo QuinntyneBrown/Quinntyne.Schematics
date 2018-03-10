@@ -6,39 +6,31 @@ using CommandLine;
 using Quinntyne.Schematics.Infrastructure.Interfaces;
 using Quinntyne.Schematics.Infrastructure.Services;
 using MediatR;
+using FluentValidation;
 
 namespace Quinntyne.Schematics.CLI.Features.EventSourcing
 {
     public class GenerateGetQueryCommand
     {
-        public class Options
-        {
-            [Option("entity", Required = false, HelpText = "Entity")]
-            public string Entity { get; set; }
-
-            public string Directory = System.Environment.CurrentDirectory;
-
-            public string Namespace { get; set; }
-
-            public string RootNamespace { get; set; }
-        }
-
         public class Request: Options, IRequest, ICodeGeneratorCommandRequest
         {
-            public Request(string[] args)
+            public Request(IOptions options)
             {                
-                Parser.Default.ParseArguments<Options>(args)
-                    .MapResult(x => {
-                        Entity = x.Entity;
-                        Directory = x.Directory;
-                        Namespace = x.Namespace;
-                        RootNamespace = x.RootNamespace;
-                        return 1;
-                    }, x => 0);
+                Entity = options.Entity;
+                Directory = options.Directory;
+                Namespace = options.Namespace;
+                RootNamespace = options.RootNamespace;
             }
-            
 
             public dynamic Settings { get; set; }
+        }
+
+        public class Validator : AbstractValidator<Request>
+        {
+            public Validator()
+            {
+                RuleFor(request => request.Entity).NotNull();
+            }
         }
 
         public class Handler : IRequestHandler<Request>
@@ -65,6 +57,8 @@ namespace Quinntyne.Schematics.CLI.Features.EventSourcing
             {                
                 var entityNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity);
                 var entityNameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity);
+                var entityNamePascalCasePlural = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity, true);
+                var entityNameCamelCasePlural = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity, true);
 
                 var template = _templateLocator.Get("GenerateGetQueryCommand");
 
@@ -73,12 +67,14 @@ namespace Quinntyne.Schematics.CLI.Features.EventSourcing
                     { "{{ entityNamePascalCase }}", entityNamePascalCase },
                     { "{{ entityNameCamelCase }}", entityNameCamelCase },
                     { "{{ namespace }}", request.Namespace },
-                    { "{{ rootNamespace }}", request.RootNamespace }
+                    { "{{ rootNamespace }}", request.RootNamespace },
+                    { "{{ entityNamePascalCasePlural }}", entityNamePascalCasePlural },
+                    { "{{ entityNameCamelCasePlural }}", entityNameCamelCasePlural },
                 };
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
                 
-                _fileWriter.WriteAllLines($"{request.Directory}//GenerateGetQueryCommand.cs", result);
+                _fileWriter.WriteAllLines($"{request.Directory}//Get{entityNamePascalCasePlural}Query.cs", result);
                
                 return Task.CompletedTask;
             }

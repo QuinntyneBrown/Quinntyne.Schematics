@@ -6,9 +6,9 @@ namespace Quinntyne.Schematics.CLI.Features.CodeGenerator
 {
     public class RegisterCodeGeneratorCommands
     {
-        public static void Register(Dictionary<string, Func<string[], IRequest>> dictionary)
+        public static void Register(Dictionary<string, Func<IOptions, IRequest>> dictionary)
         {
-            dictionary.Add("code-gen", new Func<string[], IRequest>((args) => new GenerateCodeGeneratorCommand.Request(args)));
+            dictionary.Add("code-gen", new Func<IOptions, IRequest>((options) => new GenerateCodeGeneratorCommand.Request(options)));
         }
     }
 }
