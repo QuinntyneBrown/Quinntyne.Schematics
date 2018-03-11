@@ -8,6 +8,7 @@ using Quinntyne.Schematics.CLI.Features.EventSourcing;
 using Quinntyne.Schematics.CLI.Features.CodeGenerator;
 using Microsoft.Extensions.Logging;
 using CommandLine;
+using Quinntyne.Schematics.CLI.Features.Testing;
 
 namespace Quinntyne.Schematics.CLI
 {
@@ -103,7 +104,7 @@ namespace Quinntyne.Schematics.CLI
 
             RegisterCodeGeneratorCommands.Register(dictionary);
             RegisterEventSourcingCommands.Register(dictionary);
-
+            RegisterTestingCommands.Register(dictionary);
             return dictionary;
         }
     }

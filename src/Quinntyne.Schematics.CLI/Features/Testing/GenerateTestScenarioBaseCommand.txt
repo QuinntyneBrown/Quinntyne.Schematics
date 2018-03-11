@@ -1,0 +1,50 @@
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.Configuration;
+using System;
+
+namespace {{ namespace }}
+{
+    public class {{ entityNamePascalCase }}ScenarioBase
+    {
+        protected TestServer CreateServer() {
+            var webHostBuilder = new WebHostBuilder()
+                    .UseStartup(typeof(IntegrationTestsStartup))
+                    .UseKestrel()
+                    .UseConfiguration(TestUtilities.ConfigurationProvider.Get())
+                    .ConfigureAppConfiguration((builderContext, config) =>
+                    {
+                        config
+                        .AddJsonFile("settings.json");
+                    });
+
+            var testServer = new TestServer(webHostBuilder);
+
+            return testServer;
+        }
+
+        public static class Get
+        {
+            public static string {{ entityNamePascalCasePlural }} = "api/{{ entityNameCamelCasePlural }}";
+
+            public static string {{ entityNamePascalCase }}ById(int id)
+            {
+                return $"api/{{ entityNameCamelCasePlural }}/{id}";
+            }
+        }
+
+        public static class Post
+        {
+            public static string {{ entityNamePascalCasePlural }} = "api/{{ entityNameCamelCasePlural }}";
+        }
+
+        public static class Delete
+        {
+            public static string {{ entityNamePascalCase }}(int id)
+            {
+                return $"api/{{ entityNameCamelCasePlural }}/{id}";
+            }
+        }
+
+    }
+}

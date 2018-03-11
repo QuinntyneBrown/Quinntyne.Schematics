@@ -1,0 +1,87 @@
+using {{ rootNamespace }}.API.Features.{{ entityNamePascalCasePlural }};
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using TestUtilities.Extensions;
+using Xunit;
+
+namespace {{ namespace }}
+{
+    public class {{ entityNamePascalCase }}Scenarios: {{ entityNamePascalCase }}ScenarioBase
+    {
+
+        [Fact]
+        public async Task ShouldSave()
+        {
+            using (var server = CreateServer())
+            {
+                var response = await server.CreateClient()
+                    .PostAsAsync<Save{{ entityNamePascalCase }}Command.Request, Save{{ entityNamePascalCase }}Command.Response>(Post.{{ entityNamePascalCasePlural }}, new Save{{ entityNamePascalCase }}Command.Request() {
+                        {{ entityNamePascalCase }} = new {{ entityNamePascalCase }}ApiModel()
+                        {
+
+                        }
+                    });
+
+                Assert.True(response.{{ entityNamePascalCase }}Id != default(int));
+            }
+        }
+
+        [Fact]
+        public async Task ShouldGetAll()
+        {
+            using (var server = CreateServer())
+            {
+                var response = await server.CreateClient()
+                    .GetAsync<Get{{ entityNamePascalCasePlural }}Query.Response>(Get.{{ entityNamePascalCasePlural }});
+
+                Assert.True(response.{{ entityNamePascalCasePlural }}.Count() > 0);
+            }
+        }
+
+
+        [Fact]
+        public async Task ShouldGetById()
+        {
+            using (var server = CreateServer())
+            {
+                var response = await server.CreateClient()
+                    .GetAsync<Get{{ entityNamePascalCase }}ByIdQuery.Response>(Get.{{ entityNamePascalCase }}ById(1));
+
+                Assert.True(response.{{ entityNamePascalCase }}.{{ entityNamePascalCase }}Id != default(int));
+            }
+        }
+        
+        [Fact]
+        public async Task ShouldUpdate()
+        {
+            using (var server = CreateServer())
+            {
+                var getByIdResponse = await server.CreateClient()
+                    .GetAsync<Get{{ entityNamePascalCase }}ByIdQuery.Response>(Get.{{ entityNamePascalCase }}ById(1));
+
+                Assert.True(getByIdResponse.{{ entityNamePascalCase }}.{{ entityNamePascalCase }}Id != default(int));
+
+                var saveResponse = await server.CreateClient()
+                    .PostAsAsync<Save{{ entityNamePascalCase }}Command.Request, Save{{ entityNamePascalCase }}Command.Response>(Post.{{ entityNamePascalCasePlural }}, new Save{{ entityNamePascalCase }}Command.Request()
+                    {
+                        {{ entityNamePascalCase }} = getByIdResponse.{{ entityNamePascalCase }}
+                    });
+
+                Assert.True(saveResponse.{{ entityNamePascalCase }}Id != default(int));
+            }
+        }
+        
+        [Fact]
+        public async Task ShouldDelete()
+        {
+            using (var server = CreateServer())
+            {
+                var response = await server.CreateClient()
+                    .DeleteAsync(Delete.{{ entityNamePascalCase }}(1));
+
+                response.EnsureSuccessStatusCode();
+            }
+        }
+    }
+}
