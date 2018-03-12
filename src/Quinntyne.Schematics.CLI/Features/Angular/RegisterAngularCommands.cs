@@ -6,9 +6,9 @@ namespace Quinntyne.Schematics.CLI.Features.Angular
 {
     public class RegisterAngularCommands
     {
-        public static void Register(Dictionary<string, Func<string[], IRequest>> dictionary)
+        public static void Register(Dictionary<string, Func<IOptions, IRequest>> dictionary)
         {
-
+            dictionary.Add("ng", new Func<IOptions, IRequest>((options) => new GenerateComponentCommand.Request(options)));
         }
     }
 }

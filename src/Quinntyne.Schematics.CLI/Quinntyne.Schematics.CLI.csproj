@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Features\Angular\GenerateComponentCommand.txt" />
     <None Remove="Features\Testing\GenerateTestScenarioBaseCommand.txt" />
     <None Remove="Features\Testing\GenerateTestScenariosCommand.txt" />
     <None Remove="Features\CodeGenerator\GenerateApiModelCommand.txt" />
@@ -25,6 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Features\Angular\GenerateComponentCommand.txt">
+      <DependentUpon>GenerateComponentCommand.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Features\Testing\GenerateTestScenarioBaseCommand.txt">
       <DependentUpon>GenerateTestScenarioBaseCommand.cs</DependentUpon>
     </EmbeddedResource>

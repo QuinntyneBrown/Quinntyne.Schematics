@@ -1,0 +1,16 @@
+import { Component } from "@angular/core";
+import { Subject } from "rxjs/Subject";
+
+@Component({
+    templateUrl: "./{{ nameSnakeCase }}.component.html",
+    styleUrls: ["./{{ nameSnakeCase }}.component.css"],
+    selector: "{{ prefix }}-{{ nameSnakeCase }}"
+})
+export class {{ namePascalCase }}Component { 
+
+    public ngUnsubscribe: Subject<void> = new Subject<void>();
+
+    ngOnDestroy() {
+         this.ngUnsubscribe.next();	
+    }
+}
