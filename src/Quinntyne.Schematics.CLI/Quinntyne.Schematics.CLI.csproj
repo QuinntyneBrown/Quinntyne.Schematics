@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <None Remove="Features\Angular\GenerateComponentCommand.txt" />
+    <None Remove="Features\Angular\GenerateModuleCommand.txt" />
     <None Remove="Features\Testing\GenerateTestScenarioBaseCommand.txt" />
     <None Remove="Features\Testing\GenerateTestScenariosCommand.txt" />
     <None Remove="Features\CodeGenerator\GenerateApiModelCommand.txt" />
@@ -28,6 +29,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Features\Angular\GenerateComponentCommand.txt">
       <DependentUpon>GenerateComponentCommand.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\Angular\GenerateModuleCommand.txt">
+      <DependentUpon>GenerateModuleCommand.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Features\Testing\GenerateTestScenarioBaseCommand.txt">
       <DependentUpon>GenerateTestScenarioBaseCommand.cs</DependentUpon>
