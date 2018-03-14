@@ -8,9 +8,9 @@ import { Subject } from "rxjs/Subject";
 })
 export class {{ namePascalCase }}Component { 
 
-    public ngUnsubscribe: Subject<void> = new Subject<void>();
+    public onDestroy: Subject<void> = new Subject<void>();
 
     ngOnDestroy() {
-         this.ngUnsubscribe.next();	
+         this.onDestroy.next();	
     }
 }

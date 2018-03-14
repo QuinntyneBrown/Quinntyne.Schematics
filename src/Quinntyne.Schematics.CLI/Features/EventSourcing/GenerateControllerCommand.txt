@@ -12,24 +12,21 @@ namespace {{ namespace }}
     {
         private readonly IMediator _mediator;
 
-        public {{ entityNamePascalCasePlural }}Controller(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
+        public {{ entityNamePascalCasePlural }}Controller(IMediator mediator) => _mediator = mediator;
 
-        [HttpPost("save")]
-        public async Task<ActionResult<Save{{ entityNamePascalCase }}Command.Response>> Add(Save{{ entityNamePascalCase }}Command.Request request)
+        [HttpPost]
+        public async Task<ActionResult<Save{{ entityNamePascalCase }}Command.Response>> Save(Save{{ entityNamePascalCase }}Command.Request request)
             => await _mediator.Send(request);
         
-        [HttpDelete("remove/{{{ entityNameCamelCase }}Id}")]
+        [HttpDelete("{{{ entityNameCamelCase }}Id}")]
         public async Task Remove(Remove{{ entityNamePascalCase }}Command.Request request)
             => await _mediator.Send(request);            
 
-        [HttpGet("getbyid/{{{ entityNameCamelCase }}Id}")]
+        [HttpGet("{{{ entityNameCamelCase }}Id}")]
         public async Task<ActionResult<Get{{ entityNamePascalCase }}ByIdQuery.Response>> GetById([FromRoute]Get{{ entityNamePascalCase }}ByIdQuery.Request request)
             => await _mediator.Send(request);
 
-        [HttpGet("get")]
+        [HttpGet]
         public async Task<ActionResult<Get{{ entityNamePascalCasePlural }}Query.Response>> Get()
             => await _mediator.Send(new Get{{ entityNamePascalCasePlural }}Query.Request());
     }
