@@ -60,7 +60,10 @@ namespace Quinntyne.Schematics.CLI.Features.Angular
                 var namePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Name);
                 var nameSnakeCasePlural = _namingConventionConverter.Convert(NamingConvention.SnakeCase, request.Name, true);
                 var namePascalCasePlural = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Name, true);
-                var template = _templateLocator.Get("GenerateModuleCommand");
+                var template = request.Name.ToLower() == "material" ?
+                    _templateLocator.Get("GenerateMaterialModuleCommand")
+                    : _templateLocator.Get("GenerateModuleCommand");
+
 
                 var tokens = new Dictionary<string, string>
                 {
@@ -69,8 +72,8 @@ namespace Quinntyne.Schematics.CLI.Features.Angular
                 };
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
-
-                _fileWriter.WriteAllLines($"{request.Directory}//{nameSnakeCasePlural}.module.ts", result);
+                var filename = request.Name.ToLower() == "material" ? "material" : namePascalCasePlural;
+                _fileWriter.WriteAllLines($"{request.Directory}//{filename}.module.ts", result);
 
                 return Task.CompletedTask;
             }
