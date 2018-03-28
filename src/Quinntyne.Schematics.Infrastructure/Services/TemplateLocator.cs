@@ -39,7 +39,10 @@ namespace Quinntyne.Schematics.Infrastructure.Services
                     }
                 }                
             }
-           
+
+            if (fullName == default(string) && assembly == default(Assembly))
+                return null;
+            
             try
             {
                 using (var stream = assembly.GetManifestResourceStream(fullName))

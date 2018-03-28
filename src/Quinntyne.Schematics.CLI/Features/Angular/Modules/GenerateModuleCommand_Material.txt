@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from "@angular/common";
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -37,18 +35,7 @@ import {
   MatTooltipModule
 } from "@angular/material";
 
-import { ButtonComponent } from "./mdl-components/button.component";
-
-const customElements = [ButtonComponent];
-
 @NgModule({
-  imports: [
-    CommonModule,
-	  FormsModule,
-	  ReactiveFormsModule,
-    RouterModule,
-    MatButtonModule  
-  ],
   exports: [
     MatAutocompleteModule,
     MatButtonModule,

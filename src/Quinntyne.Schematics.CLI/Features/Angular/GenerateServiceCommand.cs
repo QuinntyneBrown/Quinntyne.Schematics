@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using CommandLine;
 using Quinntyne.Schematics.Infrastructure.Interfaces;
 using Quinntyne.Schematics.Infrastructure.Services;
 using MediatR;
@@ -10,18 +8,17 @@ using FluentValidation;
 
 namespace Quinntyne.Schematics.CLI.Features.Angular
 {
-    public class GenerateModuleCommand
+    public class GenerateServiceCommand
     {
-        public class Request : Options, IRequest, ICodeGeneratorCommandRequest
+        public class Request: Options, IRequest, ICodeGeneratorCommandRequest
         {
             public Request(IOptions options)
-            {
-                Name = options.Name;
+            {                
+                Entity = options.Entity;
                 Directory = options.Directory;
                 Namespace = options.Namespace;
                 RootNamespace = options.RootNamespace;
             }
-
 
             public dynamic Settings { get; set; }
         }
@@ -30,7 +27,7 @@ namespace Quinntyne.Schematics.CLI.Features.Angular
         {
             public Validator()
             {
-                RuleFor(request => request.Name).NotNull();
+                RuleFor(request => request.Entity).NotNull();
             }
         }
 
@@ -44,7 +41,7 @@ namespace Quinntyne.Schematics.CLI.Features.Angular
             public Handler(
                 IFileWriter fileWriter,
                 INamingConventionConverter namingConventionConverter,
-                ITemplateLocator templateLocator,
+                ITemplateLocator templateLocator, 
                 ITemplateProcessor templateProcessor
                 )
             {
@@ -55,26 +52,24 @@ namespace Quinntyne.Schematics.CLI.Features.Angular
             }
 
             public Task Handle(Request request, CancellationToken cancellationToken)
-            {
-                var nameSnakeCase = _namingConventionConverter.Convert(NamingConvention.SnakeCase, request.Name);
-                var namePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Name);
-                var nameSnakeCasePlural = _namingConventionConverter.Convert(NamingConvention.SnakeCase, request.Name, true);
-                var namePascalCasePlural = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Name, true);
-                var template = request.Name.ToLower() == "material" ?
-                    _templateLocator.Get("GenerateMaterialModuleCommand")
-                    : _templateLocator.Get("GenerateModuleCommand");
+            {                
+                var entityNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity);
+                var entityNameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity);
 
+                var template = _templateLocator.Get("GenerateServiceCommand");
 
                 var tokens = new Dictionary<string, string>
                 {
-                    { "{{ namePascalCase }}", namePascalCase },
-                    { "{{ namePascalCasePlural }}", namePascalCasePlural },
+                    { "{{ entityNamePascalCase }}", entityNamePascalCase },
+                    { "{{ entityNameCamelCase }}", entityNameCamelCase },
+                    { "{{ namespace }}", request.Namespace },
+                    { "{{ rootNamespace }}", request.RootNamespace }
                 };
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
-                var filename = request.Name.ToLower() == "material" ? "material" : namePascalCasePlural;
-                _fileWriter.WriteAllLines($"{request.Directory}//{filename}.module.ts", result);
-
+                
+                _fileWriter.WriteAllLines($"{request.Directory}//GenerateServiceCommand.cs", result);
+               
                 return Task.CompletedTask;
             }
         }

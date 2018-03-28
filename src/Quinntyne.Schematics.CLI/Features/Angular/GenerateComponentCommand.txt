@@ -2,15 +2,15 @@ import { Component } from "@angular/core";
 import { Subject } from "rxjs/Subject";
 
 @Component({
-    templateUrl: "./{{ nameSnakeCase }}.component.html",
-    styleUrls: ["./{{ nameSnakeCase }}.component.css"],
-    selector: "{{ prefix }}-{{ nameSnakeCase }}"
+  templateUrl: "./{{ nameSnakeCase }}.component.html",
+  styleUrls: ["./{{ nameSnakeCase }}.component.css"],
+  selector: "{{ prefix }}-{{ nameSnakeCase }}"
 })
 export class {{ namePascalCase }}Component { 
 
-    public onDestroy: Subject<void> = new Subject<void>();
+  public onDestroy: Subject<void> = new Subject<void>();
 
-    ngOnDestroy() {
-         this.onDestroy.next();	
-    }
+  ngOnDestroy() {
+    this.onDestroy.next();	
+  }
 }
