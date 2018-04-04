@@ -68,11 +68,11 @@ namespace Quinntyne.Schematics.CLI.Features.Angular
                 var tokens = new Dictionary<string, string>
                 {
                     { "{{ namePascalCase }}", namePascalCase },
-                    { "{{ namePascalCasePlural }}", namePascalCasePlural },
+                    { "{{ namePascalCasePlural }}", namePascalCasePlural }
                 };
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
-                var filename = request.Name.ToLower() == "material" ? "material" : namePascalCasePlural;
+                var filename = request.Name.ToLower() == "material" ? "material" : nameSnakeCasePlural;
                 _fileWriter.WriteAllLines($"{request.Directory}//{filename}.module.ts", result);
 
                 return Task.CompletedTask;
