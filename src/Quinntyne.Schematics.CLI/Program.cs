@@ -67,6 +67,7 @@ namespace Quinntyne.Schematics.CLI
                         options.Directory = x.Directory;
                         options.Namespace = x.Namespace;
                         options.RootNamespace = x.RootNamespace;
+                        options.ServiceName = x.ServiceName;
                         return 1;
                     }, x => 0);
 
@@ -122,6 +123,8 @@ namespace Quinntyne.Schematics.CLI
         string Directory { get; set; }
         string Namespace { get; set; }
         string RootNamespace { get; set; }
+        [Option("serviceName", Required = false, HelpText = "Service Name")]
+        string ServiceName { get; set; }
     }
 
     public class Options : IOptions
@@ -132,6 +135,6 @@ namespace Quinntyne.Schematics.CLI
         public string Namespace { get; set; }
         public string RootNamespace { get; set; }
         public string Directory { get; set; } = System.Environment.CurrentDirectory;
-
+        public string ServiceName { get; set; }
     }
 }

@@ -36,7 +36,7 @@ namespace {{ namespace }}
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
                 => new Response()
                 {
-                    {{ entityNamePascalCase }} = {{ entityNamePascalCase }}ApiModel.From{{ entityNamePascalCase }}(await _context.{{ entityNamePascalCase }}s.FindAsync(request.{{ entityNamePascalCase }}Id))
+                    {{ entityNamePascalCase }} = {{ entityNamePascalCase }}ApiModel.From{{ entityNamePascalCase }}(await _context.{{ entityNamePascalCasePlural }}.FindAsync(request.{{ entityNamePascalCase }}Id))
                 };
         }
     }

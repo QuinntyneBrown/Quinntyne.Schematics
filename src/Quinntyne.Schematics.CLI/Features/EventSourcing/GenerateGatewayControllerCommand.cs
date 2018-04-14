@@ -18,6 +18,7 @@ namespace Quinntyne.Schematics.CLI.Features.EventSourcing
                 Directory = options.Directory;
                 Namespace = options.Namespace;
                 RootNamespace = options.RootNamespace;
+                ServiceName = options.ServiceName;
             }
 
             public dynamic Settings { get; set; }
@@ -58,6 +59,7 @@ namespace Quinntyne.Schematics.CLI.Features.EventSourcing
                 var entityNamePascalCasePlural = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity, true);
                 var entityNameCamelCasePlural = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity, true);
                 var entityNameLowerCasePlural = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity, true).ToLower();
+                var serviceNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.ServiceName);
 
                 var template = _templateLocator.Get("GenerateGatewayControllerCommand");
 
@@ -70,7 +72,7 @@ namespace Quinntyne.Schematics.CLI.Features.EventSourcing
                     { "{{ entityNamePascalCasePlural }}", entityNamePascalCasePlural },
                     { "{{ entityNameCamelCasePlural }}", entityNameCamelCasePlural },
                     { "{{ entityNameLowerCasePlural }}", entityNameLowerCasePlural },
-                    { "{{ serviceNamePascalCase }}", "DashboardService" }
+                    { "{{ serviceNamePascalCase }}", serviceNamePascalCase }
                 };
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
