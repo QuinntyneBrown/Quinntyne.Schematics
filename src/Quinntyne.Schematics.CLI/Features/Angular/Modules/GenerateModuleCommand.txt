@@ -14,9 +14,9 @@ const providers = [
   declarations: declarations,
   imports: [
     CommonModule,
-	FormsModule,
-	ReactiveFormsModule,
-	RouterModule	
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule	
   ],
   providers,
 })

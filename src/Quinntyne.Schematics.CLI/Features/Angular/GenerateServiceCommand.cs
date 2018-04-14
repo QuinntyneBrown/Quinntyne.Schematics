@@ -55,20 +55,24 @@ namespace Quinntyne.Schematics.CLI.Features.Angular
             {                
                 var entityNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity);
                 var entityNameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity);
-
+                var entityNameSnakeCase = _namingConventionConverter.Convert(NamingConvention.SnakeCase, request.Entity);
+                var entityNameCamelCasePlural = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity, true);
+                
                 var template = _templateLocator.Get("GenerateServiceCommand");
 
                 var tokens = new Dictionary<string, string>
                 {
                     { "{{ entityNamePascalCase }}", entityNamePascalCase },
                     { "{{ entityNameCamelCase }}", entityNameCamelCase },
+                    { "{{ entityNameCamelCasePlural }}", entityNameCamelCasePlural },
+                    { "{{ entityNameSnakeCase }}",entityNameSnakeCase },
                     { "{{ namespace }}", request.Namespace },
                     { "{{ rootNamespace }}", request.RootNamespace }
                 };
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
                 
-                _fileWriter.WriteAllLines($"{request.Directory}//GenerateServiceCommand.cs", result);
+                _fileWriter.WriteAllLines($"{request.Directory}//{entityNameSnakeCase}.service.ts", result);
                
                 return Task.CompletedTask;
             }

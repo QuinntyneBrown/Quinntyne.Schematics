@@ -2,6 +2,7 @@ using MediatR;
 using System.Threading.Tasks;
 using System.Threading;
 using {{ rootNamespace }}.Infrastructure.Data;
+using {{ rootNamespace }}.Core.Entities;
 using FluentValidation;
 
 namespace {{ namespace }}
@@ -12,25 +13,26 @@ namespace {{ namespace }}
         {
             public Validator()
             {
-                RuleFor(request => request.{{ entityNamePascalCase }}Id).NotEqual(0);
+                RuleFor(request => request.{{ entityNamePascalCase }}.{{ entityNamePascalCase }}Id).NotEqual(0);
             }
         }
+
         public class Request : IRequest
         {
-            public int {{ entityNamePascalCase }}Id { get; set; }
+            public {{ entityNamePascalCase }} {{ entityNamePascalCase }} { get; set; }
         }
 
         public class Handler : IRequestHandler<Request>
         {
-            public IMacariaContext _context { get; set; }
-            public Handler(IMacariaContext context)
+            public IAppDbContext _context { get; set; }
+            public Handler(IAppDbContext context)
             {
                 _context = context;
             }
 
             public async Task Handle(Request request, CancellationToken cancellationToken)
             {
-                _context.{{ entityNamePascalCasePlural }}.Remove(await _context.{{ entityNamePascalCasePlural }}.FindAsync(request.{{ entityNamePascalCase }}Id));
+                _context.{{ entityNamePascalCasePlural }}.Remove(await _context.{{ entityNamePascalCasePlural }}.FindAsync(request.{{ entityNamePascalCase }}.{{ entityNamePascalCase }}Id));
                 await _context.SaveChangesAsync(cancellationToken);
             }
 

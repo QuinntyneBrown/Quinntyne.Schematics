@@ -1,0 +1,36 @@
+import { Injectable, Inject } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import { constants } from "../constants";
+import { {{ entityNamePascalCase }} } from "../models/{{ entityNameSnakeCase }}.model";
+
+@Injectable()
+export class {{ entityNamePascalCase }}Service {
+  constructor(
+    @Inject(constants.BASE_URL) private _baseUrl:string,
+    private _client: HttpClient
+  ) { }
+
+  public get(): Observable<Array<{{ entityNamePascalCase }}>> {
+    return this._client.get<{ {{ entityNameCamelCasePlural }}: Array<{{ entityNamePascalCase }}> }>(`${this._baseUrl}/api/{{ entityNameCamelCasePlural }}`)
+      .pipe(
+        map(x => x.{{ entityNameCamelCasePlural }})
+      );
+  }
+
+  public getById(options: { {{ entityNameCamelCase }}Id: number }): Observable<{{ entityNamePascalCase }}> {
+    return this._client.get<{ {{ entityNameCamelCase }}: {{ entityNamePascalCase }} }>(`${this._baseUrl}/api/{{ entityNameCamelCasePlural }}/${options.{{ entityNameCamelCase }}Id}`)
+      .pipe(
+        map(x => x.{{ entityNameCamelCase }})
+      );
+  }
+
+  public remove(options: { {{ entityNameCamelCase }}: {{ entityNamePascalCase }} }): Observable<void> {
+    return this._client.delete<void>(`${this._baseUrl}/api/{{ entityNameCamelCasePlural }}/${options.{{ entityNameCamelCase }}.{{ entityNameCamelCase }}Id}`);
+  }
+
+  public save(options: { {{ entityNameCamelCase }}: {{ entityNamePascalCase }} }): Observable<{ {{ entityNameCamelCase }}Id: number }> {
+    return this._client.post<{ {{ entityNameCamelCase }}Id: number }>(`${this._baseUrl}/api/{{ entityNameCamelCasePlural }}`, { {{ entityNameCamelCase }}: options.{{ entityNameCamelCase }} });
+  }
+}

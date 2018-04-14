@@ -6,9 +6,9 @@ using Quinntyne.Schematics.Infrastructure.Services;
 using MediatR;
 using FluentValidation;
 
-namespace Quinntyne.Schematics.CLI.Features.Angular
+namespace Quinntyne.Schematics.CLI.Features.EventSourcing
 {
-    public class GenerateModelCommand
+    public class GenerateGatewayControllerCommand
     {
         public class Request: Options, IRequest, ICodeGeneratorCommandRequest
         {
@@ -52,25 +52,31 @@ namespace Quinntyne.Schematics.CLI.Features.Angular
             }
 
             public Task Handle(Request request, CancellationToken cancellationToken)
-            {                
+            {
                 var entityNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity);
                 var entityNameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity);
-                var entityNameSnakeCase = _namingConventionConverter.Convert(NamingConvention.SnakeCase, request.Entity);
+                var entityNamePascalCasePlural = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity, true);
+                var entityNameCamelCasePlural = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity, true);
+                var entityNameLowerCasePlural = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity, true).ToLower();
 
-                var template = _templateLocator.Get("GenerateNgModelCommand");
+                var template = _templateLocator.Get("GenerateGatewayControllerCommand");
 
                 var tokens = new Dictionary<string, string>
                 {
                     { "{{ entityNamePascalCase }}", entityNamePascalCase },
                     { "{{ entityNameCamelCase }}", entityNameCamelCase },
                     { "{{ namespace }}", request.Namespace },
-                    { "{{ rootNamespace }}", request.RootNamespace }
+                    { "{{ rootNamespace }}", request.RootNamespace },
+                    { "{{ entityNamePascalCasePlural }}", entityNamePascalCasePlural },
+                    { "{{ entityNameCamelCasePlural }}", entityNameCamelCasePlural },
+                    { "{{ entityNameLowerCasePlural }}", entityNameLowerCasePlural },
+                    { "{{ serviceNamePascalCase }}", "DashboardService" }
                 };
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
-                
-                _fileWriter.WriteAllLines($"{request.Directory}//{entityNameSnakeCase}.model.ts", result);
-               
+
+                _fileWriter.WriteAllLines($"{request.Directory}//{entityNamePascalCasePlural}Controller.cs", result);
+
                 return Task.CompletedTask;
             }
         }

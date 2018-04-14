@@ -1,0 +1,4 @@
+export class {{ entityNamePascalCase }} {
+  public {{ entityNameCamelCase }}Id: number;
+  public name: string;
+}
