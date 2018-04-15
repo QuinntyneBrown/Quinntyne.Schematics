@@ -12,7 +12,9 @@
     <None Remove="Features\Angular\GenerateModuleCommand.txt" />
     <None Remove="Features\Angular\GenerateNgModelCommand.txt" />
     <None Remove="Features\Angular\GenerateServiceCommand.txt" />
+    <None Remove="Features\EventSourcing\GenerateAppSettingsCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateGatewayControllerCommand.txt" />
+    <None Remove="Features\EventSourcing\GenerateStartUpCommand.txt" />
     <None Remove="Features\Testing\GenerateTestScenarioBaseCommand.txt" />
     <None Remove="Features\Testing\GenerateTestScenariosCommand.txt" />
     <None Remove="Features\CodeGenerator\GenerateApiModelCommand.txt" />
@@ -39,9 +41,11 @@
     <EmbeddedResource Include="Features\Angular\Modules\GenerateModuleCommand.txt">
       <DependentUpon>GenerateModuleCommand.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Features\EventSourcing\GenerateAppSettingsCommand.txt" />
     <EmbeddedResource Include="Features\EventSourcing\GenerateGatewayControllerCommand.txt">
       <DependentUpon>GenerateGatewayControllerCommand.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Features\EventSourcing\GenerateStartUpCommand.txt" />
     <EmbeddedResource Include="Features\Testing\GenerateTestScenarioBaseCommand.txt">
       <DependentUpon>GenerateTestScenarioBaseCommand.cs</DependentUpon>
     </EmbeddedResource>

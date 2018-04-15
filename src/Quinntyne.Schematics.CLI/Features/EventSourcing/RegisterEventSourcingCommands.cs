@@ -19,6 +19,8 @@ namespace Quinntyne.Schematics.CLI.Features.EventSourcing
             dictionary.Add("controller", new Func<IOptions, IRequest>((options) => new GenerateControllerCommand.Request(options)));
             dictionary.Add("gateway", new Func<IOptions, IRequest>((options) => new GenerateGatewayControllerCommand.Request(options)));
             dictionary.Add("query", new Func<IOptions, IRequest>((options) => new GenerateQueryCommand.Request(options)));
+            dictionary.Add("startup", new Func<IOptions, IRequest>((options) => new GenerateStartUpCommand.Request(options)));
+            dictionary.Add("appsettings", new Func<IOptions, IRequest>((options) => new GenerateAppSettingsCommand.Request(options)));
         }
     }
 }
