@@ -22,6 +22,8 @@ namespace Quinntyne.Schematics.CLI.Features.EventSourcing
             dictionary.Add("startup", new Func<IOptions, IRequest>((options) => new GenerateStartUpCommand.Request(options)));
             dictionary.Add("appsettings", new Func<IOptions, IRequest>((options) => new GenerateAppSettingsCommand.Request(options)));
             dictionary.Add("program", new Func<IOptions, IRequest>((options) => new GenerateProgramCommand.Request(options)));
+            dictionary.Add("root-program", new Func<IOptions, IRequest>((options) => new GenerateRootProgramCommand.Request(options)));
+            dictionary.Add("seed", new Func<IOptions, IRequest>((options) => new GenerateSeedConfigurationCommand.Request(options)));
         }
     }
 }

@@ -1,0 +1,19 @@
+using Core.Entities;
+using Infrastructure.Data;
+using System.Linq;
+
+namespace {{ namespace }}
+{
+    public class {{ entityNamePascalCase }}Configuration
+    {
+        public static void Seed(AppDbContext context)
+        {
+            var {{ entityNameCamelCase }} = context.{{ entityNamePascalCasePlural }}.FirstOrDefault(x => x.Name == "");
+
+            if ({{ entityNameCamelCase }} == null)
+                context.{{ entityNamePascalCasePlural }}.Add(new {{ entityNamePascalCase }}() { Name = "" });
+
+            context.SaveChanges();
+        }
+    }
+}
