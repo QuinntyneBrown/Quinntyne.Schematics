@@ -1,0 +1,79 @@
+using Infrastructure.Extensions;
+using {{ serviceNamePascalCase }}.Features.{{ entityNamePascalCasePlural }};
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using System.Net.Http;
+using System.Threading.Tasks;
+
+namespace {{ namespace }}
+{
+    public class {{ entityNamePascalCasePlural }}Client
+    {
+        private HttpClient _client;
+        private ILogger<{{ entityNamePascalCasePlural }}Client> _logger;
+
+        public {{ entityNamePascalCasePlural }}Client(HttpClient client, ILogger<{{ entityNamePascalCasePlural }}Client> logger)
+        {
+            _client = client;
+            _logger = logger;
+        }
+
+        public async Task<Get{{ entityNamePascalCasePlural }}Query.Response> Get()
+        {
+            try
+            {
+                return await _client.GetAsync<Get{{ entityNamePascalCasePlural }}Query.Response>("api/{{ entityNameLowerCasePlural }}");                
+            }
+            catch (HttpRequestException ex)
+            {
+                _logger.LogError($"An error occured connecting to {{ entityNamePascalCasePlural }} API {ex.ToString()}");
+
+                throw ex;
+            }
+        }
+
+        public async Task<Get{{ entityNamePascalCase }}ByIdQuery.Response> GetById(Get{{ entityNamePascalCase }}ByIdQuery.Request request)
+        {
+            try
+            {
+                return await _client.GetAsync<Get{{ entityNamePascalCase }}ByIdQuery.Response>($"api/{{ entityNameLowerCasePlural }}/{request.{{ entityNamePascalCase }}Id}");
+            }
+            catch (HttpRequestException ex)
+            {
+                _logger.LogError($"An error occured connecting to {{ entityNamePascalCasePlural }} API {ex.ToString()}");
+
+                throw ex;
+            }
+        }
+
+        public async Task<Save{{ entityNamePascalCase }}Command.Response> Save(Save{{ entityNamePascalCase }}Command.Request request)
+        {
+            try
+            {
+                var content = new StringContent(JsonConvert.SerializeObject(request));
+
+                return await _client.PostAsync<Save{{ entityNamePascalCase }}Command.Response>("api/{{ entityNameLowerCasePlural }}",content);
+            }
+            catch (HttpRequestException ex)
+            {
+                _logger.LogError($"An error occured connecting to {{ entityNamePascalCasePlural }} API {ex.ToString()}");
+
+                throw ex;
+            }
+        }
+
+        public async Task<Get{{ entityNamePascalCasePlural }}Query.Response> Remove(Remove{{ entityNamePascalCase }}Command.Request request)
+        {
+            try
+            {
+                return await _client.DeleteAsync<Get{{ entityNamePascalCasePlural }}Query.Response>($"api/{{ entityNameLowerCasePlural }}/{request.{{ entityNamePascalCase }}.{{ entityNamePascalCase }}Id}");
+            }
+            catch (HttpRequestException ex)
+            {
+                _logger.LogError($"An error occured connecting to {{ entityNamePascalCasePlural }} API {ex.ToString()}");
+
+                throw ex;
+            }
+        }
+    }
+}

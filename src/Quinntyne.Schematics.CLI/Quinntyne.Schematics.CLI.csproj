@@ -13,6 +13,7 @@
     <None Remove="Features\Angular\GenerateNgModelCommand.txt" />
     <None Remove="Features\Angular\GenerateServiceCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateAppSettingsCommand.txt" />
+    <None Remove="Features\EventSourcing\GenerateClientCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateGatewayControllerCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateProgramCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateRootProgramCommand.txt" />
@@ -33,6 +34,7 @@
     <None Remove="Features\EventSourcing\GenerateRemoveCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateSaveCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateTestsCommand.txt" />
+    <None Remove="publish.cmd" />
   </ItemGroup>
 
   <ItemGroup>
@@ -47,6 +49,7 @@
     <EmbeddedResource Include="Features\EventSourcing\GenerateAppSettingsCommand.txt">
       <DependentUpon>GenerateAppSettingsCommand.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Features\EventSourcing\GenerateClientCommand.txt" />
     <EmbeddedResource Include="Features\EventSourcing\GenerateGatewayControllerCommand.txt">
       <DependentUpon>GenerateGatewayControllerCommand.cs</DependentUpon>
     </EmbeddedResource>
