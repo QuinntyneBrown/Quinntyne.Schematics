@@ -1,59 +1,34 @@
-using Infrastructure.Extensions;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using {{ serviceNamePascalCase }}.Features.{{ entityNamePascalCasePlural }};
-using Infrastructure.Configuration;
-using Microsoft.Extensions.Options;
+using {{ rootNamespace }}.SPA.Clients;
 
 namespace {{ namespace }}
 {
     [Authorize]
     [ApiController]
     [Route("api/{{ entityNameLowerCasePlural }}")]
-    public class {{ entityNamePascalCasePlural }}Controller
+    public class {{ entityNamePascalCase }}Controller
     {
-        private readonly IHttpClientFactory _httpClientFactory;
-        private readonly string _baseUrl;
+        private readonly {{ entityNamePascalCasePlural }}Client _client;
 
-        public {{ entityNamePascalCasePlural }}Controller(IHttpClientFactory httpClientFactory, IOptions<ClusterSettings> options)
-        {
-            _httpClientFactory = httpClientFactory;
-            _baseUrl = options.Value.{{ serviceNamePascalCase }}BaseUrl;
-        }
+        public {{ entityNamePascalCase }}Controller({{ entityNamePascalCasePlural }}Client client) => _client = client;
 
         [HttpPost]
         public async Task<ActionResult<Save{{ entityNamePascalCase }}Command.Response>> Save(Save{{ entityNamePascalCase }}Command.Request request)
-        {
-            var client = _httpClientFactory.CreateClient();
-
-            return await client.PostAsync<Save{{ entityNamePascalCase }}Command.Response>($"{_baseUrl}/api/{{ entityNameLowerCasePlural }}", new StringContent(JsonConvert.SerializeObject(request)));
-        }
+            => await _client.Save(request);
 
         [HttpDelete("{{{ entityNamePascalCase }}.{{ entityNamePascalCase }}Id}")]
         public async Task Remove(Remove{{ entityNamePascalCase }}Command.Request request)
-        {
-            var client = _httpClientFactory.CreateClient();
-
-            await client.DeleteAsync($"{_baseUrl}/api/{{ entityNameLowerCasePlural }}/{request.{{ entityNamePascalCase }}.{{ entityNamePascalCase }}Id}");
-        }
+            => await _client.Remove(request);
 
         [HttpGet("{{{ entityNamePascalCase }}Id}")]
         public async Task<ActionResult<Get{{ entityNamePascalCase }}ByIdQuery.Response>> GetById([FromRoute]Get{{ entityNamePascalCase }}ByIdQuery.Request request)
-        {
-            var client = _httpClientFactory.CreateClient();
-
-            return await client.GetAsync<Get{{ entityNamePascalCase }}ByIdQuery.Response>($"{_baseUrl}/api/{{ entityNameLowerCasePlural }}/{request.{{ entityNamePascalCase }}Id}");
-        }
+            => await _client.GetById(request);
 
         [HttpGet]
         public async Task<ActionResult<Get{{ entityNamePascalCasePlural }}Query.Response>> Get()
-        {
-            var client = _httpClientFactory.CreateClient();
-
-            return await client.GetAsync<Get{{ entityNamePascalCasePlural }}Query.Response>($"{_baseUrl}/api/{{ entityNameLowerCasePlural }}");
-        }
+            => await _client.Get();
     }
 }

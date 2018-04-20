@@ -55,7 +55,6 @@ namespace Quinntyne.Schematics.CLI.Features.EventSourcing
 
             public Task Handle(Request request, CancellationToken cancellationToken)
             {
-                Console.WriteLine($">>>>> {request.ServiceName}");
                 var entityNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity);
                 var entityNameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity);
                 var entityNamePascalCasePlural = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity, true);
