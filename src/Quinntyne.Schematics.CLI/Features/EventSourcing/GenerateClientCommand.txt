@@ -1,28 +1,23 @@
-using Infrastructure.Extensions;
-using {{ serviceNamePascalCase }}.Features.{{ entityNamePascalCasePlural }};
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Infrastructure.Extensions;
+using Microsoft.AspNetCore.Http;
 
 namespace {{ namespace }}
 {
-    public class {{ entityNamePascalCasePlural }}Client
-    {
-        private HttpClient _client;
-        private ILogger<{{ entityNamePascalCasePlural }}Client> _logger;
+    public class {{ entityNamePascalCasePlural }}Client: BaseClient<{{ entityNamePascalCasePlural }}Client>
+    {        
+        public {{ entityNamePascalCasePlural }}Client(HttpClient client, ILogger<{{ entityNamePascalCasePlural }}Client> logger, IHttpContextAccessor httpContextAccessor)
+            :base(client,logger,httpContextAccessor)
+        { }
 
-        public {{ entityNamePascalCasePlural }}Client(HttpClient client, ILogger<{{ entityNamePascalCasePlural }}Client> logger)
-        {
-            _client = client;
-            _logger = logger;
-        }
-
-        public async Task<Get{{ entityNamePascalCasePlural }}Query.Response> Get()
+        public async Task<dynamic> Get()
         {
             try
             {
-                return await _client.GetAsync<Get{{ entityNamePascalCasePlural }}Query.Response>("api/{{ entityNameLowerCasePlural }}");                
+                return await _client.GetAsync<dynamic>("api/{{ entityNameLowerCasePlural }}");                
             }
             catch (HttpRequestException ex)
             {
@@ -32,11 +27,11 @@ namespace {{ namespace }}
             }
         }
 
-        public async Task<Get{{ entityNamePascalCase }}ByIdQuery.Response> GetById(Get{{ entityNamePascalCase }}ByIdQuery.Request request)
+        public async Task<dynamic> GetById(int {{ entityNameCamelCase }}Id)
         {
             try
             {
-                return await _client.GetAsync<Get{{ entityNamePascalCase }}ByIdQuery.Response>($"api/{{ entityNameLowerCasePlural }}/{request.{{ entityNamePascalCase }}Id}");
+                return await _client.GetAsync<dynamic>($"api/{{ entityNameLowerCasePlural }}/{{{ entityNameCamelCase }}Id}");
             }
             catch (HttpRequestException ex)
             {
@@ -46,13 +41,15 @@ namespace {{ namespace }}
             }
         }
 
-        public async Task<Save{{ entityNamePascalCase }}Command.Response> Save(Save{{ entityNamePascalCase }}Command.Request request)
+        public async Task<dynamic> Save(dynamic {{ entityNameCamelCase }})
         {
             try
             {
-                var content = new StringContent(JsonConvert.SerializeObject(request));
+                var content = new StringContent(JsonConvert.SerializeObject(new {
+                    {{ entityNamePascalCase }} = {{ entityNameCamelCase }}
+                }));
 
-                return await _client.PostAsync<Save{{ entityNamePascalCase }}Command.Response>("api/{{ entityNameLowerCasePlural }}",content);
+                return await _client.PostAsync<dynamic>("api/{{ entityNameLowerCasePlural }}",content);
             }
             catch (HttpRequestException ex)
             {
@@ -62,11 +59,11 @@ namespace {{ namespace }}
             }
         }
 
-        public async Task<Get{{ entityNamePascalCasePlural }}Query.Response> Remove(Remove{{ entityNamePascalCase }}Command.Request request)
+        public async Task<dynamic> Remove(int {{ entityNameCamelCase }}Id)
         {
             try
             {
-                return await _client.DeleteAsync<Get{{ entityNamePascalCasePlural }}Query.Response>($"api/{{ entityNameLowerCasePlural }}/{request.{{ entityNamePascalCase }}.{{ entityNamePascalCase }}Id}");
+                return await _client.DeleteAsync<dynamic>($"api/{{ entityNameLowerCasePlural }}/{{{ entityNameCamelCase }}Id}");
             }
             catch (HttpRequestException ex)
             {

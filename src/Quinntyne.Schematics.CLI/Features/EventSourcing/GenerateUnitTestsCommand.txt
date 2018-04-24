@@ -1,0 +1,166 @@
+using {{ rootNamespace }}.API.Features.{{ entityNamePascalCasePlural }};
+using {{ rootNamespace }}.Core.Entities;
+using {{ rootNamespace }}.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using Xunit;
+
+namespace {{ namespace }}
+{
+    public class {{ entityNamePascalCase }}UnitTests : BaseFeatureTestCollection
+    {     
+ 
+        [Fact]
+        public async Task ShouldHandleSave{{ entityNamePascalCase }}CommandRequest()
+        {
+
+            var options = new DbContextOptionsBuilder<MacariaContext>()
+                .UseInMemoryDatabase(databaseName: "ShouldHandleSave{{ entityNamePascalCase }}CommandRequest")
+                .Options;
+
+            using (var context = new MacariaContext(options, _httpContextAccessorMock.Object))
+            {
+                var handler = new Save{{ entityNamePascalCase }}Command.Handler(context);
+
+                var response = await handler.Handle(new Save{{ entityNamePascalCase }}Command.Request()
+                {
+                    {{ entityNamePascalCase }} = new {{ entityNamePascalCase }}ApiModel()
+                    {
+                        Name = "Quinntyne"
+                    }
+                }, default(CancellationToken));
+
+                Assert.Equal(1, response.{{ entityNamePascalCase }}Id);
+            }
+        }
+
+        [Fact]
+        public async Task ShouldHandleGet{{ entityNamePascalCase }}ByIdQueryRequest()
+        {
+            var options = new DbContextOptionsBuilder<MacariaContext>()
+                .UseInMemoryDatabase(databaseName: "ShouldHandleGet{{ entityNamePascalCase }}ByIdQueryRequest")
+                .Options;
+
+            using (var context = new MacariaContext(options, _httpContextAccessorMock.Object))
+            {
+                var tenant = InsertTenantIntoInMemoryDatabase(context);
+
+                context.{{ entityNamePascalCasePlural }}.Add(new {{ entityNamePascalCase }}()
+                {
+                    {{ entityNamePascalCase }}Id = 1,
+                    Name = "Quinntyne",
+                    Tenant = tenant
+                });
+
+                context.SaveChanges();
+
+                var handler = new Get{{ entityNamePascalCase }}ByIdQuery.Handler(context);
+
+                var response = await handler.Handle(new Get{{ entityNamePascalCase }}ByIdQuery.Request()
+                {
+                    {{ entityNamePascalCase }}Id = 1
+                }, default(CancellationToken));
+
+                Assert.Equal("Quinntyne", response.{{ entityNamePascalCase }}.Name);
+            }
+        }
+
+        [Fact]
+        public async Task ShouldHandleGet{{ entityNamePascalCasePlural }}QueryRequest()
+        {
+            var options = new DbContextOptionsBuilder<MacariaContext>()
+                .UseInMemoryDatabase(databaseName: "ShouldHandleGet{{ entityNamePascalCasePlural }}QueryRequest")
+                .Options;
+
+            using (var context = new MacariaContext(options, _httpContextAccessorMock.Object))
+            {
+                var tenant = InsertTenantIntoInMemoryDatabase(context);
+
+                context.{{ entityNamePascalCasePlural }}.Add(new Macaria.Core.Entities.{{ entityNamePascalCase }}()
+                {
+                    {{ entityNamePascalCase }}Id = 1,
+                    Name = "Quinntyne",
+                    Tenant = tenant
+                });
+
+                context.SaveChanges();
+
+                var handler = new Get{{ entityNamePascalCasePlural }}Query.Handler(context);
+
+                var response = await handler.Handle(new Get{{ entityNamePascalCasePlural }}Query.Request(), default(CancellationToken));
+
+                Assert.Single(response.{{ entityNamePascalCasePlural }});
+            }
+        }
+
+        [Fact]
+        public async Task ShouldHandleRemove{{ entityNamePascalCase }}CommandRequest()
+        {
+            var options = new DbContextOptionsBuilder<MacariaContext>()
+                .UseInMemoryDatabase(databaseName: "ShouldHandleRemove{{ entityNamePascalCase }}CommandRequest")
+                .Options;
+
+            using (var context = new MacariaContext(options, _httpContextAccessorMock.Object))
+            {
+                var tenant = InsertTenantIntoInMemoryDatabase(context);
+
+                context.{{ entityNamePascalCasePlural }}.Add(new {{ entityNamePascalCase }}()
+                {
+                    {{ entityNamePascalCase }}Id = 1,
+                    Name = "Quinntyne",
+                    Tenant = tenant
+                });
+
+                context.SaveChanges();
+
+                var handler = new Remove{{ entityNamePascalCase }}Command.Handler(context);
+
+                await handler.Handle(new Remove{{ entityNamePascalCase }}Command.Request()
+                {
+                    {{ entityNamePascalCase }}Id =  1 
+                }, default(CancellationToken));
+
+                Assert.Equal(0, context.{{ entityNamePascalCasePlural }}.Count());
+            }
+        }
+
+        [Fact]
+        public async Task ShouldHandleUpdate{{ entityNamePascalCase }}CommandRequest()
+        {
+            var options = new DbContextOptionsBuilder<MacariaContext>()
+                .UseInMemoryDatabase(databaseName: "ShouldHandleUpdate{{ entityNamePascalCase }}CommandRequest")
+                .Options;
+
+            using (var context = new MacariaContext(options, _httpContextAccessorMock.Object))
+            {
+                var tenant = InsertTenantIntoInMemoryDatabase(context);
+
+                context.{{ entityNamePascalCasePlural }}.Add(new {{ entityNamePascalCase }}()
+                {
+                    {{ entityNamePascalCase }}Id = 1,
+                    Name = "Quinntyne",
+                    Tenant = tenant
+                });
+
+                context.SaveChanges();
+
+                var handler = new Save{{ entityNamePascalCase }}Command.Handler(context);
+
+                var response = await handler.Handle(new Save{{ entityNamePascalCase }}Command.Request()
+                {
+                    {{ entityNamePascalCase }} = new {{ entityNamePascalCase }}ApiModel()
+                    {
+                        {{ entityNamePascalCase }}Id = 1,
+                        Name = "Quinntyne"
+                    }
+                }, default(CancellationToken));
+
+                Assert.Equal(1, response.{{ entityNamePascalCase }}Id);
+                Assert.Equal("Quinntyne", context.{{ entityNamePascalCasePlural }}.Single(x => x.{{ entityNamePascalCase }}Id == 1).Name);
+            }
+        }
+        
+    }
+}

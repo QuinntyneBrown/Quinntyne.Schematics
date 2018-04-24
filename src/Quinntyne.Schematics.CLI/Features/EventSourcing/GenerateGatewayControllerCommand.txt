@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using {{ serviceNamePascalCase }}.Features.{{ entityNamePascalCasePlural }};
-using {{ rootNamespace }}.SPA.Clients;
+using {{ rootNamespace }}.Clients;
 
 namespace {{ namespace }}
 {
@@ -16,19 +15,21 @@ namespace {{ namespace }}
         public {{ entityNamePascalCase }}Controller({{ entityNamePascalCasePlural }}Client client) => _client = client;
 
         [HttpPost]
-        public async Task<ActionResult<Save{{ entityNamePascalCase }}Command.Response>> Save(Save{{ entityNamePascalCase }}Command.Request request)
-            => await _client.Save(request);
+        public async Task<ActionResult<dynamic>> Save(dynamic {{ entityNameCamelCase }})
+            => await _client.Save({{ entityNameCamelCase }});
 
-        [HttpDelete("{{{ entityNamePascalCase }}.{{ entityNamePascalCase }}Id}")]
-        public async Task Remove(Remove{{ entityNamePascalCase }}Command.Request request)
-            => await _client.Remove(request);
+        [HttpDelete("{{{ entityNameCamelCase }}Id}")]
+        public async Task Remove(int {{ entityNameCamelCase }}Id)
+            => await _client.Remove({{ entityNameCamelCase }}Id);
 
-        [HttpGet("{{{ entityNamePascalCase }}Id}")]
-        public async Task<ActionResult<Get{{ entityNamePascalCase }}ByIdQuery.Response>> GetById([FromRoute]Get{{ entityNamePascalCase }}ByIdQuery.Request request)
-            => await _client.GetById(request);
+        [AllowAnonymous]
+        [HttpGet("{{{ entityNameCamelCase }}Id}")]
+        public async Task<ActionResult<dynamic>> GetById([FromRoute]int {{ entityNameCamelCase }}Id)
+            => await _client.GetById({{ entityNameCamelCase }}Id);
 
+        [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<Get{{ entityNamePascalCasePlural }}Query.Response>> Get()
+        public async Task<ActionResult<dynamic>> Get()
             => await _client.Get();
     }
 }
