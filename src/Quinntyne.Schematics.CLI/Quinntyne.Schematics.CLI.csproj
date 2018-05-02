@@ -50,7 +50,9 @@
     <EmbeddedResource Include="Features\EventSourcing\GenerateAppSettingsCommand.txt">
       <DependentUpon>GenerateAppSettingsCommand.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Features\EventSourcing\GenerateClientCommand.txt" />
+    <EmbeddedResource Include="Features\EventSourcing\GenerateClientCommand.txt">
+      <DependentUpon>GenerateClientCommand.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Features\EventSourcing\GenerateGatewayControllerCommand.txt">
       <DependentUpon>GenerateGatewayControllerCommand.cs</DependentUpon>
     </EmbeddedResource>
@@ -60,11 +62,15 @@
     <EmbeddedResource Include="Features\EventSourcing\GenerateRootProgramCommand.txt">
       <DependentUpon>GenerateRootProgramCommand.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Features\EventSourcing\GenerateSeedConfigurationCommand.txt" />
+    <EmbeddedResource Include="Features\EventSourcing\GenerateSeedConfigurationCommand.txt">
+      <DependentUpon>GenerateSeedConfigurationCommand.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Features\EventSourcing\GenerateStartUpCommand.txt">
       <DependentUpon>GenerateStartUpCommand.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Features\EventSourcing\GenerateUnitTestsCommand.txt" />
+    <EmbeddedResource Include="Features\EventSourcing\GenerateUnitTestsCommand.txt">
+      <DependentUpon>GenerateUnitTestsCommand.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Features\Testing\GenerateTestScenarioBaseCommand.txt">
       <DependentUpon>GenerateTestScenarioBaseCommand.cs</DependentUpon>
     </EmbeddedResource>
