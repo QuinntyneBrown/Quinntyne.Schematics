@@ -20,6 +20,7 @@
     <None Remove="Features\EventSourcing\GenerateSeedConfigurationCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateStartUpCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateUnitTestsCommand.txt" />
+    <None Remove="Features\EventSourcing\Models\GenerateBaseModel.txt" />
     <None Remove="Features\Testing\GenerateTestScenarioBaseCommand.txt" />
     <None Remove="Features\Testing\GenerateTestScenariosCommand.txt" />
     <None Remove="Features\CodeGenerator\GenerateApiModelCommand.txt" />
@@ -70,6 +71,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Features\EventSourcing\GenerateUnitTestsCommand.txt">
       <DependentUpon>GenerateUnitTestsCommand.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\EventSourcing\Models\GenerateBaseModel.txt">
+      <DependentUpon>GenerateBaseModel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Features\Testing\GenerateTestScenarioBaseCommand.txt">
       <DependentUpon>GenerateTestScenarioBaseCommand.cs</DependentUpon>

@@ -1,9 +1,9 @@
+using FluentValidation;
 using MediatR;
 using System.Threading.Tasks;
 using System.Threading;
-using {{ rootNamespace }}.Infrastructure.Data;
 using {{ rootNamespace }}.Core.Entities;
-using FluentValidation;
+using {{ rootNamespace }}.Core.Interfaces;
 
 namespace {{ namespace }}
 {
@@ -25,10 +25,8 @@ namespace {{ namespace }}
         public class Handler : IRequestHandler<Request>
         {
             public IAppDbContext _context { get; set; }
-            public Handler(IAppDbContext context)
-            {
-                _context = context;
-            }
+            
+			public Handler(IAppDbContext context) => _context = context;
 
             public async Task Handle(Request request, CancellationToken cancellationToken)
             {

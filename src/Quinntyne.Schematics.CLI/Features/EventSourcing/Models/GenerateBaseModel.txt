@@ -1,0 +1,11 @@
+using System;
+
+namespace {{ namespace }}
+{
+    public class BaseModel
+    {
+        public DateTime CreatedOn { get; set; }
+        public DateTime LastModifiedOn { get; set; }
+        public bool IsDeleted { get; set; }
+    }
+}
