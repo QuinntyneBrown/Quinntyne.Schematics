@@ -1,8 +1,8 @@
 using {{ rootNamespace }}.API.Features.{{ entityNamePascalCasePlural }};
+using {{ rootNamespace }}.Core.Extensions;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using TestUtilities.Extensions;
 using Xunit;
 
 namespace {{ namespace }}

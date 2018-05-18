@@ -18,9 +18,11 @@ namespace Quinntyne.Schematics.CLI.Features.Testing
                 Directory = options.Directory;
                 Namespace = options.Namespace;
                 RootNamespace = options.RootNamespace;
+                Options = options;
             }
 
             public dynamic Settings { get; set; }
+            public IOptions Options { get; set; }
         }
 
         public class Validator : AbstractValidator<Request>
@@ -37,21 +39,24 @@ namespace Quinntyne.Schematics.CLI.Features.Testing
             private readonly ITemplateLocator _templateLocator;
             private readonly ITemplateProcessor _templateProcessor;
             private readonly INamingConventionConverter _namingConventionConverter;
+            private readonly IMediator _mediator;
 
             public Handler(
                 IFileWriter fileWriter,
                 INamingConventionConverter namingConventionConverter,
                 ITemplateLocator templateLocator, 
-                ITemplateProcessor templateProcessor
+                ITemplateProcessor templateProcessor,
+                IMediator mediator
                 )
             {
                 _fileWriter = fileWriter;
                 _namingConventionConverter = namingConventionConverter;
                 _templateProcessor = templateProcessor;
                 _templateLocator = templateLocator;
+                _mediator = mediator;
             }
 
-            public Task Handle(Request request, CancellationToken cancellationToken)
+            public async Task Handle(Request request, CancellationToken cancellationToken)
             {
                 var entityNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity);
                 var entityNameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity);
@@ -59,7 +64,6 @@ namespace Quinntyne.Schematics.CLI.Features.Testing
                 var entityNameCamelCasePlural = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity, true);
 
                 var templateScenarios = _templateLocator.Get("GenerateTestScenariosCommand");
-                var templateBase = _templateLocator.Get("GenerateTestScenarioBaseCommand");
 
                 var tokens = new Dictionary<string, string>
                 {
@@ -72,12 +76,10 @@ namespace Quinntyne.Schematics.CLI.Features.Testing
                 };
 
                 var resultScenarios = _templateProcessor.ProcessTemplate(templateScenarios, tokens);
-                var resultScenarioBase = _templateProcessor.ProcessTemplate(templateBase, tokens);
 
                 _fileWriter.WriteAllLines($"{request.Directory}//{entityNamePascalCase}Scenarios.cs", resultScenarios);
-                _fileWriter.WriteAllLines($"{request.Directory}//{entityNamePascalCase}ScenarioBase.cs", resultScenarioBase);
 
-                return Task.CompletedTask;
+                await _mediator.Send(new GenerateTestScenarioBaseCommand.Request(request.Options));                
             }
         }
     }
