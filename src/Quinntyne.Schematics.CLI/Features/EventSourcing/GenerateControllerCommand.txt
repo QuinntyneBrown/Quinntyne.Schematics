@@ -19,7 +19,7 @@ namespace {{ namespace }}
             => await _mediator.Send(request);
         
         [HttpDelete("{{{ entityNamePascalCase }}.{{ entityNamePascalCase }}Id}")]
-        public async Task Remove(Remove{{ entityNamePascalCase }}Command.Request request)
+        public async Task Remove([FromRoute]Remove{{ entityNamePascalCase }}Command.Request request)
             => await _mediator.Send(request);            
 
         [HttpGet("{{{ entityNamePascalCase }}Id}")]
