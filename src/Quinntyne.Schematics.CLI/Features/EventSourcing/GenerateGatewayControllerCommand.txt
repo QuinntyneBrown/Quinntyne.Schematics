@@ -22,12 +22,10 @@ namespace {{ namespace }}
         public async Task Remove(int {{ entityNameCamelCase }}Id)
             => await _client.Remove({{ entityNameCamelCase }}Id);
 
-        [AllowAnonymous]
         [HttpGet("{{{ entityNameCamelCase }}Id}")]
         public async Task<ActionResult<dynamic>> GetById([FromRoute]int {{ entityNameCamelCase }}Id)
             => await _client.GetById({{ entityNameCamelCase }}Id);
 
-        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<dynamic>> Get()
             => await _client.Get();

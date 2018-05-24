@@ -18,11 +18,11 @@ namespace {{ namespace }}
         public async Task<ActionResult<Save{{ entityNamePascalCase }}Command.Response>> Save(Save{{ entityNamePascalCase }}Command.Request request)
             => await _mediator.Send(request);
         
-        [HttpDelete("{{{ entityNamePascalCase }}.{{ entityNamePascalCase }}Id}")]
+        [HttpDelete("{{{ entityNameCamelCase }}Id}")]
         public async Task Remove([FromRoute]Remove{{ entityNamePascalCase }}Command.Request request)
             => await _mediator.Send(request);            
 
-        [HttpGet("{{{ entityNamePascalCase }}Id}")]
+        [HttpGet("{{{ entityNameCamelCase }}Id}")]
         public async Task<ActionResult<Get{{ entityNamePascalCase }}ByIdQuery.Response>> GetById([FromRoute]Get{{ entityNamePascalCase }}ByIdQuery.Request request)
             => await _mediator.Send(request);
 

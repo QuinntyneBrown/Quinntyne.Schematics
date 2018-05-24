@@ -13,13 +13,13 @@ namespace {{ namespace }}
         {
             public Validator()
             {
-                RuleFor(request => request.{{ entityNamePascalCase }}.{{ entityNamePascalCase }}Id).NotEqual(0);
+                RuleFor(request => request.{{ entityNamePascalCase }}Id).NotEqual(0);
             }
         }
 
         public class Request : IRequest
         {
-            public {{ entityNamePascalCase }} {{ entityNamePascalCase }} { get; set; }
+            public int {{ entityNamePascalCase }}Id { get; set; }
         }
 
         public class Handler : IRequestHandler<Request>
@@ -30,7 +30,7 @@ namespace {{ namespace }}
 
             public async Task Handle(Request request, CancellationToken cancellationToken)
             {
-                _context.{{ entityNamePascalCasePlural }}.Remove(await _context.{{ entityNamePascalCasePlural }}.FindAsync(request.{{ entityNamePascalCase }}.{{ entityNamePascalCase }}Id));
+                _context.{{ entityNamePascalCasePlural }}.Remove(await _context.{{ entityNamePascalCasePlural }}.FindAsync(request.{{ entityNamePascalCase }}Id));
                 await _context.SaveChangesAsync(cancellationToken);
             }
 

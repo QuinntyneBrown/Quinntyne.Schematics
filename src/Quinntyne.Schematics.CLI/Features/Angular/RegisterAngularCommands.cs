@@ -13,6 +13,7 @@ namespace Quinntyne.Schematics.CLI.Features.Angular
             dictionary.Add("ng-model", new Func<IOptions, IRequest>((options) => new GenerateModelCommand.Request(options)));
             dictionary.Add("ng-overlay-ref", new Func<IOptions, IRequest>((options) => new GenerateOverlayRefCommand.Request(options)));
             dictionary.Add("ng-service", new Func<IOptions, IRequest>((options) => new GenerateServiceCommand.Request(options)));
+            dictionary.Add("ng-overlay", new Func<IOptions, IRequest>((options) => new GenerateOverlayServiceCommand.Request(options)));
         }
     }
 }
