@@ -79,6 +79,7 @@ namespace Quinntyne.Schematics.CLI.Features.Angular
                 var serviceName = $"{nameSnakeCase}-overlay";
 
                 _fileWriter.WriteAllLines($"{request.Directory}//{serviceName}.ts", result);
+
                 request.Options.Name = serviceName;
 
                 await _mediator.Send(new GenerateComponentCommand.Request(request.Options));
