@@ -8,22 +8,19 @@ using FluentValidation;
 
 namespace Quinntyne.Schematics.CLI.Features.Angular
 {
-    public class GenerateComponentCommand
+    public class GenerateEditOverlayCommand
     {
         public class Request: Options, IRequest, ICodeGeneratorCommandRequest
         {
             public Request(IOptions options)
             {                
-                Name = options.Name;
+                Entity = options.Entity;
                 Directory = options.Directory;
                 Namespace = options.Namespace;
                 RootNamespace = options.RootNamespace;
-                Entity = options.Entity;
-                Options = options;
             }
 
             public dynamic Settings { get; set; }
-            public IOptions Options { get; set; }
         }
 
         public class Validator : AbstractValidator<Request>
@@ -40,52 +37,40 @@ namespace Quinntyne.Schematics.CLI.Features.Angular
             private readonly ITemplateLocator _templateLocator;
             private readonly ITemplateProcessor _templateProcessor;
             private readonly INamingConventionConverter _namingConventionConverter;
-            private readonly IMediator _mediator;
 
             public Handler(
                 IFileWriter fileWriter,
                 INamingConventionConverter namingConventionConverter,
                 ITemplateLocator templateLocator, 
-                ITemplateProcessor templateProcessor,
-                IMediator mediator
+                ITemplateProcessor templateProcessor
                 )
             {
                 _fileWriter = fileWriter;
                 _namingConventionConverter = namingConventionConverter;
                 _templateProcessor = templateProcessor;
                 _templateLocator = templateLocator;
-                _mediator = mediator;
             }
 
-            public async Task Handle(Request request, CancellationToken cancellationToken)
-            {
-                if(!string.IsNullOrEmpty(request.Entity))
-                {
-                    await _mediator.Send(new GenerateEditOverlayComponentCommand.Request(request.Options));
-                    return;
-                }
-                var namePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Name);
-                var nameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Name);
-                var nameSnakeCase = _namingConventionConverter.Convert(NamingConvention.SnakeCase, request.Name);
+            public Task Handle(Request request, CancellationToken cancellationToken)
+            {                
+                var entityNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity);
+                var entityNameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity);
 
-                var template = _templateLocator.Get("GenerateComponentCommand");
+                var template = _templateLocator.Get("GenerateEditOverlayCommand");
 
                 var tokens = new Dictionary<string, string>
                 {
+                    { "{{ entityNamePascalCase }}", entityNamePascalCase },
+                    { "{{ entityNameCamelCase }}", entityNameCamelCase },
                     { "{{ namespace }}", request.Namespace },
-                    { "{{ rootNamespace }}", request.RootNamespace },
-                    { "{{ nameSnakeCase }}", nameSnakeCase },
-                    { "{{ prefix }}", "app" },
-                    {"{{ namePascalCase }}",namePascalCase }
+                    { "{{ rootNamespace }}", request.RootNamespace }
                 };
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
-
-                _fileWriter.WriteAllLines($"{request.Directory}//{nameSnakeCase}.component.ts", result);
-                _fileWriter.WriteAllLines($"{request.Directory}//{nameSnakeCase}.component.html", new string[0]);
-                _fileWriter.WriteAllLines($"{request.Directory}//{nameSnakeCase}.component.css", new string[0]);
-
-                await Task.CompletedTask;
+                
+                _fileWriter.WriteAllLines($"{request.Directory}//GenerateEditOverlayCommand.cs", result);
+               
+                return Task.CompletedTask;
             }
         }
     }

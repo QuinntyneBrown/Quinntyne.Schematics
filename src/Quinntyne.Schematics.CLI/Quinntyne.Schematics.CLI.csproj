@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <None Remove="Features\Angular\GenerateComponentCommand.txt" />
+    <None Remove="Features\Angular\GenerateEditOverlayCommand.txt" />
+    <None Remove="Features\Angular\GenerateEditOverlayComponentCommand.txt" />
     <None Remove="Features\Angular\GenerateModuleCommand - Copy.txt" />
     <None Remove="Features\Angular\GenerateModuleCommand.txt" />
     <None Remove="Features\Angular\GenerateNgModelCommand.txt" />
@@ -43,6 +45,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Features\Angular\GenerateComponentCommand.txt">
       <DependentUpon>GenerateComponentCommand.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\Angular\GenerateEditOverlayCommand.txt">
+      <DependentUpon>GenerateEditOverlayCommand.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\Angular\GenerateEditOverlayComponentCommand.txt">
+      <DependentUpon>GenerateEditOverlayComponentCommand.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Features\Angular\GenerateNgModelCommand.txt" />
     <EmbeddedResource Include="Features\Angular\GenerateOverlayServiceCommand.txt">
@@ -135,6 +143,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Quinntyne.Schematics.Extensions\Quinntyne.Schematics.Extensions.csproj" />
     <ProjectReference Include="..\Quinntyne.Schematics.Infrastructure\Quinntyne.Schematics.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\Angular\Components\" />
   </ItemGroup>
 
 </Project>

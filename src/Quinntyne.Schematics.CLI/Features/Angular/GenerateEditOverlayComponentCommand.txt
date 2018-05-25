@@ -1,0 +1,62 @@
+import { Component } from "@angular/core";
+import { Subject, BehaviorSubject } from "rxjs";
+import { FormGroup, FormControl } from "@angular/forms";
+import { OverlayRefWrapper } from "../core/overlay-ref-wrapper";
+import { {{ entityNamePascalCase }}Service } from "./{{ entityNameSnakeCase }}.service";
+import { {{ entityNamePascalCase }} } from "./{{ entityNameSnakeCase }}.model";
+import { map, switchMap, tap, takeUntil } from "rxjs/operators";
+
+@Component({
+  templateUrl: "./edit-{{ entityNameSnakeCase }}-overlay.component.html",
+  styleUrls: ["./edit-{{ entityNameSnakeCase }}-overlay.component.css"],
+  selector: "app-edit-{{ entityNameSnakeCase }}-overlay"
+})
+export class Edit{{ entityNamePascalCase }}OverlayComponent { 
+  constructor(
+    private _{{ entityNameCamelCase }}Service: {{ entityNamePascalCase }}Service,
+    private _overlay: OverlayRefWrapper) { }
+
+  ngOnInit() {
+    if (this.{{ entityNameCamelCase }}Id)
+      this._{{ entityNameCamelCase }}Service.getById({ {{ entityNameCamelCase }}Id: this.{{ entityNameCamelCase }}Id })
+        .pipe(
+          map(x => this.{{ entityNameCamelCase }}$.next(x)),
+          switchMap(x => this.{{ entityNameCamelCase }}$),
+          map(x => this.form.patchValue({
+            name: x.name
+          }))
+        )
+        .subscribe();
+  }
+
+  public onDestroy: Subject<void> = new Subject<void>();
+
+  ngOnDestroy() {
+    this.onDestroy.next();	
+  }
+
+  public {{ entityNameCamelCase }}$: BehaviorSubject<{{ entityNamePascalCase }}> = new BehaviorSubject(<{{ entityNamePascalCase }}>{});
+  
+  public {{ entityNameCamelCase }}Id: number;
+
+  public handleCancelClick() {
+    this._overlay.close();
+  }
+
+  public handleSaveClick() {
+    const {{ entityNameCamelCase }} = new {{ entityNamePascalCase }}();
+    {{ entityNameCamelCase }}.{{ entityNameCamelCase }}Id = this.{{ entityNameCamelCase }}Id;
+    {{ entityNameCamelCase }}.name = this.form.value.name;
+    this._{{ entityNameCamelCase }}Service.save({ {{ entityNameCamelCase }} })
+      .pipe(
+        map(x => {{ entityNameCamelCase }}.{{ entityNameCamelCase }}Id = x.{{ entityNameCamelCase }}Id),
+        tap(x => this._overlay.close({{ entityNameCamelCase }})),
+        takeUntil(this.onDestroy)
+      )
+      .subscribe();
+  }
+
+  public form: FormGroup = new FormGroup({
+    name: new FormControl(null, [])
+  });
+} 
