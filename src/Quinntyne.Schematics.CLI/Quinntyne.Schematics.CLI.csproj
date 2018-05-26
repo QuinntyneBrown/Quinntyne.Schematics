@@ -7,6 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Features\AngularComponents\GenerateListComponentCommand.txt" />
+    <None Remove="Features\AngularComponents\GenerateListComponentCssCommand.txt" />
+    <None Remove="Features\AngularComponents\GenerateListComponentHtmlCommand.txt" />
     <None Remove="Features\Angular\GenerateComponentCommand.txt" />
     <None Remove="Features\Angular\GenerateEditOverlayCommand.txt" />
     <None Remove="Features\Angular\GenerateEditOverlayComponentCommand.txt" />
@@ -43,6 +46,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Features\AngularComponents\GenerateListComponentCommand.txt" />
+    <EmbeddedResource Include="Features\AngularComponents\GenerateListComponentCssCommand.txt" />
+    <EmbeddedResource Include="Features\AngularComponents\GenerateListComponentHtmlCommand.txt" />
     <EmbeddedResource Include="Features\Angular\GenerateComponentCommand.txt">
       <DependentUpon>GenerateComponentCommand.cs</DependentUpon>
     </EmbeddedResource>

@@ -6,9 +6,9 @@ using Quinntyne.Schematics.Infrastructure.Services;
 using MediatR;
 using FluentValidation;
 
-namespace Quinntyne.Schematics.CLI.Features.Angular
+namespace Quinntyne.Schematics.CLI.Features.AngularComponents
 {
-    public class GenerateEditOverlayComponentCommand
+    public class GenerateListComponentCommand
     {
         public class Request: Options, IRequest, ICodeGeneratorCommandRequest
         {
@@ -18,6 +18,7 @@ namespace Quinntyne.Schematics.CLI.Features.Angular
                 Directory = options.Directory;
                 Namespace = options.Namespace;
                 RootNamespace = options.RootNamespace;
+                Name = options.Name;
             }
 
             public dynamic Settings { get; set; }
@@ -56,23 +57,38 @@ namespace Quinntyne.Schematics.CLI.Features.Angular
                 var entityNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity);
                 var entityNameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity);
                 var entityNameSnakeCase = _namingConventionConverter.Convert(NamingConvention.SnakeCase, request.Entity);
+                var entityNameCamelCasePlural = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity, true);
 
-                var template = _templateLocator.Get("GenerateEditOverlayComponentCommand");
+                var nameSnakeCase = _namingConventionConverter.Convert(NamingConvention.SnakeCase, request.Name);
+                var nameCamelCasePlural = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Name, true);
+                var namePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Name);
+
+                var template = _templateLocator.Get("GenerateListComponentCommand");
+                var templateCss = _templateLocator.Get("GenerateListComponentCssCommand");
+                var templateHtml = _templateLocator.Get("GenerateListComponentHtmlCommand");
 
                 var tokens = new Dictionary<string, string>
                 {
                     { "{{ entityNamePascalCase }}", entityNamePascalCase },
                     { "{{ entityNameCamelCase }}", entityNameCamelCase },
                     { "{{ entityNameSnakeCase }}", entityNameSnakeCase },
+                    { "{{ entityNameCamelCasePlural }}", entityNameCamelCasePlural },
+
+                    { "{{ nameSnakeCase }}", nameSnakeCase },
+                    { "{{ namePascalCase }}", namePascalCase },
+                    { "{{ nameCamelCasePlural }}", nameCamelCasePlural },
+
                     { "{{ namespace }}", request.Namespace },
                     { "{{ rootNamespace }}", request.RootNamespace }
                 };
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
-                
-                _fileWriter.WriteAllLines($"{request.Directory}//edit-{entityNameCamelCase}.component.ts", result);
-                _fileWriter.WriteAllLines($"{request.Directory}//edit-{entityNameCamelCase}.component.html", new string[0]);
-                _fileWriter.WriteAllLines($"{request.Directory}//edit-{entityNameCamelCase}.component.css", new string[0]);
+                var resultCss = _templateProcessor.ProcessTemplate(templateCss, tokens);
+                var resultHtml = _templateProcessor.ProcessTemplate(templateHtml, tokens);
+
+                _fileWriter.WriteAllLines($"{request.Directory}//{nameSnakeCase}.component.ts", result);
+                _fileWriter.WriteAllLines($"{request.Directory}//{nameSnakeCase}.component.css", resultCss);
+                _fileWriter.WriteAllLines($"{request.Directory}//{nameSnakeCase}.component.html", resultHtml);
 
                 return Task.CompletedTask;
             }

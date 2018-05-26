@@ -63,6 +63,7 @@ namespace Quinntyne.Schematics.CLI.Features.Angular
                 var namePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Name);
                 var nameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Name);
                 var nameSnakeCase = _namingConventionConverter.Convert(NamingConvention.SnakeCase, request.Name);
+                var entityNameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity);
 
                 var template = _templateLocator.Get("GenerateOverlayServiceCommand");
 
@@ -72,7 +73,8 @@ namespace Quinntyne.Schematics.CLI.Features.Angular
                     { "{{ nameCamelCase }}", nameCamelCase },
                     { "{{ nameSnakeCase }}", nameSnakeCase },
                     { "{{ namespace }}", request.Namespace },
-                    { "{{ rootNamespace }}", request.RootNamespace }
+                    { "{{ rootNamespace }}", request.RootNamespace },
+                    { "{{ entityNameCamelCase }}", entityNameCamelCase }
                 };
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);

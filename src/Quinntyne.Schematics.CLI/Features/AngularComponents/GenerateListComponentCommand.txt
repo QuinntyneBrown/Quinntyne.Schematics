@@ -1,0 +1,81 @@
+import { Component } from "@angular/core";
+import { Subject, Observable, BehaviorSubject } from "rxjs";
+import { takeUntil, tap, map } from "rxjs/operators";
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from "@angular/router";
+import { {{ entityNamePascalCase }}Service } from "./{{ entityNameSnakeCase }}.service";
+import { {{ entityNamePascalCase }} } from "./{{ entityNameSnakeCase }}.model";
+import { deepCopy } from "../core/deep-copy";
+import { GridApi, ColDef } from "ag-grid";
+import { CheckboxCellComponent } from "../shared/checkbox-cell.component";
+import { DeleteCellComponent } from "../shared/delete-cell.component";
+import { EditCellComponent } from "../shared/edit-cell.component";
+
+@Component({
+  templateUrl: "./{{ nameSnakeCase }}.component.html",
+  styleUrls: ["./{{ nameSnakeCase }}.component.css"],
+  selector: "app-{{ nameSnakeCase }}"
+})
+export class {{ namePascalCase }}Component { 
+  constructor(
+    private _{{ entityNameCamelCase }}Service: {{ entityNamePascalCase }}Service,
+    private _router: Router
+  ) { }
+
+  ngOnInit() {
+    this._{{ entityNameCamelCase }}Service.get()
+      .pipe(map(x => this.{{ entityNameCamelCasePlural }}$.next(x)))
+      .subscribe();
+  }
+
+  public onDestroy: Subject<void> = new Subject<void>();
+
+  public {{ entityNameCamelCasePlural }}$: BehaviorSubject<Array<{{ entityNamePascalCase }}>> = new BehaviorSubject([]);
+
+  ngOnDestroy() {
+    this.onDestroy.next();    
+  }
+
+  public handleRemoveClick($event) {
+    const {{ entityNameCamelCasePlural }}: Array<{{ entityNamePascalCase }}> = [...this.{{ entityNameCamelCasePlural }}$.value];
+    const index = {{ entityNameCamelCasePlural }}.findIndex(x => x.{{ entityNameCamelCase }}Id == $event.data.{{ entityNameCamelCase }}Id);
+    {{ entityNameCamelCasePlural }}.splice(index, 1);
+    this.{{ entityNameCamelCasePlural }}$.next({{ entityNameCamelCasePlural }});
+
+    this._{{ entityNameCamelCase }}Service.remove({ {{ entityNameCamelCase }}: $event.data })
+      .pipe(takeUntil(this.onDestroy))
+      .subscribe();
+  }
+
+  public handleEditClick($event) {    
+
+  }
+
+  public addOrUpdate({{ entityNameCamelCase }}: {{ entityNamePascalCase }}) {
+    if (!{{ entityNameCamelCase }}) return;
+
+    let {{ entityNameCamelCasePlural }} = [...this.{{ entityNameCamelCasePlural }}$.value];
+    const i = {{ entityNameCamelCasePlural }}.findIndex((t) => t.{{ entityNameCamelCase }}Id == {{ entityNameCamelCase }}.{{ entityNameCamelCase }}Id);
+    const _ = i < 0 ? {{ entityNameCamelCasePlural }}.push({{ entityNameCamelCase }}) : {{ entityNameCamelCasePlural }}[i] = {{ entityNameCamelCase }};    
+    this.{{ entityNameCamelCasePlural }}$.next({{ entityNameCamelCasePlural }});
+  }
+
+  public columnDefs: Array<ColDef> = [
+    { headerName: "Name", field: "name" },
+    { cellRenderer: "editRenderer", onCellClicked: $event => this.handleEditClick($event), width: 30 },
+    { cellRenderer: "deleteRenderer", onCellClicked: $event => this.handleRemoveClick($event), width: 30 }
+  ];
+
+  public frameworkComponents: any = {
+    checkboxRenderer: CheckboxCellComponent,
+    deleteRenderer: DeleteCellComponent,
+    editRenderer: EditCellComponent
+  };
+
+  private _gridApi: GridApi;
+
+  public onGridReady(params) {
+    this._gridApi = params.api;
+    this._gridApi.sizeColumnsToFit();
+  }
+}

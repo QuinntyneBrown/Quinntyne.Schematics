@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using CommandLine;
 using Quinntyne.Schematics.CLI.Features.Testing;
 using Quinntyne.Schematics.CLI.Features.Angular;
+using Quinntyne.Schematics.CLI.Features.AngularComponents;
 
 namespace Quinntyne.Schematics.CLI
 {
@@ -108,6 +109,7 @@ namespace Quinntyne.Schematics.CLI
             RegisterEventSourcingCommands.Register(dictionary);
             RegisterTestingCommands.Register(dictionary);
             RegisterAngularCommands.Register(dictionary);
+            RegisterAngularComponentCommands.Register(dictionary);
             return dictionary;
         }
     }
