@@ -7,11 +7,11 @@ import { {{ entityNamePascalCase }} } from "./{{ entityNameSnakeCase }}.model";
 import { map, switchMap, tap, takeUntil } from "rxjs/operators";
 
 @Component({
-  templateUrl: "./edit-{{ entityNameSnakeCase }}-overlay.component.html",
-  styleUrls: ["./edit-{{ entityNameSnakeCase }}-overlay.component.css"],
-  selector: "app-edit-{{ entityNameSnakeCase }}-overlay"
+  templateUrl: "./{{ nameSnakeCase }}.component.html",
+  styleUrls: ["./{{ nameSnakeCase }}.component.css"],
+  selector: "app-{{ nameSnakeCase }}"
 })
-export class Edit{{ entityNamePascalCase }}OverlayComponent { 
+export class {{ namePascalCase }}Component { 
   constructor(
     private _{{ entityNameCamelCase }}Service: {{ entityNamePascalCase }}Service,
     private _overlay: OverlayRefWrapper) { }

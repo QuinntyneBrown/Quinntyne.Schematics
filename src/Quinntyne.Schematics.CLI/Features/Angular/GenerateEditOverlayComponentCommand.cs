@@ -18,6 +18,7 @@ namespace Quinntyne.Schematics.CLI.Features.Angular
                 Directory = options.Directory;
                 Namespace = options.Namespace;
                 RootNamespace = options.RootNamespace;
+                Name = options.Name;
             }
 
             public dynamic Settings { get; set; }
@@ -52,10 +53,14 @@ namespace Quinntyne.Schematics.CLI.Features.Angular
             }
 
             public Task Handle(Request request, CancellationToken cancellationToken)
-            {                
+            {
                 var entityNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity);
                 var entityNameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity);
                 var entityNameSnakeCase = _namingConventionConverter.Convert(NamingConvention.SnakeCase, request.Entity);
+
+                var namePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Name);
+                var nameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Name);
+                var nameSnakeCase = _namingConventionConverter.Convert(NamingConvention.SnakeCase, request.Name);
 
                 var template = _templateLocator.Get("GenerateEditOverlayComponentCommand");
 
@@ -64,15 +69,18 @@ namespace Quinntyne.Schematics.CLI.Features.Angular
                     { "{{ entityNamePascalCase }}", entityNamePascalCase },
                     { "{{ entityNameCamelCase }}", entityNameCamelCase },
                     { "{{ entityNameSnakeCase }}", entityNameSnakeCase },
+                    { "{{ namePascalCase }}", namePascalCase },
+                    { "{{ nameCamelCase }}", nameCamelCase },
+                    { "{{ nameSnakeCase }}", nameSnakeCase },
                     { "{{ namespace }}", request.Namespace },
                     { "{{ rootNamespace }}", request.RootNamespace }
                 };
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
                 
-                _fileWriter.WriteAllLines($"{request.Directory}//edit-{entityNameCamelCase}.component.ts", result);
-                _fileWriter.WriteAllLines($"{request.Directory}//edit-{entityNameCamelCase}.component.html", new string[0]);
-                _fileWriter.WriteAllLines($"{request.Directory}//edit-{entityNameCamelCase}.component.css", new string[0]);
+                _fileWriter.WriteAllLines($"{request.Directory}//{nameSnakeCase}.component.ts", result);
+                _fileWriter.WriteAllLines($"{request.Directory}//{nameSnakeCase}.component.html", new string[0]);
+                _fileWriter.WriteAllLines($"{request.Directory}//{nameSnakeCase}.component.css", new string[0]);
 
                 return Task.CompletedTask;
             }

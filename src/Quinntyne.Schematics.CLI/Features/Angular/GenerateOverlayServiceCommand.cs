@@ -77,13 +77,8 @@ namespace Quinntyne.Schematics.CLI.Features.Angular
                     { "{{ entityNameCamelCase }}", entityNameCamelCase }
                 };
 
-                var result = _templateProcessor.ProcessTemplate(template, tokens);
-                var serviceName = $"{nameSnakeCase}-overlay";
-
-                _fileWriter.WriteAllLines($"{request.Directory}//{serviceName}.ts", result);
-
-                request.Options.Name = serviceName;
-
+                var result = _templateProcessor.ProcessTemplate(template, tokens);                
+                _fileWriter.WriteAllLines($"{request.Directory}//{nameSnakeCase}.ts", result);
                 await _mediator.Send(new GenerateComponentCommand.Request(request.Options));
             }
         }
