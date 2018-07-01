@@ -1,9 +1,10 @@
+using {{ rootNamespace }}.Core.DomainEvents;
+using {{ rootNamespace }}.Core.Interfaces;
+using {{ rootNamespace }}.Core.Models;
 using FluentValidation;
 using MediatR;
 using System.Threading.Tasks;
 using System.Threading;
-using {{ rootNamespace }}.Core.Entities;
-using {{ rootNamespace }}.Core.Interfaces;
 
 namespace {{ namespace }}
 {
@@ -38,6 +39,8 @@ namespace {{ namespace }}
                 if ({{ entityNameCamelCase }} == null) _context.{{ entityNamePascalCasePlural }}.Add({{ entityNameCamelCase }} = new {{ entityNamePascalCase }}());
 
                 {{ entityNameCamelCase }}.Name = request.{{ entityNamePascalCase }}.Name;
+
+                {{ entityNameCamelCase }}.RaiseDomainEvent(new {{ entityNamePascalCase }}Saved({{ entityNameCamelCase }}));
 
                 await _context.SaveChangesAsync(cancellationToken);
 

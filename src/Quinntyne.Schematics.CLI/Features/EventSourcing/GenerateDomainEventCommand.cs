@@ -8,7 +8,7 @@ using FluentValidation;
 
 namespace Quinntyne.Schematics.CLI.Features.EventSourcing
 {
-    public class GenerateCommand
+    public class GenerateDomainEventCommand
     {
         public class Request: Options, IRequest, ICodeGeneratorCommandRequest
         {
@@ -56,37 +56,24 @@ namespace Quinntyne.Schematics.CLI.Features.EventSourcing
             {                
                 var entityNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity);
                 var entityNameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity);
-                var entityNamePascalCasePlural = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity, true);
-                var entityNameCamelCasePlural = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity, true);
-
                 var namePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Name);
-                var nameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Name);
-                var namePascalCasePlural = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Name, true);
-                var nameCamelCasePlural = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Name, true);
+                var entityNamePascalCasePlural = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity, true);
 
-                var template = _templateLocator.Get("GenerateCommand");
+                var template = _templateLocator.Get("GenerateDomainEventCommand");
 
                 var tokens = new Dictionary<string, string>
                 {
                     { "{{ entityNamePascalCase }}", entityNamePascalCase },
                     { "{{ entityNameCamelCase }}", entityNameCamelCase },
-                    { "{{ entityNamePascalCasePlural }}", entityNamePascalCasePlural },
-                    { "{{ entityNameCamelCasePlural }}", entityNameCamelCasePlural },
-
-                    { "{{ namePascalCase }}", namePascalCase },
-                    { "{{ nameCamelCase }}", nameCamelCase },
-                    { "{{ namePascalCasePlural }}", namePascalCasePlural },
-                    { "{{ nameCamelCasePlural }}", nameCamelCasePlural },
-
-
                     { "{{ namespace }}", request.Namespace },
                     { "{{ rootNamespace }}", request.RootNamespace },
-
+                    { "{{ namePascalCase }}", namePascalCase },
+                    { "{{ entityNamePascalCasePlural }}", entityNamePascalCasePlural }
                 };
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
                 
-                _fileWriter.WriteAllLines($"{request.Directory}//{namePascalCase}Command.cs", result);
+                _fileWriter.WriteAllLines($"{request.Directory}//{namePascalCase}.cs", result);
                
                 return Task.CompletedTask;
             }

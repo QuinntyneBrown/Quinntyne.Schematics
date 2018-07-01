@@ -1,0 +1,22 @@
+using {{ rootNamespace }}.Core;
+using {{ rootNamespace }}.Core.DomainEvents;
+using MediatR;
+using Microsoft.AspNetCore.SignalR;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace {{ namespace }}
+{
+    public class {{ namePascalCase }}Handler : INotificationHandler<{{ namePascalCase }}>
+    {
+        private readonly IHubContext<IntegrationEventsHub> _hubContext;
+
+        public {{ namePascalCase }}Handler(IHubContext<IntegrationEventsHub> hubContext)
+            => _hubContext = hubContext;
+
+        public async Task Handle({{ namePascalCase }} @event, CancellationToken cancellationToken)
+        {
+            await _hubContext.Clients.All.SendAsync("events", @event, cancellationToken);
+        }
+    }
+}

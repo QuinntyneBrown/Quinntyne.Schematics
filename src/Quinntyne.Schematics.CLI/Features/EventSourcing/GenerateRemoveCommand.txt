@@ -1,9 +1,10 @@
+using {{ rootNamespace }}.Core.DomainEvents;
+using {{ rootNamespace }}.Core.Interfaces;
+using {{ rootNamespace }}.Core.Models;
 using FluentValidation;
 using MediatR;
 using System.Threading.Tasks;
 using System.Threading;
-using {{ rootNamespace }}.Core.Entities;
-using {{ rootNamespace }}.Core.Interfaces;
 
 namespace {{ namespace }}
 {
@@ -30,10 +31,11 @@ namespace {{ namespace }}
 
             public async Task Handle(Request request, CancellationToken cancellationToken)
             {
-                _context.{{ entityNamePascalCasePlural }}.Remove(await _context.{{ entityNamePascalCasePlural }}.FindAsync(request.{{ entityNamePascalCase }}Id));
+                var {{ entityNameCamelCase }} = await _context.{{ entityNamePascalCasePlural }}.FindAsync(request.{{ entityNamePascalCase }}Id);
+                _context.{{ entityNamePascalCasePlural }}.Remove({{ entityNameCamelCase }});
+                {{ entityNameCamelCase }}.RaiseDomainEvent(new {{ entityNamePascalCase }}Removed({{ entityNameCamelCase }}.{{ entityNamePascalCase }}Id));
                 await _context.SaveChangesAsync(cancellationToken);
             }
-
         }
     }
 }

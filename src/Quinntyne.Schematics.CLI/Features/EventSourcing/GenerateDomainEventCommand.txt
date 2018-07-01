@@ -1,0 +1,14 @@
+using {{ rootNamespace }}.Core.Common;
+using {{ rootNamespace }}.Core.Models;
+
+namespace {{ namespace }}
+{
+    public class {{ namePascalCase }}: DomainEvent
+    {
+        public {{ namePascalCase }}(dynamic payload)
+        {
+            Payload = payload;
+            EventType = EventTypes.{{ entityNamePascalCasePlural }}.{{ namePascalCase }};
+        }
+    }
+}

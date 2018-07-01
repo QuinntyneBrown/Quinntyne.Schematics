@@ -11,6 +11,7 @@ using CommandLine;
 using Quinntyne.Schematics.CLI.Features.Testing;
 using Quinntyne.Schematics.CLI.Features.Angular;
 using Quinntyne.Schematics.CLI.Features.AngularComponents;
+using AutoMapper;
 
 namespace Quinntyne.Schematics.CLI
 {
@@ -51,9 +52,9 @@ namespace Quinntyne.Schematics.CLI
 
             var appArgs = (lastArg + 1) >= args.Length ? Enumerable.Empty<string>() : args.Skip(lastArg + 1).ToArray();
 
-            Func<IOptions, IRequest> request;
+            Func<IOptions, IRequest> requestFunc;
 
-            var retrieveRequest = _commands.TryGetValue(command, out request);
+            var retrieveRequest = _commands.TryGetValue(command, out requestFunc);
 
             if (retrieveRequest)
             {
@@ -72,7 +73,11 @@ namespace Quinntyne.Schematics.CLI
                         return 1;
                     }, x => 0);
 
-                _mediator.Send(request(options)).Wait();
+                var request = requestFunc(options);
+
+                (request as IOptions).Name = options.Name;
+
+                _mediator.Send(request).Wait();
             }
 
             return 1;

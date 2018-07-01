@@ -1,5 +1,5 @@
 using {{ rootNamespace }}.API.Features.{{ entityNamePascalCasePlural }};
-using {{ rootNamespace }}.Core.Entities;
+using {{ rootNamespace }}.Core.Models;
 using {{ rootNamespace }}.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;

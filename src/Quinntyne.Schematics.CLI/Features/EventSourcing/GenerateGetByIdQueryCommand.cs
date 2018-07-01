@@ -74,7 +74,7 @@ namespace Quinntyne.Schematics.CLI.Features.EventSourcing
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
                 
-                _fileWriter.WriteAllLines($"{request.Directory}//Get{entityNamePascalCase}ByIdQueryCommand.cs", result);
+                _fileWriter.WriteAllLines($"{request.Directory}//Get{entityNamePascalCase}ByIdQuery.cs", result);
                
                 return Task.CompletedTask;
             }

@@ -14,10 +14,7 @@ namespace Quinntyne.Schematics.CLI.Features.EventSourcing
     {
         public class Request: Options, IRequest, ICodeGeneratorCommandRequest
         {
-            public Request(IOptions options)
-            {
-                Options = options;
-            }
+            public Request(IOptions options) => Options = options;
 
             public dynamic Settings { get; set; }
             public IOptions Options { get; set; }
@@ -33,22 +30,18 @@ namespace Quinntyne.Schematics.CLI.Features.EventSourcing
 
         public class Handler : IRequestHandler<Request>
         {
-
             private IMediator _mediator;
-            public Handler(
-                IMediator mediator
-                )
-            {
-                _mediator = mediator;
-            }
+            public Handler(IMediator mediator) => _mediator = mediator;
 
             public async Task Handle(Request request, CancellationToken cancellationToken)
             {
                 await _mediator.Send(new GenerateApiModelCommand.Request(request.Options));
                 await _mediator.Send(new GenerateRemoveCommand.Request(request.Options));
+                await _mediator.Send(new GenerateRemovedEventCommand.Request(request.Options));
                 await _mediator.Send(new GenerateGetByIdQueryCommand.Request(request.Options));
                 await _mediator.Send(new GenerateGetQueryCommand.Request(request.Options));
                 await _mediator.Send(new GenerateSaveCommand.Request(request.Options));
+                await _mediator.Send(new GenerateSavedEventCommand.Request(request.Options));
                 await _mediator.Send(new GenerateControllerCommand.Request(request.Options));
 
                 await Task.CompletedTask;
