@@ -31,15 +31,14 @@ namespace Quinntyne.Schematics.Infrastructure.Services
     public interface INamespaceProvider
     {
         Namespace GetNamespace(string path);
+        string GetSolutionPath(string path, int depth = 0);
     }
 
     public class NamespaceProvider : INamespaceProvider
     {
         private INamingConventionConverter _namingConventionConverter;
         public NamespaceProvider(INamingConventionConverter namingConventionConverter)
-        {
-            _namingConventionConverter = namingConventionConverter;
-        }
+            => _namingConventionConverter = namingConventionConverter;
 
         public Namespace GetNamespace(string path)
         {
@@ -73,6 +72,20 @@ namespace Quinntyne.Schematics.Infrastructure.Services
             var projectFiles = GetFiles(computedPath, "*.csproj");
             depth = depth + 1;
             return (projectFiles.FirstOrDefault() != null) ? projectFiles.First() : GetProjectPath(path, depth);
+        }
+
+        public string GetSolutionPath(string path, int depth = 0)
+        {
+            var directories = path.Split(DirectorySeparatorChar);
+
+            if (directories.Length <= depth)
+                return null;
+
+            var newDirectories = directories.Take(directories.Length - depth);
+            var computedPath = Join(DirectorySeparatorChar.ToString(), newDirectories);
+            var solutionFile = GetFiles(computedPath, "*.sln");
+            depth = depth + 1;
+            return (solutionFile.FirstOrDefault() != null) ? solutionFile.First() : GetSolutionPath(path, depth);
         }
 
         public List<string> GetSubNamespaces(string path, string projectPath)

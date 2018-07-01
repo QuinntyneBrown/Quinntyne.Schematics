@@ -12,6 +12,7 @@ using Quinntyne.Schematics.CLI.Features.Testing;
 using Quinntyne.Schematics.CLI.Features.Angular;
 using Quinntyne.Schematics.CLI.Features.AngularComponents;
 using AutoMapper;
+using Quinntyne.Schematics.Infrastructure.Services;
 
 namespace Quinntyne.Schematics.CLI
 {
@@ -20,6 +21,7 @@ namespace Quinntyne.Schematics.CLI
         private readonly IDictionary<string, Func<IOptions, IRequest>> _commands;
         private readonly IMediator _mediator;
         private readonly ILogger<Program> _logger;
+        private readonly INamespaceProvider _namespaceProvider;
 
         static void Main(string[] args)
         {
@@ -35,13 +37,16 @@ namespace Quinntyne.Schematics.CLI
 
             var mediator = serviceProvider.GetService<IMediator>();
 
-            new Program(mediator, commands).ProcessArgs(args);
+            var namespaceProvider = serviceProvider.GetService<INamespaceProvider>();
+
+            new Program(mediator, commands, namespaceProvider).ProcessArgs(args);
         }
 
-        public Program(IMediator mediator, IDictionary<string, Func<IOptions, IRequest>> commands)
+        public Program(IMediator mediator, IDictionary<string, Func<IOptions, IRequest>> commands, INamespaceProvider namespaceProvider)
         {
             _mediator = mediator;
             _commands = commands;
+            _namespaceProvider = namespaceProvider;
         }
 
         public int ProcessArgs(string[] args)
@@ -74,9 +79,10 @@ namespace Quinntyne.Schematics.CLI
                     }, x => 0);
 
                 var request = requestFunc(options);
-
+                
                 (request as IOptions).Name = options.Name;
-
+                (request as IOptions).SolutionDirectory = System.IO.Path.GetDirectoryName(_namespaceProvider.GetSolutionPath(options.Directory));
+                
                 _mediator.Send(request).Wait();
             }
 
@@ -128,6 +134,7 @@ namespace Quinntyne.Schematics.CLI
         [Option("entity", Required = false, HelpText = "Entity")]
         string Entity { get; set; }
         string Directory { get; set; }
+        string SolutionDirectory { get; set; }
         string Namespace { get; set; }
         string RootNamespace { get; set; }
         [Option("serviceName", Required = false, HelpText = "Service Name")]
@@ -142,6 +149,7 @@ namespace Quinntyne.Schematics.CLI
         public string Namespace { get; set; }
         public string RootNamespace { get; set; }
         public string Directory { get; set; } = System.Environment.CurrentDirectory;
+        public string SolutionDirectory { get; set; }
         public string ServiceName { get; set; }
     }
 }

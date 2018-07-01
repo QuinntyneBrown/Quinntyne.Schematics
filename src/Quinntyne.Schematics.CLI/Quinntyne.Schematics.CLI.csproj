@@ -80,7 +80,9 @@
     <EmbeddedResource Include="Features\EventSourcing\GenerateDomainEventCommand.txt">
       <DependentUpon>GenerateDomainEventCommand.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Features\EventSourcing\GenerateDomainEventHandlerCommand.txt" />
+    <EmbeddedResource Include="Features\EventSourcing\GenerateDomainEventHandlerCommand.txt">
+      <DependentUpon>GenerateDomainEventHandlerCommand.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Features\EventSourcing\GenerateEventCommand.txt">
       <DependentUpon>GenerateEventCommand.cs</DependentUpon>
     </EmbeddedResource>

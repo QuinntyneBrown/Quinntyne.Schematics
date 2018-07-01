@@ -19,9 +19,11 @@ namespace Quinntyne.Schematics.CLI.Features.EventSourcing
                 Namespace = options.Namespace;
                 RootNamespace = options.RootNamespace;
                 Name = options.Name;
+                Options = options;
             }
 
             public dynamic Settings { get; set; }
+            public IOptions Options { get; set; }
         }
 
         public class Validator : AbstractValidator<Request>
@@ -38,21 +40,24 @@ namespace Quinntyne.Schematics.CLI.Features.EventSourcing
             private readonly ITemplateLocator _templateLocator;
             private readonly ITemplateProcessor _templateProcessor;
             private readonly INamingConventionConverter _namingConventionConverter;
+            private readonly IMediator _mediator;
 
             public Handler(
                 IFileWriter fileWriter,
                 INamingConventionConverter namingConventionConverter,
                 ITemplateLocator templateLocator, 
-                ITemplateProcessor templateProcessor
+                ITemplateProcessor templateProcessor,
+                IMediator mediator
                 )
             {
                 _fileWriter = fileWriter;
                 _namingConventionConverter = namingConventionConverter;
                 _templateProcessor = templateProcessor;
                 _templateLocator = templateLocator;
+                _mediator = mediator;
             }
 
-            public Task Handle(Request request, CancellationToken cancellationToken)
+            public async Task Handle(Request request, CancellationToken cancellationToken)
             {                
                 var entityNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity);
                 var entityNameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity);
@@ -74,8 +79,15 @@ namespace Quinntyne.Schematics.CLI.Features.EventSourcing
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
                 
                 _fileWriter.WriteAllLines($"{request.Directory}//{namePascalCase}.cs", result);
-               
-                return Task.CompletedTask;
+
+                await Task.CompletedTask;
+                
+                await _mediator.Send(new GenerateDomainEventHandlerCommand.Request(request)
+                {
+                    Name = request.Name,
+                    Directory = $"{request.SolutionDirectory}\\src\\{request.RootNamespace}.API\\Features\\{entityNamePascalCasePlural}"
+                });
+
             }
         }
     }
