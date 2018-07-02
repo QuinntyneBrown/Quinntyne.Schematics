@@ -20,7 +20,10 @@ namespace Quinntyne.Schematics.Infrastructure.Behaviours
             if(request as ICodeGeneratorCommandRequest != null)
             {
                 var @namespace = _namespaceProvider.GetNamespace(System.Environment.CurrentDirectory); 
-                (request as ICodeGeneratorCommandRequest).Namespace = @namespace.Value;
+
+                if(string.IsNullOrEmpty((request as ICodeGeneratorCommandRequest).Namespace))
+                    (request as ICodeGeneratorCommandRequest).Namespace = @namespace.Value;
+
                 (request as ICodeGeneratorCommandRequest).RootNamespace = @namespace.Root;
             }
 

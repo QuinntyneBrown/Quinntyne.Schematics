@@ -1,5 +1,4 @@
 using {{ rootNamespace }}.Core.Common;
-using {{ rootNamespace }}.Core.Models;
 
 namespace {{ namespace }}
 {

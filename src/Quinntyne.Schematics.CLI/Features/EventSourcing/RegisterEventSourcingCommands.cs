@@ -31,6 +31,7 @@ namespace Quinntyne.Schematics.CLI.Features.EventSourcing
             dictionary.Add("unittests", new Func<IOptions, IRequest>((options) => new GenerateUnitTestsCommand.Request(options)));
             dictionary.Add("event", new Func<IOptions, IRequest>((options) => new GenerateDomainEventCommand.Request(options)));
             dictionary.Add("handler", new Func<IOptions, IRequest>((options) => new GenerateDomainEventHandlerCommand.Request(options)));
+            dictionary.Add("integration", new Func<IOptions, IRequest>((options) => new GenerateIntegrationEventCommand.Request(options)));
 
         }
     }

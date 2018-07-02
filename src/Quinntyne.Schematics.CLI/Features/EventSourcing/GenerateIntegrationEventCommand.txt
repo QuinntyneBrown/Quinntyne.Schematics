@@ -1,0 +1,17 @@
+using {{ rootNamespace }}.Core.Common;
+using Newtonsoft.Json;
+
+namespace {{ namespace }}
+{
+    public class {{ namePascalCase }}: IntegrationEvent
+    {
+        public {{ namePascalCase }}(Core.DomainEvents.{{ namePascalCase }} @event)
+            :base(@event) { }
+
+        public static {{ namePascalCase }} FromDomainEvent(Core.DomainEvents.{{ namePascalCase }} @event) {
+            return new {{ namePascalCase }}(@event) { 
+                Payload = JsonConvert.SerializeObject(@event.Payload)			
+            };
+        }
+    }
+}

@@ -24,6 +24,7 @@
     <None Remove="Features\EventSourcing\GenerateDomainEventHandlerCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateEventCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateGatewayControllerCommand.txt" />
+    <None Remove="Features\EventSourcing\GenerateIntegrationEventCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateProgramCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateRemovedEventCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateRootProgramCommand.txt" />
@@ -88,6 +89,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Features\EventSourcing\GenerateGatewayControllerCommand.txt">
       <DependentUpon>GenerateGatewayControllerCommand.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\EventSourcing\GenerateIntegrationEventCommand.txt">
+      <DependentUpon>GenerateIntegrationEventCommand.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Features\EventSourcing\GenerateProgramCommand.txt">
       <DependentUpon>GenerateProgramCommand.cs</DependentUpon>
