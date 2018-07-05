@@ -1,0 +1,133 @@
+npm install rimraf -g
+
+mkdir src test
+
+cd src
+
+mkdir {{ rootNamespace }}.Core {{ rootNamespace }}.Infrastructure {{ rootNamespace }}.API {{ rootNamespace }}.SPA
+
+cd src\{{ rootNamespace }}.Core
+
+dotnet new classlib -f netcoreapp2.1
+
+dotnet add package FluentValidation.AspNetCore -v 7.6.103
+
+dotnet add package Microsoft.AspNetCore.All -v 2.1.1
+
+dotnet add package Microsoft.AspNetCore.SignalR -v 1.0.1
+
+dotnet add package MediatR -v 4.1.0
+
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer -v 2.1.1
+
+dotnet add package Swashbuckle.AspNetCore -v 2.5.0
+
+mkdir Behaviours
+
+mkdir Common
+
+mkdir DomainEvents
+
+mkdir Exceptions
+
+mkdir Extensions
+
+mkdir Identity
+
+mkdir Interfaces
+
+mkdir Models
+
+rimraf Class1.cs
+
+cd src\{{ rootNamespace }}.Infrastructure
+
+dotnet new classlib -f netcoreapp2.1
+
+rimraf Class1.cs
+
+dotnet add package Microsoft.AspNetCore.All -v 2.1.1
+
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer -v 2.1.1
+
+mkdir Data
+
+mkdir Extensions
+
+dotnet add reference ..\{{ rootNamespace }}.Core\{{ rootNamespace }}.Core.csproj
+
+cd src\{{ rootNamespace }}.API
+
+dotnet new webapi
+
+dotnet add package FluentValidation.AspNetCore -v 7.6.103
+
+dotnet add package Microsoft.AspNetCore.All -v 2.1.1
+
+dotnet add package Microsoft.AspNetCore.SignalR -v 1.0.1
+
+dotnet add package MediatR -v 4.1.0
+
+dotnet add package MediatR.Extensions.Microsoft.DependencyInjection -v 4.0.0
+
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer -v 2.1.1
+
+dotnet add package Swashbuckle.AspNetCore -v 2.5.0
+
+dotnet add reference ..\{{ rootNamespace }}.Core\{{ rootNamespace }}.Core.csproj
+
+dotnet add reference ..\{{ rootNamespace }}.Infrastructure\{{ rootNamespace }}.Infrastructure.csproj
+
+cd src\{{ rootNamespace }}.SPA
+
+dotnet new angular
+
+rimraf ClientApp
+
+ng new ClientApp
+
+cd test
+
+mkdir IntegrationTests UnitTests
+
+cd test\IntegrationTests
+
+dotnet new xunit
+
+dotnet add package Microsoft.EntityFrameworkCore.InMemory -v 2.1.1
+
+dotnet add package Microsoft.AspNetCore.All -v 2.1.1
+
+dotnet add package Microsoft.AspNetCore.SignalR.Client -v 1.0.1
+
+rimraf UnitTest1.cs
+
+dotnet add reference ..\..\src\{{ rootNamespace }}.Core\{{ rootNamespace }}.Core.csproj
+
+dotnet add reference ..\..\src\{{ rootNamespace }}.Infrastructure\{{ rootNamespace }}.Infrastructure.csproj
+
+dotnet add reference ..\..\src\{{ rootNamespace }}.API\{{ rootNamespace }}.API.csproj
+
+cd test\UnitTests
+
+dotnet new xunit
+
+dotnet add package MediatR -v 4.1.0
+
+dotnet add package Moq -v 4.8.1
+
+rimraf UnitTest1.cs
+
+dotnet add reference ..\..\src\{{ rootNamespace }}.Core\{{ rootNamespace }}.Core.csproj
+
+dotnet add reference ..\..\src\{{ rootNamespace }}.Infrastructure\{{ rootNamespace }}.Infrastructure.csproj
+
+dotnet add reference ..\..\src\{{ rootNamespace }}.API\{{ rootNamespace }}.API.csproj
+
+cd {{ currentDirectory }}
+
+dotnet new sln -n {{ rootNamespace }}
+
+dotnet sln add .\src\{{ rootNamespace }}.Core\{{ rootNamespace }}.Core.csproj .\src\{{ rootNamespace }}.Infrastructure\{{ rootNamespace }}.Infrastructure.csproj .\src\{{ rootNamespace }}.API\{{ rootNamespace }}.API.csproj .\src\{{ rootNamespace }}.SPA\{{ rootNamespace }}.SPA.csproj .\test\IntegrationTests\IntegrationTests.csproj .\test\UnitTests\UnitTests.csproj
+
+start {{ rootNamespace }}.sln

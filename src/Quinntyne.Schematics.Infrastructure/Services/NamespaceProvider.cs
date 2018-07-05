@@ -46,6 +46,9 @@ namespace Quinntyne.Schematics.Infrastructure.Services
 
             var projectPath = GetProjectPath(path);
 
+            if(IsNullOrEmpty(projectPath))
+                return new Namespace(rootNamespace, null);
+
             var subNamespaces = GetSubNamespaces(path, projectPath);
             
             return new Namespace(rootNamespace, $"{Join(".", subNamespaces)}");
@@ -53,11 +56,23 @@ namespace Quinntyne.Schematics.Infrastructure.Services
 
         public string GetRootNamespace(string path)
         {
-            using (var settings = new StreamReader($"{System.IO.Path.GetDirectoryName(GetProjectPath(path))}\\codeGeneratorSettings.json"))
+            if(File.Exists($"{path}\\codeGeneratorSettings.json"))
             {
-                string json = settings.ReadToEnd();
-                return JsonConvert.DeserializeObject<dynamic>(json).RootNamespace;
-            }            
+                using(var settings = new StreamReader($"{path}\\codeGeneratorSettings.json"))
+                {
+                    string json = settings.ReadToEnd();
+                    return JsonConvert.DeserializeObject<dynamic>(json).RootNamespace;
+                }
+            } else if(!IsNullOrEmpty(GetProjectPath(path)))
+            {
+                using (var settings = new StreamReader($"{System.IO.Path.GetDirectoryName(GetProjectPath(path))}\\codeGeneratorSettings.json"))
+                {
+                    string json = settings.ReadToEnd();
+                    return JsonConvert.DeserializeObject<dynamic>(json).RootNamespace;
+                }
+            }
+            
+            return Path.GetFileName(path);            
         }
 
         public string GetProjectPath(string path, int depth = 0)

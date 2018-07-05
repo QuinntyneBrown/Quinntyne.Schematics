@@ -13,6 +13,7 @@ using Quinntyne.Schematics.CLI.Features.Angular;
 using Quinntyne.Schematics.CLI.Features.AngularComponents;
 using AutoMapper;
 using Quinntyne.Schematics.Infrastructure.Services;
+using Quinntyne.Schematics.CLI.Features.FullStackSolution;
 
 namespace Quinntyne.Schematics.CLI
 {
@@ -20,7 +21,6 @@ namespace Quinntyne.Schematics.CLI
     {
         private readonly IDictionary<string, Func<IOptions, IRequest>> _commands;
         private readonly IMediator _mediator;
-        private readonly ILogger<Program> _logger;
         private readonly INamespaceProvider _namespaceProvider;
 
         static void Main(string[] args)
@@ -121,6 +121,7 @@ namespace Quinntyne.Schematics.CLI
             RegisterTestingCommands.Register(dictionary);
             RegisterAngularCommands.Register(dictionary);
             RegisterAngularComponentCommands.Register(dictionary);
+            RegisterFullStackSolutionCommands.Register(dictionary);
             return dictionary;
         }
     }

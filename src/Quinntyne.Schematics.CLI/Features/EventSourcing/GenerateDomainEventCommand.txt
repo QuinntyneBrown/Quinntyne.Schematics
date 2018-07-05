@@ -4,9 +4,9 @@ namespace {{ namespace }}
 {
     public class {{ namePascalCase }}: DomainEvent
     {
-        public {{ namePascalCase }}(dynamic payload)
+        public {{ namePascalCase }}(Guid? correlationId)
         {
-            Payload = payload;
+            EventData = new { correlationId };
             EventType = EventTypes.{{ entityNamePascalCasePlural }}.{{ namePascalCase }};
         }
     }

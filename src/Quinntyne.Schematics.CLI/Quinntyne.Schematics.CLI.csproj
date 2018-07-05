@@ -34,6 +34,17 @@
     <None Remove="Features\EventSourcing\GenerateStartUpCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateUnitTestsCommand.txt" />
     <None Remove="Features\EventSourcing\Models\GenerateBaseModel.txt" />
+    <None Remove="Features\FullStackSolution\GenerateSolutionCommand.txt" />
+    <None Remove="Features\FullStackSolution\Section1\Section1Step03Command.txt" />
+    <None Remove="Features\FullStackSolution\Section1\Section1Step04Command.txt" />
+    <None Remove="Features\FullStackSolution\Section1\Section1Step05Command.txt" />
+    <None Remove="Features\FullStackSolution\Section1\Section1Step06Command.txt" />
+    <None Remove="Features\FullStackSolution\Section1\Section1Step07Command.txt" />
+    <None Remove="Features\FullStackSolution\Section1\Section1Step08Command.txt" />
+    <None Remove="Features\FullStackSolution\Section1\Section1Step09Command.txt" />
+    <None Remove="Features\FullStackSolution\Section1\Section1Step10Command.txt" />
+    <None Remove="Features\FullStackSolution\Section1\Section1Step1Command.txt" />
+    <None Remove="Features\FullStackSolution\Section1\Section1Step2Command.txt" />
     <None Remove="Features\Testing\GenerateTestScenarioBaseCommand.txt" />
     <None Remove="Features\Testing\GenerateTestScenariosCommand.txt" />
     <None Remove="Features\CodeGenerator\GenerateApiModelCommand.txt" />
@@ -118,6 +129,36 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Features\EventSourcing\Models\GenerateBaseModel.txt">
       <DependentUpon>GenerateBaseModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\FullStackSolution\GenerateSolutionCommand.txt">
+      <DependentUpon>GenerateSolutionCommand.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\FullStackSolution\Section1\Section1Step02Command.txt">
+      <DependentUpon>Section1Step02Command.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\FullStackSolution\Section1\Section1Step03Command.txt">
+      <DependentUpon>Section1Step03Command.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\FullStackSolution\Section1\Section1Step04Command.txt">
+      <DependentUpon>Section1Step04Command.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\FullStackSolution\Section1\Section1Step05Command.txt">
+      <DependentUpon>Section1Step05Command.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\FullStackSolution\Section1\Section1Step06Command.txt">
+      <DependentUpon>Section1Step06Command.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\FullStackSolution\Section1\Section1Step07Command.txt">
+      <DependentUpon>Section1Step07Command.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\FullStackSolution\Section1\Section1Step08Command.txt">
+      <DependentUpon>Section1Step08Command.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\FullStackSolution\Section1\Section1Step09Command.txt">
+      <DependentUpon>Section1Step09Command.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\FullStackSolution\Section1\Section1Step10Command.txt">
+      <DependentUpon>Section1Step10Command.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Features\Testing\GenerateTestScenarioBaseCommand.txt">
       <DependentUpon>GenerateTestScenarioBaseCommand.cs</DependentUpon>
