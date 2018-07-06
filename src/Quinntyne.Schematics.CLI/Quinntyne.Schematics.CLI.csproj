@@ -34,6 +34,7 @@
     <None Remove="Features\EventSourcing\GenerateStartUpCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateUnitTestsCommand.txt" />
     <None Remove="Features\EventSourcing\Models\GenerateBaseModel.txt" />
+    <None Remove="Features\FullStackSolution\Classes\AppDbContext.txt" />
     <None Remove="Features\FullStackSolution\GenerateSolutionCommand.txt" />
     <None Remove="Features\FullStackSolution\Section1\Section1Step03Command.txt" />
     <None Remove="Features\FullStackSolution\Section1\Section1Step04Command.txt" />
@@ -61,6 +62,10 @@
     <None Remove="Features\EventSourcing\GenerateSaveCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateTestsCommand.txt" />
     <None Remove="publish.cmd" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Features\FullStackSolution\Classes\AppDbContext.txt" />
   </ItemGroup>
 
   <ItemGroup>

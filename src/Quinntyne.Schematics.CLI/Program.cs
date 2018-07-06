@@ -75,11 +75,13 @@ namespace Quinntyne.Schematics.CLI
                         options.Namespace = x.Namespace;
                         options.RootNamespace = x.RootNamespace;
                         options.ServiceName = x.ServiceName;
+                        options.ClassName = x.ClassName;
                         return 1;
                     }, x => 0);
 
                 var request = requestFunc(options);
-                
+
+                (request as IOptions).ClassName = options.ClassName;
                 (request as IOptions).Name = options.Name;
                 (request as IOptions).SolutionDirectory = System.IO.Path.GetDirectoryName(_namespaceProvider.GetSolutionPath(options.Directory));
                 
@@ -134,6 +136,8 @@ namespace Quinntyne.Schematics.CLI
         string Name { get; set; }
         [Option("entity", Required = false, HelpText = "Entity")]
         string Entity { get; set; }
+        [Option("class", Required = false, HelpText = "Class")]
+        string ClassName { get; set; }
         string Directory { get; set; }
         string SolutionDirectory { get; set; }
         string Namespace { get; set; }
@@ -145,6 +149,7 @@ namespace Quinntyne.Schematics.CLI
     public class Options : IOptions
     {
         public string Domain { get; set; }
+        public string ClassName { get; set; }
         public string Name { get; set; }
         public string Entity { get; set; }
         public string Namespace { get; set; }
