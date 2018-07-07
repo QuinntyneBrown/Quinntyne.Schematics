@@ -1,0 +1,6 @@
+src\{{ rootNamespace }}.SPA\ClientApp\src\app\core\
+import { Observable } from "rxjs";
+
+export interface IDeactivatable {
+  canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean;
+}

@@ -11,7 +11,7 @@ namespace Quinntyne.Schematics.CLI.Features.FullStackSolution
         {
             dictionary.Add("sln", new Func<IOptions, IRequest>((options) => new GenerateSolutionCommand.Request(options)));
             dictionary.Add("class", new Func<IOptions, IRequest>((options) => new GenerateClassCommand.Request(options)));
-            dictionary.Add("file", new Func<IOptions, IRequest>((options) => new GenerateClassCommand.Request(options)));
+            dictionary.Add("file", new Func<IOptions, IRequest>((options) => new GenerateFileCommand.Request(options)));
 
             RegisterSection1Commands.Register(dictionary);
         }

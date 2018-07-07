@@ -66,6 +66,7 @@ namespace Quinntyne.Schematics.Infrastructure.Services
                 }                
             }
 
+            var s = embededResourceNames.Where(x => x.Contains("appguardts")).ToList();
 
 
             if (fullName == default(string) && assembly == default(Assembly))

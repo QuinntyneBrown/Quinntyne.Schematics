@@ -5,15 +5,17 @@ using Quinntyne.Schematics.Infrastructure.Interfaces;
 using Quinntyne.Schematics.Infrastructure.Services;
 using MediatR;
 using FluentValidation;
+using System.Linq;
+using System;
 
 namespace Quinntyne.Schematics.CLI.Features.FullStackSolution
 {
     public class GenerateFileCommand
     {
-        public class Request: Options, IRequest, ICodeGeneratorCommandRequest
+        public class Request : Options, IRequest, ICodeGeneratorCommandRequest
         {
             public Request(IOptions options)
-            {                
+            {
                 Entity = options.Entity;
                 Directory = options.Directory;
                 Namespace = options.Namespace;
@@ -41,7 +43,7 @@ namespace Quinntyne.Schematics.CLI.Features.FullStackSolution
             public Handler(
                 IFileWriter fileWriter,
                 INamingConventionConverter namingConventionConverter,
-                ITemplateLocator templateLocator, 
+                ITemplateLocator templateLocator,
                 ITemplateProcessor templateProcessor
                 )
             {
@@ -52,24 +54,29 @@ namespace Quinntyne.Schematics.CLI.Features.FullStackSolution
             }
 
             public Task Handle(Request request, CancellationToken cancellationToken)
-            {                
-                var entityNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity);
-                var entityNameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity);
-
-                var template = _templateLocator.Get("GenerateFileCommand");
-
-                var tokens = new Dictionary<string, string>
+            {
+                foreach (var name in request.Name.Split(","))
                 {
-                    { "{{ entityNamePascalCase }}", entityNamePascalCase },
-                    { "{{ entityNameCamelCase }}", entityNameCamelCase },
-                    { "{{ namespace }}", request.Namespace },
-                    { "{{ rootNamespace }}", request.RootNamespace }
-                };
+                    var templateName = name;
+                    var template = _templateLocator.Get(templateName.Replace(".",""));
 
-                var result = _templateProcessor.ProcessTemplate(template, tokens);
-                
-                _fileWriter.WriteAllLines($"{request.Directory}//GenerateFileCommand.cs", result);
-               
+                    var tokens = new Dictionary<string, string>
+                    {
+                        { "{{ rootNamespace }}", request.RootNamespace }
+                    };
+
+                    var result = _templateProcessor.ProcessTemplate(template, tokens);
+
+                    var relativePath = $"{result[0]}{name}";
+
+                    relativePath.Replace(@"\", "//");
+
+                    result = result.Skip(1).ToArray();
+
+                    _fileWriter.WriteAllLines($"{request.SolutionDirectory}//{relativePath}", result);
+
+                }
+
                 return Task.CompletedTask;
             }
         }

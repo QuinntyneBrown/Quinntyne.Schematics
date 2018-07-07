@@ -78,6 +78,24 @@
     <None Remove="Features\FullStackSolution\Classes\UnitTests\TagUnitTests.txt" />
     <None Remove="Features\FullStackSolution\Classes\UnitTests\UserTests.txt" />
     <None Remove="Features\FullStackSolution\Classes\UnitTests\UserUnitTests.txt" />
+    <None Remove="Features\FullStackSolution\Files\Core\appguardts.txt" />
+    <None Remove="Features\FullStackSolution\Files\Core\appservicests.txt" />
+    <None Remove="Features\FullStackSolution\Files\Core\can-deactivate-componentguardts.txt" />
+    <None Remove="Features\FullStackSolution\Files\Core\constantsts.txt" />
+    <None Remove="Features\FullStackSolution\Files\Core\coremodulets.txt" />
+    <None Remove="Features\FullStackSolution\Files\Core\deactivatablets.txt" />
+    <None Remove="Features\FullStackSolution\Files\Core\errorservicets.txt" />
+    <None Remove="Features\FullStackSolution\Files\Core\headersinterceptorts.txt" />
+    <None Remove="Features\FullStackSolution\Files\Core\hub-client-guardts.txt" />
+    <None Remove="Features\FullStackSolution\Files\Core\hub-clientts.txt" />
+    <None Remove="Features\FullStackSolution\Files\Core\languageservicets.txt" />
+    <None Remove="Features\FullStackSolution\Files\Core\launch-settingsts.txt" />
+    <None Remove="Features\FullStackSolution\Files\Core\local-storageservicets.txt" />
+    <None Remove="Features\FullStackSolution\Files\Core\loggerservicets.txt" />
+    <None Remove="Features\FullStackSolution\Files\Core\overlay-ref-providerts.txt" />
+    <None Remove="Features\FullStackSolution\Files\Core\overlay-ref-wrapperts.txt" />
+    <None Remove="Features\FullStackSolution\Files\Core\redirectservicets.txt" />
+    <None Remove="Features\FullStackSolution\Files\Core\unauthorized-responseincerceptorts.txt" />
     <None Remove="Features\FullStackSolution\GenerateSolutionCommand.txt" />
     <None Remove="Features\FullStackSolution\Section1\Section1Step03Command.txt" />
     <None Remove="Features\FullStackSolution\Section1\Section1Step04Command.txt" />
@@ -245,6 +263,24 @@
     <EmbeddedResource Include="Features\FullStackSolution\Classes\UnitTests\TagUnitTests.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\UnitTests\UserTests.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\UnitTests\UserUnitTests.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Core\appguardts.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Core\appservicests.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Core\can-deactivate-componentguardts.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Core\constantsts.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Core\coremodulets.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Core\deactivatablets.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Core\errorservicets.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Core\headersinterceptorts.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Core\hub-client-guardts.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Core\hub-clientts.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Core\languageservicets.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Core\launch-settingsts.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Core\local-storageservicets.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Core\loggerservicets.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Core\overlay-ref-providerts.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Core\overlay-ref-wrapperts.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Core\redirectservicets.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Core\unauthorized-responseincerceptorts.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\GenerateSolutionCommand.txt">
       <DependentUpon>GenerateSolutionCommand.cs</DependentUpon>
     </EmbeddedResource>
@@ -337,6 +373,11 @@
   <ItemGroup>
     <Folder Include="Features\Angular\Components\" />
     <Folder Include="Features\FullStackSolution\Classes\SPA\" />
+    <Folder Include="Features\FullStackSolution\Files\Users\" />
+    <Folder Include="Features\FullStackSolution\Files\Settings\" />
+    <Folder Include="Features\FullStackSolution\Files\Tags\" />
+    <Folder Include="Features\FullStackSolution\Files\Notes\" />
+    <Folder Include="Features\FullStackSolution\Files\Shared\" />
   </ItemGroup>
 
 </Project>
