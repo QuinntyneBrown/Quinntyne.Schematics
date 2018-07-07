@@ -1,0 +1,16 @@
+src\{{ rootNamespace }}.Core\DomainEvents\NoteSaved.cs
+using {{ rootNamespace }}.Core.Common;
+using {{ rootNamespace }}.Core.Models;
+
+namespace {{ rootNamespace }}.Core.DomainEvents
+{
+    public class NoteSaved: DomainEvent<Note>
+    {
+        public NoteSaved(Note note)
+        {
+            Payload =  note;
+            EventType = EventTypes.Notes.NoteSaved;
+        }
+    }
+    
+}

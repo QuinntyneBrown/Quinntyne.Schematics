@@ -1,0 +1,15 @@
+src\{{ rootNamespace }}.Core\DomainEvents\NoteRemoved.cs
+using {{ rootNamespace }}.Core.Common;
+using {{ rootNamespace }}.Core.Models;
+
+namespace {{ rootNamespace }}.Core.DomainEvents
+{
+    public class NoteRemoved: DomainEvent<Note>
+    {
+        public NoteRemoved(Note note)
+        {
+            Payload = note;
+            EventType = EventTypes.Notes.NoteRemoved;
+        }
+    }
+}

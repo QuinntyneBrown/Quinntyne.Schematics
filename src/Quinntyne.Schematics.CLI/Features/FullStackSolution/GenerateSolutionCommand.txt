@@ -78,6 +78,18 @@ dotnet add reference ..\{{ rootNamespace }}.Core\{{ rootNamespace }}.Core.csproj
 
 dotnet add reference ..\{{ rootNamespace }}.Infrastructure\{{ rootNamespace }}.Infrastructure.csproj
 
+rimraf Controllers
+
+mkdir Features
+
+cd src\{{ rootNamespace }}.API\Features
+
+mkdir Notes
+
+mkdir Tags
+
+mkdir Users
+
 cd src\{{ rootNamespace }}.SPA
 
 dotnet new angular
@@ -94,7 +106,11 @@ cd test\IntegrationTests
 
 dotnet new xunit
 
+mkdir Features
+
 dotnet add package Microsoft.EntityFrameworkCore.InMemory -v 2.1.1
+
+dotnet add package Microsoft.AspNetCore.TestHost -v 2.1.1
 
 dotnet add package Microsoft.AspNetCore.All -v 2.1.1
 
@@ -111,6 +127,10 @@ dotnet add reference ..\..\src\{{ rootNamespace }}.API\{{ rootNamespace }}.API.c
 cd test\UnitTests
 
 dotnet new xunit
+
+mkdir API
+
+mkdir Core
 
 dotnet add package MediatR -v 4.1.0
 

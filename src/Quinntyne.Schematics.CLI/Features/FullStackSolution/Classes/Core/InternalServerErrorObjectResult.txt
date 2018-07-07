@@ -1,0 +1,15 @@
+src\{{ rootNamespace }}.Core\Exceptions\InternalServerErrorObjectResult.cs
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
+namespace {{ rootNamespace }}.Core.Exceptions
+{
+    public class InternalServerErrorObjectResult : ObjectResult
+    {
+        public InternalServerErrorObjectResult(object error)
+            : base(error)
+        {
+            StatusCode = StatusCodes.Status500InternalServerError;
+        }
+    }
+}

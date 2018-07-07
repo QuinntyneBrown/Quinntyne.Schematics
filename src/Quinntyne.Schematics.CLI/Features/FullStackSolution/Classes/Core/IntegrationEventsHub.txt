@@ -1,0 +1,9 @@
+src\{{ rootNamespace }}.Core\IntegrationEventsHub.cs
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.SignalR;
+
+namespace {{ rootNamespace }}.Core
+{
+    [Authorize(AuthenticationSchemes = "Bearer")]
+    public class IntegrationEventsHub: Hub { }
+}

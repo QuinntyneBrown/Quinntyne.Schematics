@@ -16,11 +16,11 @@ namespace {{ namespace }}
         public async Task ShouldHandleSave{{ entityNamePascalCase }}CommandRequest()
         {
 
-            var options = new DbContextOptionsBuilder<MacariaContext>()
+            var options = new DbContextOptionsBuilder<{{ rootNamespace }}Context>()
                 .UseInMemoryDatabase(databaseName: "ShouldHandleSave{{ entityNamePascalCase }}CommandRequest")
                 .Options;
 
-            using (var context = new MacariaContext(options, _httpContextAccessorMock.Object))
+            using (var context = new {{ rootNamespace }}Context(options, _httpContextAccessorMock.Object))
             {
                 var handler = new Save{{ entityNamePascalCase }}Command.Handler(context);
 
@@ -39,11 +39,11 @@ namespace {{ namespace }}
         [Fact]
         public async Task ShouldHandleGet{{ entityNamePascalCase }}ByIdQueryRequest()
         {
-            var options = new DbContextOptionsBuilder<MacariaContext>()
+            var options = new DbContextOptionsBuilder<{{ rootNamespace }}Context>()
                 .UseInMemoryDatabase(databaseName: "ShouldHandleGet{{ entityNamePascalCase }}ByIdQueryRequest")
                 .Options;
 
-            using (var context = new MacariaContext(options, _httpContextAccessorMock.Object))
+            using (var context = new {{ rootNamespace }}Context(options, _httpContextAccessorMock.Object))
             {
                 var tenant = InsertTenantIntoInMemoryDatabase(context);
 
@@ -70,15 +70,15 @@ namespace {{ namespace }}
         [Fact]
         public async Task ShouldHandleGet{{ entityNamePascalCasePlural }}QueryRequest()
         {
-            var options = new DbContextOptionsBuilder<MacariaContext>()
+            var options = new DbContextOptionsBuilder<{{ rootNamespace }}Context>()
                 .UseInMemoryDatabase(databaseName: "ShouldHandleGet{{ entityNamePascalCasePlural }}QueryRequest")
                 .Options;
 
-            using (var context = new MacariaContext(options, _httpContextAccessorMock.Object))
+            using (var context = new {{ rootNamespace }}Context(options, _httpContextAccessorMock.Object))
             {
                 var tenant = InsertTenantIntoInMemoryDatabase(context);
 
-                context.{{ entityNamePascalCasePlural }}.Add(new Macaria.Core.Entities.{{ entityNamePascalCase }}()
+                context.{{ entityNamePascalCasePlural }}.Add(new {{ rootNamespace }}.Core.Entities.{{ entityNamePascalCase }}()
                 {
                     {{ entityNamePascalCase }}Id = 1,
                     Name = "Quinntyne",
@@ -98,11 +98,11 @@ namespace {{ namespace }}
         [Fact]
         public async Task ShouldHandleRemove{{ entityNamePascalCase }}CommandRequest()
         {
-            var options = new DbContextOptionsBuilder<MacariaContext>()
+            var options = new DbContextOptionsBuilder<{{ rootNamespace }}Context>()
                 .UseInMemoryDatabase(databaseName: "ShouldHandleRemove{{ entityNamePascalCase }}CommandRequest")
                 .Options;
 
-            using (var context = new MacariaContext(options, _httpContextAccessorMock.Object))
+            using (var context = new {{ rootNamespace }}Context(options, _httpContextAccessorMock.Object))
             {
                 var tenant = InsertTenantIntoInMemoryDatabase(context);
 
@@ -129,11 +129,11 @@ namespace {{ namespace }}
         [Fact]
         public async Task ShouldHandleUpdate{{ entityNamePascalCase }}CommandRequest()
         {
-            var options = new DbContextOptionsBuilder<MacariaContext>()
+            var options = new DbContextOptionsBuilder<{{ rootNamespace }}Context>()
                 .UseInMemoryDatabase(databaseName: "ShouldHandleUpdate{{ entityNamePascalCase }}CommandRequest")
                 .Options;
 
-            using (var context = new MacariaContext(options, _httpContextAccessorMock.Object))
+            using (var context = new {{ rootNamespace }}Context(options, _httpContextAccessorMock.Object))
             {
                 var tenant = InsertTenantIntoInMemoryDatabase(context);
 

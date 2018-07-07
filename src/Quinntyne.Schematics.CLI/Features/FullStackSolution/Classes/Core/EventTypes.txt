@@ -1,3 +1,4 @@
+﻿src\{{ rootNamespace }}.Core\Common\EventTypes.cs
 namespace {{ rootNamespace }}.Core.Common
 {
     public static class EventTypes

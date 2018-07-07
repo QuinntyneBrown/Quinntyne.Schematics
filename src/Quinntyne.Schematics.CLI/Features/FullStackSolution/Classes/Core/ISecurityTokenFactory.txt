@@ -1,0 +1,8 @@
+src\{{ rootNamespace }}.Core\Identity\ISecurityTokenFactory.cs
+namespace {{ rootNamespace }}.Core.Identity
+{
+    public interface ISecurityTokenFactory
+    {
+        string Create(string username);
+    }
+}

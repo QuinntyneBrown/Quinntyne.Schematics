@@ -59,6 +59,8 @@ namespace Quinntyne.Schematics.CLI.Features.CodeGenerator
             {                
                 var template = _templateLocator.Get("GenerateCodeGeneratorCommand");
 
+                if (template == null) return Task.CompletedTask;
+
                 var tokens = new Dictionary<string, string>
                 {
                     { "{{ name }}", request.Name },

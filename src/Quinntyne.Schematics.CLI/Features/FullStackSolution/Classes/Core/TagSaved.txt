@@ -1,0 +1,15 @@
+src\{{ rootNamespace }}.Core\DomainEvents\TagSaved.cs
+using {{ rootNamespace }}.Core.Common;
+using {{ rootNamespace }}.Core.Models;
+
+namespace {{ rootNamespace }}.Core.DomainEvents
+{
+    public class TagSaved: DomainEvent<Tag>
+    {
+        public TagSaved(Tag tag)
+        {
+            Payload = tag;
+            EventType = EventTypes.Tags.TagSaved;
+        }
+    }
+}

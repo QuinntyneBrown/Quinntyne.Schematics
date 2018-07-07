@@ -1,0 +1,27 @@
+src\{{ rootNamespace }}.Infrastructure\Extensions\ServiceCollectionExtensions.cs
+using {{ rootNamespace }}.Core.Interfaces;
+using {{ rootNamespace }}.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace {{ rootNamespace }}.Infrastructure.Extensions
+{
+    public static class ServiceCollectionExtensions
+    {                
+        public static IServiceCollection AddDataStore(this IServiceCollection services,
+                                               string connectionString, bool useInMemoryDatabase = false)
+        {
+            services.AddScoped<IAppDbContext, AppDbContext>();
+
+            return services.AddDbContext<AppDbContext>(options =>
+            {
+                options
+                .UseLoggerFactory(AppDbContext.ConsoleLoggerFactory);
+
+                _ = useInMemoryDatabase 
+                ? options.UseInMemoryDatabase(databaseName: "{{ rootNamespace }}")
+                : options.UseSqlServer(connectionString, b => b.MigrationsAssembly("{{ rootNamespace }}.Infrastructure"));
+            });          
+        }
+    }
+}

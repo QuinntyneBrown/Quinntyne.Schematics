@@ -8,7 +8,7 @@ using FluentValidation;
 
 namespace Quinntyne.Schematics.CLI.Features.FullStackSolution
 {
-    public class GenerateEventTypesCommmand
+    public class GenerateFileCommand
     {
         public class Request: Options, IRequest, ICodeGeneratorCommandRequest
         {
@@ -56,7 +56,7 @@ namespace Quinntyne.Schematics.CLI.Features.FullStackSolution
                 var entityNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity);
                 var entityNameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity);
 
-                var template = _templateLocator.Get("GenerateEventTypesCommmand");
+                var template = _templateLocator.Get("GenerateFileCommand");
 
                 var tokens = new Dictionary<string, string>
                 {
@@ -68,7 +68,7 @@ namespace Quinntyne.Schematics.CLI.Features.FullStackSolution
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
                 
-                _fileWriter.WriteAllLines($"{request.Directory}//GenerateEventTypesCommmand.cs", result);
+                _fileWriter.WriteAllLines($"{request.Directory}//GenerateFileCommand.cs", result);
                
                 return Task.CompletedTask;
             }

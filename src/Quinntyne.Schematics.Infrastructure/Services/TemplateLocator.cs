@@ -11,6 +11,31 @@ namespace Quinntyne.Schematics.Infrastructure.Services
         string[] Get(string filename);
     }
 
+    public static class StringListExtensions {
+
+        public static string SingleOrDefaultResourceName(this string[] collection,string name)
+        {
+            try
+            {
+                string result = null;
+
+                if (collection.Length == 0) return null;
+
+                result = collection.SingleOrDefault(x => x.EndsWith(name));
+
+                if (result != null)
+                    return result;
+
+                return collection.SingleOrDefault(x => x.EndsWith($".{name}.txt"));
+
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
+    }
+
     public class TemplateLocator : ITemplateLocator
     {        
         public string[] Get(string name)
@@ -18,18 +43,19 @@ namespace Quinntyne.Schematics.Infrastructure.Services
             var lines = new List<string>();
             var fullName = default(string);
             var assembly = default(Assembly);
+            var embededResourceNames = new List<string>();
 
-            foreach(var assemblyName in Assembly.GetExecutingAssembly().GetReferencedAssemblies())
+            foreach (var assemblyName in Assembly.GetExecutingAssembly().GetReferencedAssemblies())
             {
                 foreach(Assembly _assembly in AppDomain.CurrentDomain.GetAssemblies())
                 {
                     try
                     {
-                        var embededResourceNames = _assembly.GetManifestResourceNames();
-
-                        if (embededResourceNames.Length > 0 && _assembly.GetManifestResourceNames().SingleOrDefault(x => x.Contains(name)) != null)
+                        foreach (var item in _assembly.GetManifestResourceNames()) embededResourceNames.Add(item);
+                        
+                        if(!string.IsNullOrEmpty(_assembly.GetManifestResourceNames().SingleOrDefaultResourceName(name)))
                         {
-                            fullName = _assembly.GetManifestResourceNames().Single(x => x.Contains(name));
+                            fullName = _assembly.GetManifestResourceNames().SingleOrDefaultResourceName(name);                            
                             assembly = _assembly;
                         }
                     }
@@ -39,6 +65,8 @@ namespace Quinntyne.Schematics.Infrastructure.Services
                     }
                 }                
             }
+
+
 
             if (fullName == default(string) && assembly == default(Assembly))
                 return null;
@@ -63,5 +91,7 @@ namespace Quinntyne.Schematics.Infrastructure.Services
                 throw exception;
             }
         }
+
+        
     }
 }

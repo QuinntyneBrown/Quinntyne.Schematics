@@ -55,24 +55,27 @@ namespace Quinntyne.Schematics.CLI.Features.FullStackSolution
 
             public Task Handle(Request request, CancellationToken cancellationToken)
             {
-
-                var template = _templateLocator.Get(request.ClassName);
-
-                var tokens = new Dictionary<string, string>
+                foreach(var className in request.ClassName.Split(","))
                 {
-                    { "{{ rootNamespace }}", request.RootNamespace }
-                };
+                    var template = _templateLocator.Get(className);
 
-                var result = _templateProcessor.ProcessTemplate(template, tokens);
+                    var tokens = new Dictionary<string, string>
+                    {
+                        { "{{ rootNamespace }}", request.RootNamespace }
+                    };
 
-                var filename = result[0];
+                    var result = _templateProcessor.ProcessTemplate(template, tokens);
 
-                filename.Replace(@"\", "//");
+                    var filename = result[0];
 
-                result = result.Skip(1).ToArray();
+                    filename.Replace(@"\", "//");
 
-                _fileWriter.WriteAllLines($"{request.SolutionDirectory}//{filename}", result);
-               
+                    result = result.Skip(1).ToArray();
+
+                    _fileWriter.WriteAllLines($"{request.SolutionDirectory}//{filename}", result);
+
+                }
+                
                 return Task.CompletedTask;
             }
         }
