@@ -96,6 +96,21 @@
     <None Remove="Features\FullStackSolution\Files\Core\overlay-ref-wrapperts.txt" />
     <None Remove="Features\FullStackSolution\Files\Core\redirectservicets.txt" />
     <None Remove="Features\FullStackSolution\Files\Core\unauthorized-responseincerceptorts.txt" />
+    <None Remove="Features\FullStackSolution\Files\Notes\deleted-notespagecomponentcss.txt" />
+    <None Remove="Features\FullStackSolution\Files\Notes\deleted-notespagecomponenthtml.txt" />
+    <None Remove="Features\FullStackSolution\Files\Notes\deleted-notespagecomponentts.txt" />
+    <None Remove="Features\FullStackSolution\Files\Notes\edit-notepagecomponentcss.txt" />
+    <None Remove="Features\FullStackSolution\Files\Notes\edit-notepagecomponenthtml.txt" />
+    <None Remove="Features\FullStackSolution\Files\Notes\edit-notepagecomponentts.txt" />
+    <None Remove="Features\FullStackSolution\Files\Notes\notemodel.txt" />
+    <None Remove="Features\FullStackSolution\Files\Notes\notesbytagpagecomponentcss.txt" />
+    <None Remove="Features\FullStackSolution\Files\Notes\notesbytagpagecomponenthtml.txt" />
+    <None Remove="Features\FullStackSolution\Files\Notes\notesbytagpagecomponentts.txt" />
+    <None Remove="Features\FullStackSolution\Files\Notes\notesmodule.txt" />
+    <None Remove="Features\FullStackSolution\Files\Notes\notespagecomponentcss.txt" />
+    <None Remove="Features\FullStackSolution\Files\Notes\notespagecomponenthtml.txt" />
+    <None Remove="Features\FullStackSolution\Files\Notes\notespagecomponentts.txt" />
+    <None Remove="Features\FullStackSolution\Files\Notes\notesservice.txt" />
     <None Remove="Features\FullStackSolution\GenerateSolutionCommand.txt" />
     <None Remove="Features\FullStackSolution\Section1\Section1Step03Command.txt" />
     <None Remove="Features\FullStackSolution\Section1\Section1Step04Command.txt" />
@@ -281,6 +296,21 @@
     <EmbeddedResource Include="Features\FullStackSolution\Files\Core\overlay-ref-wrapperts.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\Core\redirectservicets.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\Core\unauthorized-responseincerceptorts.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Notes\deleted-notespagecomponentcss.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Notes\deleted-notespagecomponenthtml.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Notes\deleted-notespagecomponentts.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Notes\edit-notepagecomponentcss.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Notes\edit-notepagecomponenthtml.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Notes\edit-notepagecomponentts.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Notes\notemodel.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Notes\notesbytagpagecomponentcss.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Notes\notesbytagpagecomponenthtml.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Notes\notesbytagpagecomponentts.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Notes\notesmodule.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Notes\notespagecomponentcss.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Notes\notespagecomponenthtml.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Notes\notespagecomponentts.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Notes\notesservice.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\GenerateSolutionCommand.txt">
       <DependentUpon>GenerateSolutionCommand.cs</DependentUpon>
     </EmbeddedResource>
@@ -376,7 +406,6 @@
     <Folder Include="Features\FullStackSolution\Files\Users\" />
     <Folder Include="Features\FullStackSolution\Files\Settings\" />
     <Folder Include="Features\FullStackSolution\Files\Tags\" />
-    <Folder Include="Features\FullStackSolution\Files\Notes\" />
     <Folder Include="Features\FullStackSolution\Files\Shared\" />
   </ItemGroup>
 

@@ -1,0 +1,2 @@
+src\{{ rootNamespace }}\ClientApp\src\app\shared\
+<div class="editor"></div>

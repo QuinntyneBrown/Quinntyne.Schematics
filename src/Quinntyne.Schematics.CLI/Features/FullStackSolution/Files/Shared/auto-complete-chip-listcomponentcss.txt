@@ -1,0 +1,4 @@
+src\{{ rootNamespace }}\ClientApp\src\app\shared\
+mat-form-field {
+  width: 100%;
+}

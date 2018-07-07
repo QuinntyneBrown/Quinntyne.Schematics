@@ -1,0 +1,6 @@
+src\{{ rootNamespace }}\ClientApp\src\app\shared\
+<button mat-icon-button>
+  <mat-icon>
+    close
+  </mat-icon>
+</button>

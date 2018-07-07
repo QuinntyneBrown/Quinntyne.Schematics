@@ -1,0 +1,6 @@
+src\{{ rootNamespace }}\ClientApp\src\app\shared\
+<section class="mat-typography">
+  <h2>
+    <ng-content></ng-content>
+  </h2>  
+</section>
