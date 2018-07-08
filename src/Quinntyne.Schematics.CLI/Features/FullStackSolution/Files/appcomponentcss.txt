@@ -1,0 +1,4 @@
+src\{{ rootNamespace }}\ClientApp\src\app\
+:host {
+  height: 100%;
+}
