@@ -5,22 +5,26 @@ using Quinntyne.Schematics.Infrastructure.Interfaces;
 using Quinntyne.Schematics.Infrastructure.Services;
 using MediatR;
 using FluentValidation;
+using System.Linq;
+using System;
 
 namespace Quinntyne.Schematics.CLI.Features.FullStackSolution
 {
     public class AddClientSharedCommand
     {
-        public class Request: Options, IRequest, ICodeGeneratorCommandRequest
+        public class Request : Options, IRequest, ICodeGeneratorCommandRequest
         {
             public Request(IOptions options)
-            {                
+            {
                 Entity = options.Entity;
                 Directory = options.Directory;
                 Namespace = options.Namespace;
                 RootNamespace = options.RootNamespace;
+                Options = options;
             }
 
             public dynamic Settings { get; set; }
+            public IOptions Options { get; set; }
         }
 
         public class Validator : AbstractValidator<Request>
@@ -33,44 +37,44 @@ namespace Quinntyne.Schematics.CLI.Features.FullStackSolution
 
         public class Handler : IRequestHandler<Request>
         {
-            private readonly IFileWriter _fileWriter;
-            private readonly ITemplateLocator _templateLocator;
-            private readonly ITemplateProcessor _templateProcessor;
-            private readonly INamingConventionConverter _namingConventionConverter;
+            private readonly IMediator _mediator;
 
             public Handler(
-                IFileWriter fileWriter,
-                INamingConventionConverter namingConventionConverter,
-                ITemplateLocator templateLocator, 
-                ITemplateProcessor templateProcessor
+                IMediator mediator
                 )
             {
-                _fileWriter = fileWriter;
-                _namingConventionConverter = namingConventionConverter;
-                _templateProcessor = templateProcessor;
-                _templateLocator = templateLocator;
+                _mediator = mediator;
             }
 
-            public Task Handle(Request request, CancellationToken cancellationToken)
-            {                
-                var entityNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity);
-                var entityNameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity);
+            public async Task Handle(Request request, CancellationToken cancellationToken)
+            {
 
-                var template = _templateLocator.Get("AddClientSharedCommand");
+                var names = string.Join(",", new[] {
+                        "auth-guard.ts",
+                        "auth.service.ts",
+                        "can-deactivate-component.guard.ts",
+                        "constants.ts",
+                        "core.module.ts",
+                        "deactivatable.ts",
+                        "error.service.ts",
+                        "headers.interceptor.ts",
+                        "hub-client.ts",
+                        "hub-client-guard.ts",
+                        "language.service.ts",
+                        "launch-settings.ts",
+                        "local-storage.service.ts",
+                        "logger.service.ts",
+                        "overlay-ref-provider.ts",
+                        "overlay-ref-wrapper.ts",
+                        "redirect.service.ts",
+                        "unauthorized-response.interceptor.ts"
+                    });
 
-                var tokens = new Dictionary<string, string>
+                await _mediator.Send(new GenerateFileCommand.Request(request.Options)
                 {
-                    { "{{ entityNamePascalCase }}", entityNamePascalCase },
-                    { "{{ entityNameCamelCase }}", entityNameCamelCase },
-                    { "{{ namespace }}", request.Namespace },
-                    { "{{ rootNamespace }}", request.RootNamespace }
-                };
-
-                var result = _templateProcessor.ProcessTemplate(template, tokens);
-                
-                _fileWriter.WriteAllLines($"{request.Directory}//AddClientSharedCommand.cs", result);
-               
-                return Task.CompletedTask;
+                    Name = names,
+                    SolutionDirectory = request.SolutionDirectory
+                });
             }
         }
     }

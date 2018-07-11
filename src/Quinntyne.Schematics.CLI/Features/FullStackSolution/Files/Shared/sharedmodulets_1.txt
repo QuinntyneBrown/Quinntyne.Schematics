@@ -34,29 +34,12 @@ import {
   MatToolbarModule,
   MatTooltipModule
 } from '@angular/material';
+
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { PrimaryHeaderComponent } from './primary-header.component';
-import { QuillTextEditorComponent } from './quill-text-editor.component';
 import { CommonModule } from '@angular/common';
-import { AgGridModule } from 'ag-grid-angular';
-import { DeleteCellComponent } from './delete-cell.component';
-import { AutoCompleteChipListComponent } from './auto-complete-chip-list.component';
-import { TranslateModule } from '@ngx-translate/core';
-import { GridComponent } from './grid.component';
-import { AreYouSureOverlayComponent } from './are-you-sure-overlay.component';
-import { ConfirmRefreshOverlayComponent } from './confirm-refresh-overlay.component';
-import { UnDeleteCellComponent } from './un-delete-cell.component';
 
 @NgModule({
   declarations: [
-    AreYouSureOverlayComponent,
-    AutoCompleteChipListComponent,
-    ConfirmRefreshOverlayComponent,
-    DeleteCellComponent,
-    GridComponent,
-    PrimaryHeaderComponent,
-    QuillTextEditorComponent,
-    UnDeleteCellComponent
   ],
   imports: [
     MatAutocompleteModule,
@@ -94,10 +77,7 @@ import { UnDeleteCellComponent } from './un-delete-cell.component';
 
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
-    TranslateModule,
-
-    AgGridModule.withComponents([DeleteCellComponent, UnDeleteCellComponent])
+    ReactiveFormsModule
   ],
   exports: [
     MatAutocompleteModule,
@@ -131,22 +111,11 @@ import { UnDeleteCellComponent } from './un-delete-cell.component';
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
-    MatTooltipModule,
-
-    AgGridModule,
+    MatTooltipModule,    
     FormsModule,
-    ReactiveFormsModule,
-
-    AutoCompleteChipListComponent,
-    DeleteCellComponent,
-    GridComponent,
-    PrimaryHeaderComponent,
-    QuillTextEditorComponent,
-    PrimaryHeaderComponent
+    ReactiveFormsModule
   ],
   entryComponents: [
-    AreYouSureOverlayComponent,
-    ConfirmRefreshOverlayComponent
   ]
 })
-export class SharedModule {}
+export class SharedModule { }

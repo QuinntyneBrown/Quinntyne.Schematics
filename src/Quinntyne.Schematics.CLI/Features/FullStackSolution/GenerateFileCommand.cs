@@ -67,7 +67,7 @@ namespace Quinntyne.Schematics.CLI.Features.FullStackSolution
 
                     var result = _templateProcessor.ProcessTemplate(template, tokens);
 
-                    var relativePath = $"{result[0]}{name}";
+                    var relativePath = $"{result[0]}{name.Split("_")[0]}";
 
                     relativePath.Replace(@"\", "//");
 

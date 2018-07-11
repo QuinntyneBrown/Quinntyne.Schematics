@@ -49,7 +49,7 @@ namespace Quinntyne.Schematics.CLI.Features.FullStackSolution
             public async Task Handle(Request request, CancellationToken cancellationToken) {
 
                 var names = string.Join(",", new[] {
-                        "auth-guard.ts",
+                        "auth.guard.ts",
                         "auth.service.ts",
                         "can-deactivate-component.guard.ts",
                         "constants.ts",

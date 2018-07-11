@@ -78,6 +78,7 @@
     <None Remove="Features\FullStackSolution\Classes\UnitTests\TagUnitTests.txt" />
     <None Remove="Features\FullStackSolution\Classes\UnitTests\UserTests.txt" />
     <None Remove="Features\FullStackSolution\Classes\UnitTests\UserUnitTests.txt" />
+    <None Remove="Features\FullStackSolution\Files\angularjson.txt" />
     <None Remove="Features\FullStackSolution\Files\anonymous-master-pagecomponentcss.txt" />
     <None Remove="Features\FullStackSolution\Files\anonymous-master-pagecomponenthtml.txt" />
     <None Remove="Features\FullStackSolution\Files\anonymous-master-pagecomponentts.txt" />
@@ -86,7 +87,7 @@
     <None Remove="Features\FullStackSolution\Files\appcomponenthtml.txt" />
     <None Remove="Features\FullStackSolution\Files\appcomponentts.txt" />
     <None Remove="Features\FullStackSolution\Files\appmodulets.txt" />
-    <None Remove="Features\FullStackSolution\Files\Core\auth-guardts.txt" />
+    <None Remove="Features\FullStackSolution\Files\Core\authguardts.txt" />
     <None Remove="Features\FullStackSolution\Files\Core\authservicets.txt" />
     <None Remove="Features\FullStackSolution\Files\Core\can-deactivate-componentguardts.txt" />
     <None Remove="Features\FullStackSolution\Files\Core\constantsts.txt" />
@@ -125,6 +126,7 @@
     <None Remove="Features\FullStackSolution\Files\Notes\notespagecomponenthtml.txt" />
     <None Remove="Features\FullStackSolution\Files\Notes\notespagecomponentts.txt" />
     <None Remove="Features\FullStackSolution\Files\Notes\notesservice.txt" />
+    <None Remove="Features\FullStackSolution\Files\packagejson.txt" />
     <None Remove="Features\FullStackSolution\Files\Shared\are-you-sure-overlaycomponenthtml.txt" />
     <None Remove="Features\FullStackSolution\Files\Shared\are-you-sure-overlaycomponentts.txt" />
     <None Remove="Features\FullStackSolution\Files\Shared\auto-complete-chip-listcomponentcss.txt" />
@@ -144,6 +146,7 @@
     <None Remove="Features\FullStackSolution\Files\Shared\quill-text-editorcomponentcss.txt" />
     <None Remove="Features\FullStackSolution\Files\Shared\quill-text-editorcomponentts.txt" />
     <None Remove="Features\FullStackSolution\Files\Shared\sharedmodulets.txt" />
+    <None Remove="Features\FullStackSolution\Files\Shared\sharedmodulets_1.txt" />
     <None Remove="Features\FullStackSolution\Files\Shared\un-delete-cellcomponenthtml.txt" />
     <None Remove="Features\FullStackSolution\Files\Shared\un-delete-cellcomponentts.txt" />
     <None Remove="Features\FullStackSolution\Files\Tags\add-tag-overlaycomponentcss.txt" />
@@ -327,6 +330,7 @@
     <EmbeddedResource Include="Features\FullStackSolution\Classes\UnitTests\TagUnitTests.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\UnitTests\UserTests.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\UnitTests\UserUnitTests.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\angularjson.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\anonymous-master-pagecomponentcss.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\anonymous-master-pagecomponenthtml.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\anonymous-master-pagecomponentts.txt" />
@@ -335,7 +339,7 @@
     <EmbeddedResource Include="Features\FullStackSolution\Files\appcomponenthtml.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\appcomponentts.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\appmodulets.txt" />
-    <EmbeddedResource Include="Features\FullStackSolution\Files\Core\auth-guardts.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Core\authguardts.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\Core\authservicets.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\Core\can-deactivate-componentguardts.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\Core\constantsts.txt" />
@@ -374,6 +378,7 @@
     <EmbeddedResource Include="Features\FullStackSolution\Files\Notes\notespagecomponenthtml.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\Notes\notespagecomponentts.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\Notes\notesservice.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\packagejson.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\are-you-sure-overlaycomponenthtml.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\are-you-sure-overlaycomponentts.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\auto-complete-chip-listcomponentcss.txt" />
@@ -391,6 +396,7 @@
     <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\primary-headercomponentts.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\quill-text-editorcomponentcss.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\quill-text-editorcomponentts.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\sharedmodulets_1.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\sharedmodulets.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\un-delete-cellcomponenthtml.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\un-delete-cellcomponentts.txt" />
