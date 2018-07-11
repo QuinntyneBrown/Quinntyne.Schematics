@@ -1,4 +1,4 @@
-src\Macaria.SPA\ClientApp\src\app\
+src\{{ rootNamespace }}.SPA\ClientApp\src\app\
 :host {
   height: 100%;
   position: relative;

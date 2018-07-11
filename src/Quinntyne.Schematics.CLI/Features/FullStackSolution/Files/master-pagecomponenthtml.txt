@@ -1,9 +1,9 @@
-src\Macaria.SPA\ClientApp\src\app\
+src\{{ rootNamespace }}.SPA\ClientApp\src\app\
 <mat-toolbar color="primary" class="mat-elevation-z6">
   <button mat-icon-button (click)="drawer.toggle()">
     <mat-icon>menu</mat-icon>
   </button>
-  <h1>Macaria</h1>
+  <h1>{{ rootNamespace }}</h1>
 </mat-toolbar>
 
 <mat-sidenav-container class="app-content-container" autosize>

@@ -5,12 +5,10 @@ using Quinntyne.Schematics.Infrastructure.Interfaces;
 using Quinntyne.Schematics.Infrastructure.Services;
 using MediatR;
 using FluentValidation;
-using System.Linq;
-using System;
 
 namespace Quinntyne.Schematics.CLI.Features.FullStackSolution
 {
-    public class GenerateClassCommand
+    public class AddClientSharedCommand
     {
         public class Request: Options, IRequest, ICodeGeneratorCommandRequest
         {
@@ -54,30 +52,24 @@ namespace Quinntyne.Schematics.CLI.Features.FullStackSolution
             }
 
             public Task Handle(Request request, CancellationToken cancellationToken)
-            {
-                foreach(var className in request.ClassName.Split(","))
+            {                
+                var entityNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity);
+                var entityNameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity);
+
+                var template = _templateLocator.Get("AddClientSharedCommand");
+
+                var tokens = new Dictionary<string, string>
                 {
-                    var template = _templateLocator.Get(className);
+                    { "{{ entityNamePascalCase }}", entityNamePascalCase },
+                    { "{{ entityNameCamelCase }}", entityNameCamelCase },
+                    { "{{ namespace }}", request.Namespace },
+                    { "{{ rootNamespace }}", request.RootNamespace }
+                };
 
-                    var tokens = new Dictionary<string, string>
-                    {
-                        { "{{ rootNamespace }}", request.RootNamespace }
-                    };
-
-                    var result = _templateProcessor.ProcessTemplate(template, tokens);
-
-                    var filename = result[0];
-
-                    filename.Replace(@"\", "//");
-
-                    result = result.Skip(1).ToArray();
-
-                    Console.WriteLine($"{request.SolutionDirectory}//{filename}");
-
-                    _fileWriter.WriteAllLines($"{request.SolutionDirectory}//{filename}", result);
-
-                }
+                var result = _templateProcessor.ProcessTemplate(template, tokens);
                 
+                _fileWriter.WriteAllLines($"{request.Directory}//AddClientSharedCommand.cs", result);
+               
                 return Task.CompletedTask;
             }
         }

@@ -1,7 +1,7 @@
 src\{{ rootNamespace }}\ClientApp\src\app\tags\
 <mat-card>
   <section class="mat-typography">
-    <h2>Macaria</h2>
+    <h2>{{ rootNamespace }}</h2>
   </section>
   <mat-card-title>
     {{ "Login" | translate }}

@@ -1,4 +1,4 @@
-src\Macaria.SPA\ClientApp\src\assets\
+src\{{ rootNamespace }}.SPA\ClientApp\src\assets\
 {
   "logLevel": 0
 }

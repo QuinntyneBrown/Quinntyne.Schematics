@@ -1,4 +1,4 @@
-src\Macaria.SPA\ClientApp\src\assets\i18n\
+src\{{ rootNamespace }}.SPA\ClientApp\src\assets\i18n\
 {
   "An error ocurr.Try it again.": "Une erreur est survenue. Essayez à nouveau.",
   "Cancel": "Annuler",
