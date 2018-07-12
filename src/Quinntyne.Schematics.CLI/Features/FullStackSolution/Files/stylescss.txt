@@ -1,0 +1,8 @@
+﻿src\{{ rootNamespace }}.SPA\ClientApp\src\
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+  height: 100%;
+  width: 100%;
+}

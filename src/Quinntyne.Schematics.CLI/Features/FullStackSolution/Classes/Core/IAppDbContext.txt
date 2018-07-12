@@ -1,3 +1,4 @@
+src\{{ rootNamespace }}.Core\Interfaces\IAppDbContext.cs
 using {{ rootNamespace }}.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;

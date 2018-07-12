@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <AssemblyName>quinntyne</AssemblyName>
   </PropertyGroup>
 
@@ -60,6 +60,8 @@
     <None Remove="Features\FullStackSolution\Classes\Core\PasswordHasher.txt" />
     <None Remove="Features\FullStackSolution\Classes\Core\SecurityTokenFactory.txt" />
     <None Remove="Features\FullStackSolution\Classes\Core\ServiceCollectionExtensions.txt" />
+    <None Remove="Features\FullStackSolution\Classes\Core\ServiceCollectionExtensions_1.txt" />
+    <None Remove="Features\FullStackSolution\Classes\Core\ServiceCollectionExtensions_2.txt" />
     <None Remove="Features\FullStackSolution\Classes\Core\SignalRContractResolver.txt" />
     <None Remove="Features\FullStackSolution\Classes\Core\StringExtensions.txt" />
     <None Remove="Features\FullStackSolution\Classes\Core\Tag.txt" />
@@ -79,6 +81,7 @@
     <None Remove="Features\FullStackSolution\Classes\UnitTests\UserTests.txt" />
     <None Remove="Features\FullStackSolution\Classes\UnitTests\UserUnitTests.txt" />
     <None Remove="Features\FullStackSolution\Files\angularjson.txt" />
+    <None Remove="Features\FullStackSolution\Files\angularjson_1.txt" />
     <None Remove="Features\FullStackSolution\Files\anonymous-master-pagecomponentcss.txt" />
     <None Remove="Features\FullStackSolution\Files\anonymous-master-pagecomponenthtml.txt" />
     <None Remove="Features\FullStackSolution\Files\anonymous-master-pagecomponentts.txt" />
@@ -107,6 +110,7 @@
     <None Remove="Features\FullStackSolution\Files\Core\unauthorized-responseinterceptorts.txt" />
     <None Remove="Features\FullStackSolution\Files\enjson.txt" />
     <None Remove="Features\FullStackSolution\Files\frjson.txt" />
+    <None Remove="Features\FullStackSolution\Files\indexhtml.txt" />
     <None Remove="Features\FullStackSolution\Files\launchSettingsjson.txt" />
     <None Remove="Features\FullStackSolution\Files\master-pagecomponentcss.txt" />
     <None Remove="Features\FullStackSolution\Files\master-pagecomponenthtml.txt" />
@@ -127,6 +131,7 @@
     <None Remove="Features\FullStackSolution\Files\Notes\notespagecomponentts.txt" />
     <None Remove="Features\FullStackSolution\Files\Notes\notesservice.txt" />
     <None Remove="Features\FullStackSolution\Files\packagejson.txt" />
+    <None Remove="Features\FullStackSolution\Files\packagejson_1.txt" />
     <None Remove="Features\FullStackSolution\Files\Shared\are-you-sure-overlaycomponenthtml.txt" />
     <None Remove="Features\FullStackSolution\Files\Shared\are-you-sure-overlaycomponentts.txt" />
     <None Remove="Features\FullStackSolution\Files\Shared\auto-complete-chip-listcomponentcss.txt" />
@@ -149,6 +154,8 @@
     <None Remove="Features\FullStackSolution\Files\Shared\sharedmodulets_1.txt" />
     <None Remove="Features\FullStackSolution\Files\Shared\un-delete-cellcomponenthtml.txt" />
     <None Remove="Features\FullStackSolution\Files\Shared\un-delete-cellcomponentts.txt" />
+    <None Remove="Features\FullStackSolution\Files\stylescss.txt" />
+    <None Remove="Features\FullStackSolution\Files\stylesscss.txt" />
     <None Remove="Features\FullStackSolution\Files\Tags\add-tag-overlaycomponentcss.txt" />
     <None Remove="Features\FullStackSolution\Files\Tags\add-tag-overlaycomponenthtml.txt" />
     <None Remove="Features\FullStackSolution\Files\Tags\add-tag-overlaycomponentts.txt" />
@@ -232,6 +239,8 @@
     <EmbeddedResource Include="Features\FullStackSolution\Classes\Core\NoteRemoved.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\Core\NoteSaved.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\Core\NoteTag.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Classes\Core\ServiceCollectionExtensions_2.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Classes\Core\ServiceCollectionExtensions_1.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\Core\SignalRContractResolver.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\Core\Tag.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\Core\TagRemoved.txt" />
@@ -330,6 +339,7 @@
     <EmbeddedResource Include="Features\FullStackSolution\Classes\UnitTests\TagUnitTests.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\UnitTests\UserTests.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\UnitTests\UserUnitTests.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\angularjson_1.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\angularjson.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\anonymous-master-pagecomponentcss.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\anonymous-master-pagecomponenthtml.txt" />
@@ -359,6 +369,7 @@
     <EmbeddedResource Include="Features\FullStackSolution\Files\Core\unauthorized-responseinterceptorts.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\enjson.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\frjson.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\indexhtml.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\launchSettingsjson.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\master-pagecomponentcss.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\master-pagecomponenthtml.txt" />
@@ -378,6 +389,7 @@
     <EmbeddedResource Include="Features\FullStackSolution\Files\Notes\notespagecomponenthtml.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\Notes\notespagecomponentts.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\Notes\notesservice.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\packagejson_1.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\packagejson.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\are-you-sure-overlaycomponenthtml.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\are-you-sure-overlaycomponentts.txt" />
@@ -400,6 +412,8 @@
     <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\sharedmodulets.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\un-delete-cellcomponenthtml.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\un-delete-cellcomponentts.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\stylescss.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\stylesscss.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\Tags\add-tag-overlaycomponentcss.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\Tags\add-tag-overlaycomponenthtml.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\Tags\add-tag-overlaycomponentts.txt" />
@@ -493,9 +507,13 @@
     <PackageReference Include="CommandLineParser" Version="2.2.1" />
     <PackageReference Include="FluentValidation" Version="7.5.0" />
     <PackageReference Include="MediatR" Version="4.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="4.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -507,6 +525,12 @@
     <Folder Include="Features\Angular\Components\" />
     <Folder Include="Features\FullStackSolution\Classes\SPA\" />
     <Folder Include="Features\FullStackSolution\Files\Settings\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Web">
+      <HintPath>System.Web</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

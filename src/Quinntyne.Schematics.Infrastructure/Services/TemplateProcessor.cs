@@ -9,7 +9,7 @@ namespace Quinntyne.Schematics.Infrastructure.Services
         string[] ProcessTemplate(string[] template, IDictionary<string,string> tokens);
     }
 
-    public class TemplateProcessor : ITemplateProcessor
+    public class TemplateProcessor: ITemplateProcessor
     {
         private INamingConventionConverter _namingConventionConverter;
         public TemplateProcessor(INamingConventionConverter namingConventionConverter)
