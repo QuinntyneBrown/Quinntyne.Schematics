@@ -21,7 +21,7 @@ namespace {{ namespace }}
         {
             switch(@event)
             {
-                case {{ entityNamePascalCase }}Created roleCreated:
+                case {{ entityNamePascalCase }}Created {{ entityNameCamelCase }}Created:
                     Name = {{ entityNameCamelCase }}Created.Name;
                     break;
             }
