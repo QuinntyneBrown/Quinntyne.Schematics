@@ -1,13 +1,7 @@
-using {{ rootNamespace }}.Core.Common;
-
 namespace {{ namespace }}
 {
     public class {{ namePascalCase }}: DomainEvent
     {
-        public {{ namePascalCase }}(Guid? correlationId)
-        {
-            EventData = new { correlationId };
-            EventType = EventTypes.{{ entityNamePascalCasePlural }}.{{ namePascalCase }};
-        }
+
     }
 }

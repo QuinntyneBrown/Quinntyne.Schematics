@@ -1,4 +1,4 @@
-src\{{ rootNamespace }}\ClientApp\src\app\
+src\{{ rootNamespace }}.SPA\ClientApp\src\app\
 :host {
   align-items: center;
   background-color: var(--default-color, rgb(241, 241, 241));

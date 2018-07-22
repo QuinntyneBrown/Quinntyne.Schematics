@@ -71,6 +71,8 @@ namespace Quinntyne.Schematics.CLI.Features.FullStackSolution
 
                     relativePath.Replace(@"\", "//");
 
+                    Console.WriteLine(relativePath);
+
                     result = result.Skip(1).ToArray();
 
                     _fileWriter.WriteAllLines($"{request.SolutionDirectory}//{relativePath}", result);

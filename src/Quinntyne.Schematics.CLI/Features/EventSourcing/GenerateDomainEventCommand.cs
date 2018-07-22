@@ -78,21 +78,7 @@ namespace Quinntyne.Schematics.CLI.Features.EventSourcing
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
                 
-                _fileWriter.WriteAllLines($"{request.Directory}//{namePascalCase}.cs", result);
-
-                await _mediator.Send(new GenerateDomainEventHandlerCommand.Request(request)
-                {
-                    Name = request.Name,
-                    Directory = $"{request.SolutionDirectory}\\src\\{request.RootNamespace}.API\\Features\\{entityNamePascalCasePlural}",
-                    Namespace = $"{request.RootNamespace}.API.Features.{entityNamePascalCasePlural}"
-                });
-
-                await _mediator.Send(new GenerateIntegrationEventCommand.Request(request)
-                {
-                    Name = request.Name,
-                    Directory = $"{request.SolutionDirectory}\\src\\{request.RootNamespace}.API\\Features\\{entityNamePascalCasePlural}",
-                    Namespace = $"{request.RootNamespace}.API.Features.{entityNamePascalCasePlural}"
-                });
+                _fileWriter.WriteAllLines($"{request.Directory}//{namePascalCase}.cs", result);                
 
             }
         }

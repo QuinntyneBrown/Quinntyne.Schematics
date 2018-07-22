@@ -1,2 +1,2 @@
-src\{{ rootNamespace }}\ClientApp\src\app\
+src\{{ rootNamespace }}.SPA\ClientApp\src\app\
 <router-outlet></router-outlet>

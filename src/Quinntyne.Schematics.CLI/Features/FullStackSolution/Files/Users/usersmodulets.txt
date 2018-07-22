@@ -1,4 +1,4 @@
-src\{{ rootNamespace }}\ClientApp\src\app\tags\
+src\{{ rootNamespace }}\ClientApp\src\app\users\
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login.component';

@@ -1,8 +1,30 @@
+using {{ rootNamespace }}.Core.Common;
+using {{ rootNamespace }}.Core.DomainEvents;
+using System;
+
 namespace {{ namespace }}
 {
-    public class {{ entityNamePascalCase }}
+    public class {{ entityNamePascalCase }}: AggregateRoot
     {
-        public int {{ entityNamePascalCase }}Id { get; set; }           
+        public {{ entityNamePascalCase }}(string name)
+            => Apply(new {{ entityNamePascalCase }}Created(name));
+
+        public Guid {{ entityNamePascalCase }}Id { get; set; }           
 		public string Name { get; set; }        
+
+        protected override void EnsureValidState()
+        {
+            
+        }
+
+        protected override void When(DomainEvent @event)
+        {
+            switch(@event)
+            {
+                case {{ entityNamePascalCase }}Created roleCreated:
+                    Name = {{ entityNameCamelCase }}Created.Name;
+                    break;
+            }
+        
     }
 }

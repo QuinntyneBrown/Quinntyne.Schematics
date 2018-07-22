@@ -1,4 +1,4 @@
-src\{{ rootNamespace }}\ClientApp\src\app\tags\
+src\{{ rootNamespace }}\ClientApp\src\app\users\
 import { Component, Input, Renderer, ElementRef, HostListener } from '@angular/core';
 import { Subject } from 'rxjs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';

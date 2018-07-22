@@ -1,4 +1,4 @@
-src\{{ rootNamespace }}\ClientApp\src\app\
+src\{{ rootNamespace }}.SPA\ClientApp\src\app\
 import { Component } from '@angular/core';
 
 @Component({

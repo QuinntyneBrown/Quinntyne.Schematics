@@ -1,4 +1,4 @@
-src\{{ rootNamespace }}\ClientApp\src\app\tags\
+src\{{ rootNamespace }}\ClientApp\src\app\users\
 :host {
   width: 100%;
 }
