@@ -20,11 +20,13 @@
     <None Remove="Features\Angular\GenerateServiceCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateAppSettingsCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateClientCommand.txt" />
+    <None Remove="Features\EventSourcing\GenerateCreateCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateDomainEventCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateDomainEventHandlerCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateEventCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateGatewayControllerCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateIntegrationEventCommand.txt" />
+    <None Remove="Features\EventSourcing\GenerateProcessManagerCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateProgramCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateRemovedEventCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateRootProgramCommand.txt" />
@@ -33,6 +35,7 @@
     <None Remove="Features\EventSourcing\GenerateSeedConfigurationCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateStartUpCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateUnitTestsCommand.txt" />
+    <None Remove="Features\EventSourcing\GenerateUpdateCommand.txt" />
     <None Remove="Features\EventSourcing\Models\GenerateBaseModel.txt" />
     <None Remove="Features\FullStackSolution\Classes\API\appSettings.txt" />
     <None Remove="Features\FullStackSolution\Classes\API\AuthenticateCommand.txt" />
@@ -200,6 +203,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Features\EventSourcing\GenerateCreateCommand.txt" />
+    <EmbeddedResource Include="Features\EventSourcing\GenerateProcessManagerCommand.txt" />
+    <EmbeddedResource Include="Features\EventSourcing\GenerateUpdateCommand.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\API\appSettings.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\API\AuthenticateCommand.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\API\GetDeletedNotesQuery.txt" />

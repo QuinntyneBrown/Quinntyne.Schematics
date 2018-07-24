@@ -1,10 +1,10 @@
-using MediatR;
-using System.Threading.Tasks;
-using System.Threading;
-using System.Collections.Generic;
 using {{ rootNamespace }}.Core.Interfaces;
+using {{ rootNamespace }}.Core.Models;
+using MediatR;
+using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace {{ namespace }}
 {
@@ -14,20 +14,20 @@ namespace {{ namespace }}
 
         public class Response
         {
-            public IEnumerable<{{ entityNamePascalCase }}ApiModel> {{ entityNamePascalCasePlural }} { get; set; }
+            public IEnumerable<{{ entityNamePascalCase }}Dto> {{ entityNamePascalCasePlural }} { get; set; }
         }
 
         public class Handler : IRequestHandler<Request, Response>
         {
-            public IAppDbContext _context { get; set; }
-            
-			public Handler(IAppDbContext context) => _context = context;
+            private readonly IEventStore _eventStore;
 
-            public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
-                => new Response()
+            public Handler(IEventStore eventStore) => _eventStore = eventStore;
+
+            public Task<Response> Handle(Request request, CancellationToken cancellationToken)
+                => Task.FromResult(new Response()
                 {
-                    {{ entityNamePascalCasePlural }} = await _context.{{ entityNamePascalCasePlural }}.Select(x => {{ entityNamePascalCase }}ApiModel.From{{ entityNamePascalCase }}(x)).ToListAsync()
-                };
+                    {{ entityNamePascalCasePlural }} = _eventStore.Query<{{ entityNamePascalCase }}>().Select(x => {{ entityNamePascalCase }}Dto.From{{ entityNamePascalCase }}(x)).ToList()
+                });
         }
     }
 }
