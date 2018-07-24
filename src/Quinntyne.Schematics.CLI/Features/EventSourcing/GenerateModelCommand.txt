@@ -25,6 +25,6 @@ namespace {{ namespace }}
                     Name = {{ entityNameCamelCase }}Created.Name;
                     break;
             }
-        
+        }
     }
 }

@@ -68,7 +68,7 @@ namespace Quinntyne.Schematics.CLI.Features.EventSourcing
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
 
-                _fileWriter.WriteAllLines($"{request.Directory}//{entityNamePascalCase}ApiModel.cs", result);
+                _fileWriter.WriteAllLines($"{request.Directory}//{entityNamePascalCase}Dto.cs", result);
 
                 return Task.CompletedTask;
             }
