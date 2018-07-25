@@ -8,7 +8,7 @@ using FluentValidation;
 
 namespace Quinntyne.Schematics.CLI.Features.EventSourcing
 {
-    public class GenerateDomainEventCommand
+    public class GenerateDomainEventWithNameCommand
     {
         public class Request: Options, IRequest, ICodeGeneratorCommandRequest
         {
@@ -18,12 +18,9 @@ namespace Quinntyne.Schematics.CLI.Features.EventSourcing
                 Directory = options.Directory;
                 Namespace = options.Namespace;
                 RootNamespace = options.RootNamespace;
-                Name = options.Name;
-                Options = options;
             }
 
             public dynamic Settings { get; set; }
-            public IOptions Options { get; set; }
         }
 
         public class Validator : AbstractValidator<Request>
@@ -40,48 +37,40 @@ namespace Quinntyne.Schematics.CLI.Features.EventSourcing
             private readonly ITemplateLocator _templateLocator;
             private readonly ITemplateProcessor _templateProcessor;
             private readonly INamingConventionConverter _namingConventionConverter;
-            private readonly IMediator _mediator;
 
             public Handler(
                 IFileWriter fileWriter,
                 INamingConventionConverter namingConventionConverter,
                 ITemplateLocator templateLocator, 
-                ITemplateProcessor templateProcessor,
-                IMediator mediator
+                ITemplateProcessor templateProcessor
                 )
             {
                 _fileWriter = fileWriter;
                 _namingConventionConverter = namingConventionConverter;
                 _templateProcessor = templateProcessor;
                 _templateLocator = templateLocator;
-                _mediator = mediator;
             }
 
-            public async Task Handle(Request request, CancellationToken cancellationToken)
+            public Task Handle(Request request, CancellationToken cancellationToken)
             {                
                 var entityNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity);
                 var entityNameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity);
-                var namePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Name);
-                var entityNamePascalCasePlural = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity, true);
 
-                var template = request.Name.Contains("Created") || request.Name.Contains("NameChanged")
-                    ? _templateLocator.Get("GenerateDomainEventWithNameCommand")
-                    : _templateLocator.Get("GenerateDomainEventCommand");
+                var template = _templateLocator.Get("GenerateDomainEventWithNameCommand");
 
                 var tokens = new Dictionary<string, string>
                 {
                     { "{{ entityNamePascalCase }}", entityNamePascalCase },
                     { "{{ entityNameCamelCase }}", entityNameCamelCase },
                     { "{{ namespace }}", request.Namespace },
-                    { "{{ rootNamespace }}", request.RootNamespace },
-                    { "{{ namePascalCase }}", namePascalCase },
-                    { "{{ entityNamePascalCasePlural }}", entityNamePascalCasePlural }
+                    { "{{ rootNamespace }}", request.RootNamespace }
                 };
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
                 
-                _fileWriter.WriteAllLines($"{request.Directory}//{namePascalCase}.cs", result);                
-
+                _fileWriter.WriteAllLines($"{request.Directory}//GenerateDomainEventWithNameCommand.cs", result);
+               
+                return Task.CompletedTask;
             }
         }
     }

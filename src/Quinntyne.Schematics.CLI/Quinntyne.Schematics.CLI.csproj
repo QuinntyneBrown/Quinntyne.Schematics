@@ -23,6 +23,7 @@
     <None Remove="Features\EventSourcing\GenerateCreateCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateDomainEventCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateDomainEventHandlerCommand.txt" />
+    <None Remove="Features\EventSourcing\GenerateDomainEventWithNameCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateEventCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateGatewayControllerCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateIntegrationEventCommand.txt" />
@@ -204,6 +205,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Features\EventSourcing\GenerateCreateCommand.txt" />
+    <EmbeddedResource Include="Features\EventSourcing\GenerateDomainEventWithNameCommand.txt" />
     <EmbeddedResource Include="Features\EventSourcing\GenerateProcessManagerCommand.txt" />
     <EmbeddedResource Include="Features\EventSourcing\GenerateUpdateCommand.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\API\appSettings.txt" />
