@@ -7,7 +7,7 @@ namespace {{ namespace }}
     public class {{ entityNamePascalCase }}: AggregateRoot
     {
         public {{ entityNamePascalCase }}(string name)
-            => Apply(new {{ entityNamePascalCase }}Created(name));
+            => Apply(new {{ entityNamePascalCase }}Created(name,{{ entityNamePascalCase }}Id));
 
         public Guid {{ entityNamePascalCase }}Id { get; set; } = Guid.NewGuid();          
 		public string Name { get; set; }        
@@ -24,6 +24,7 @@ namespace {{ namespace }}
             {
                 case {{ entityNamePascalCase }}Created {{ entityNameCamelCase }}Created:
                     Name = {{ entityNameCamelCase }}Created.Name;
+					{{ entityNamePascalCase }}Id = {{ entityNameCamelCase }}Created.{{ entityNamePascalCase }}Id;
                     break;
 
                 case {{ entityNamePascalCase }}NameChanged {{ entityNameCamelCase }}NameChanged:
