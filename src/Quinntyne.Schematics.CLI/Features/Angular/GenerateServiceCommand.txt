@@ -19,7 +19,7 @@ export class {{ entityNamePascalCase }}Service {
       );
   }
 
-  public getById(options: { {{ entityNameCamelCase }}Id: number }): Observable<{{ entityNamePascalCase }}> {
+  public getById(options: { {{ entityNameCamelCase }}Id: string }): Observable<{{ entityNamePascalCase }}> {
     return this._client.get<{ {{ entityNameCamelCase }}: {{ entityNamePascalCase }} }>(`${this._baseUrl}api/{{ entityNameCamelCasePlural }}/${options.{{ entityNameCamelCase }}Id}`)
       .pipe(
         map(x => x.{{ entityNameCamelCase }})
@@ -30,7 +30,11 @@ export class {{ entityNamePascalCase }}Service {
     return this._client.delete<void>(`${this._baseUrl}api/{{ entityNameCamelCasePlural }}/${options.{{ entityNameCamelCase }}.{{ entityNameCamelCase }}Id}`);
   }
 
-  public save(options: { {{ entityNameCamelCase }}: {{ entityNamePascalCase }} }): Observable<{ {{ entityNameCamelCase }}Id: number }> {
-    return this._client.post<{ {{ entityNameCamelCase }}Id: number }>(`${this._baseUrl}api/{{ entityNameCamelCasePlural }}`, { {{ entityNameCamelCase }}: options.{{ entityNameCamelCase }} });
+  public create(options: { {{ entityNameCamelCase }}: {{ entityNamePascalCase }} }): Observable<{ {{ entityNameCamelCase }}Id: string }> {
+    return this._client.post<{ {{ entityNameCamelCase }}Id: string }>(`${this._baseUrl}api/{{ entityNameCamelCasePlural }}`, { {{ entityNameCamelCase }}: options.{{ entityNameCamelCase }} });
+  }
+
+  public update(options: { {{ entityNameCamelCase }}: {{ entityNamePascalCase }} }): Observable<{ {{ entityNameCamelCase }}Id: string }> {
+    return this._client.put<{ {{ entityNameCamelCase }}Id: string }>(`${this._baseUrl}api/{{ entityNameCamelCasePlural }}`, { {{ entityNameCamelCase }}: options.{{ entityNameCamelCase }} });
   }
 }

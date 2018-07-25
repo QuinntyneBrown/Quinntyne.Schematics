@@ -1,4 +1,4 @@
 export class {{ entityNamePascalCase }} {
-  public {{ entityNameCamelCase }}Id: number;
+  public {{ entityNameCamelCase }}Id: string;
   public name: string;
 }
