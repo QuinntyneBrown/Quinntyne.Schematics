@@ -1,0 +1,13 @@
+﻿src\{{ rootNamespace }}.Core\DomainEvents\DashboardCardAddedToDashboard.cs
+using System;
+
+namespace {{ rootNamespace }}.Core.DomainEvents
+{
+    public class DashboardCardAddedToDashboard: DomainEvent
+    {
+        public DashboardCardAddedToDashboard(Guid dashboardCardId)
+            => DashboardCardId = dashboardCardId;
+        
+        public Guid DashboardCardId { get; set; }
+    }
+}

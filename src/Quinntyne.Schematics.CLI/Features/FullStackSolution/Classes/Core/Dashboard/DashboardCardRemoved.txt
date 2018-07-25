@@ -1,0 +1,8 @@
+﻿src\{{ rootNamespace }}.Core\DomainEvents\DashboardCardRemoved.cs
+namespace {{ rootNamespace }}.Core.DomainEvents
+{
+    public class DashboardCardRemoved: DomainEvent
+    {
+
+    }
+}
