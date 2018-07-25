@@ -9,8 +9,9 @@ namespace {{ namespace }}
         public {{ entityNamePascalCase }}(string name)
             => Apply(new {{ entityNamePascalCase }}Created(name));
 
-        public Guid {{ entityNamePascalCase }}Id { get; set; }           
+        public Guid {{ entityNamePascalCase }}Id { get; set; } = Guid.NewGuid();          
 		public string Name { get; set; }        
+		public bool IsDeleted { get; set; }
 
         protected override void EnsureValidState()
         {
@@ -19,12 +20,26 @@ namespace {{ namespace }}
 
         protected override void When(DomainEvent @event)
         {
-            switch(@event)
+            switch (@event)
             {
                 case {{ entityNamePascalCase }}Created {{ entityNameCamelCase }}Created:
                     Name = {{ entityNameCamelCase }}Created.Name;
                     break;
+
+                case {{ entityNamePascalCase }}NameChanged {{ entityNameCamelCase }}NameChanged:
+                    Name = {{ entityNameCamelCase }}NameChanged.Name;
+                    break;
+
+                case {{ entityNamePascalCase }}Removed {{ entityNameCamelCase }}Removed:
+                    IsDeleted = true;
+                    break;
             }
         }
+
+        public void ChangeName(string name)
+            => Apply(new {{ entityNamePascalCase }}NameChanged(name));
+
+        public void Remove()
+            => Apply(new {{ entityNamePascalCase }}Removed());
     }
 }
