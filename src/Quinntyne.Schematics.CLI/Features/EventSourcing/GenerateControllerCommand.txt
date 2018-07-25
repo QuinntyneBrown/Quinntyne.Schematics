@@ -15,7 +15,11 @@ namespace {{ namespace }}
         public {{ entityNamePascalCasePlural }}Controller(IMediator mediator) => _mediator = mediator;
 
         [HttpPost]
-        public async Task<ActionResult<Save{{ entityNamePascalCase }}Command.Response>> Save(Save{{ entityNamePascalCase }}Command.Request request)
+        public async Task<ActionResult<Create{{ entityNamePascalCase }}Command.Response>> Create(Create{{ entityNamePascalCase }}Command.Request request)
+            => await _mediator.Send(request);
+
+        [HttpPut]
+        public async Task<ActionResult<Update{{ entityNamePascalCase }}Command.Response>> Update([FromBody]Update{{ entityNamePascalCase }}Command.Request request)
             => await _mediator.Send(request);
         
         [HttpDelete("{{{ entityNameCamelCase }}Id}")]

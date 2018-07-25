@@ -1,8 +1,8 @@
-using {{ rootNamespace }}.Core.DomainEvents;
 using {{ rootNamespace }}.Core.Interfaces;
 using {{ rootNamespace }}.Core.Models;
 using FluentValidation;
 using MediatR;
+using System;
 using System.Threading.Tasks;
 using System.Threading;
 
@@ -14,27 +14,30 @@ namespace {{ namespace }}
         {
             public Validator()
             {
-                RuleFor(request => request.{{ entityNamePascalCase }}Id).NotEqual(0);
+                RuleFor(request => request.{{ entityNamePascalCase }}Id).NotEqual(default(Guid));
             }
         }
 
         public class Request : IRequest
         {
-            public int {{ entityNamePascalCase }}Id { get; set; }
+            public Guid {{ entityNamePascalCase }}Id { get; set; }
         }
 
         public class Handler : IRequestHandler<Request>
         {
-            public IAppDbContext _context { get; set; }
+            private readonly IEventStore _eventStore;
             
-			public Handler(IAppDbContext context) => _context = context;
+            public Handler(IEventStore eventStore) => _eventStore = eventStore;
 
-            public async Task Handle(Request request, CancellationToken cancellationToken)
+            public Task Handle(Request request, CancellationToken cancellationToken)
             {
-                var {{ entityNameCamelCase }} = await _context.{{ entityNamePascalCasePlural }}.FindAsync(request.{{ entityNamePascalCase }}Id);
-                _context.{{ entityNamePascalCasePlural }}.Remove({{ entityNameCamelCase }});
-                {{ entityNameCamelCase }}.RaiseDomainEvent(new {{ entityNamePascalCase }}Removed({{ entityNameCamelCase }}.{{ entityNamePascalCase }}Id));
-                await _context.SaveChangesAsync(cancellationToken);
+                var {{ entityNameCamelCase }} = _eventStore.Query<{{ entityNamePascalCase }}>(request.{{ entityNamePascalCase }}Id);
+
+                {{ entityNameCamelCase }}.Remove();
+                
+                _eventStore.Save({{ entityNameCamelCase }});
+
+                return Task.CompletedTask;
             }
         }
     }
