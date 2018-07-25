@@ -5,6 +5,7 @@ using Quinntyne.Schematics.Infrastructure.Interfaces;
 using Quinntyne.Schematics.Infrastructure.Services;
 using MediatR;
 using FluentValidation;
+using System;
 
 namespace Quinntyne.Schematics.CLI.Features.EventSourcing
 {
@@ -67,6 +68,8 @@ namespace Quinntyne.Schematics.CLI.Features.EventSourcing
                 };
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
+
+                Console.WriteLine($"{request.Directory}//GenerateEventCommand.cs");
                 
                 _fileWriter.WriteAllLines($"{request.Directory}//GenerateEventCommand.cs", result);
                

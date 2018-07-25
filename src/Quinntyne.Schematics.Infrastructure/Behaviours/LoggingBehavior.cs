@@ -16,11 +16,11 @@ namespace Quinntyne.Schematics.Infrastructure.Behaviours
 
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
-            _logger.LogInformation($"Handling {typeof(TResponse).Name}");
+            //_logger.LogInformation($"Handling {typeof(TResponse).Name}");
 
             var response = await next();
 
-            _logger.LogInformation($"Handled {typeof(TResponse).Name}");
+            //_logger.LogInformation($"Handled {typeof(TResponse).Name}");
 
             return response;
         }

@@ -5,6 +5,7 @@ using Quinntyne.Schematics.Infrastructure.Interfaces;
 using Quinntyne.Schematics.Infrastructure.Services;
 using MediatR;
 using FluentValidation;
+using Quinntyne.Schematics.CLI.DomainEvents;
 
 namespace Quinntyne.Schematics.CLI.Features.EventSourcing
 {
@@ -37,21 +38,23 @@ namespace Quinntyne.Schematics.CLI.Features.EventSourcing
             private readonly ITemplateLocator _templateLocator;
             private readonly ITemplateProcessor _templateProcessor;
             private readonly INamingConventionConverter _namingConventionConverter;
-
+            private readonly IMediator _mediator;
             public Handler(
                 IFileWriter fileWriter,
                 INamingConventionConverter namingConventionConverter,
                 ITemplateLocator templateLocator, 
-                ITemplateProcessor templateProcessor
+                ITemplateProcessor templateProcessor,
+                IMediator mediator
                 )
             {
                 _fileWriter = fileWriter;
                 _namingConventionConverter = namingConventionConverter;
                 _templateProcessor = templateProcessor;
                 _templateLocator = templateLocator;
+                _mediator = mediator;
             }
 
-            public Task Handle(Request request, CancellationToken cancellationToken)
+            public async Task Handle(Request request, CancellationToken cancellationToken)
             {                
                 var entityNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity);
                 var entityNameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity);
@@ -69,8 +72,16 @@ namespace Quinntyne.Schematics.CLI.Features.EventSourcing
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
                 
                 _fileWriter.WriteAllLines($"{request.Directory}//{entityNamePascalCase}.cs", result);
+
+                var notification = new EventSourcingModelCreated()
+                {
+                    Entity = request.Entity,
+                    SolutionDirectory = request.SolutionDirectory,
+                    RootNamespace= request.RootNamespace
+                };
+
+                await _mediator.Publish(notification);
                
-                return Task.CompletedTask;
             }
         }
     }
