@@ -94,7 +94,6 @@
     <None Remove="Features\FullStackSolution\Classes\Core\EventTypes.txt" />
     <None Remove="Features\FullStackSolution\Classes\Core\HttpClientExtensions.txt" />
     <None Remove="Features\FullStackSolution\Classes\Core\HttpGlobalExceptionFilter.txt" />
-    <None Remove="Features\FullStackSolution\Classes\Core\IAppDbContext.txt" />
     <None Remove="Features\FullStackSolution\Classes\Core\IntegrationEventsHub.txt" />
     <None Remove="Features\FullStackSolution\Classes\Core\InternalServerErrorObjectResult.txt" />
     <None Remove="Features\FullStackSolution\Classes\Core\ISecurityTokenFactory.txt" />
@@ -110,6 +109,13 @@
     <None Remove="Features\FullStackSolution\Classes\Core\Tag.txt" />
     <None Remove="Features\FullStackSolution\Classes\Core\User.txt" />
     <None Remove="Features\FullStackSolution\Classes\Core\ValidationBehaviour.txt" />
+    <None Remove="Features\FullStackSolution\Classes\EventStore\AggregateRoot.txt" />
+    <None Remove="Features\FullStackSolution\Classes\EventStore\AppDbContextEventStore.txt" />
+    <None Remove="Features\FullStackSolution\Classes\EventStore\AppInitializerEventStore.txt" />
+    <None Remove="Features\FullStackSolution\Classes\EventStore\EventStore.txt" />
+    <None Remove="Features\FullStackSolution\Classes\EventStore\IAppDbContext.txt" />
+    <None Remove="Features\FullStackSolution\Classes\EventStore\IEventStore.txt" />
+    <None Remove="Features\FullStackSolution\Classes\EventStore\StoredEvent.txt" />
     <None Remove="Features\FullStackSolution\Classes\Infrastructure\InfrastructureServiceCollectionExtensions.txt" />
     <None Remove="Features\FullStackSolution\Classes\IntegrationTests\NoteScenarioBase.txt" />
     <None Remove="Features\FullStackSolution\Classes\IntegrationTests\NoteScenarios.txt" />
@@ -342,7 +348,6 @@
     <EmbeddedResource Include="Features\FullStackSolution\Classes\Core\DomainEvent.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\Core\Entity.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\Core\EventTypes.txt" />
-    <EmbeddedResource Include="Features\FullStackSolution\Classes\Core\IAppDbContext.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\Core\IntegrationEventsHub.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\Core\Note.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\Core\NoteRemoved.txt" />
@@ -365,7 +370,12 @@
     <EmbeddedResource Include="Features\FullStackSolution\Classes\Core\StringExtensions.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\Core\User.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\Core\ValidationBehaviour.txt" />
-    <EmbeddedResource Include="Features\FullStackSolution\Classes\Infrastructure\AppDbContext.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Classes\EventStore\AggregateRoot.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Classes\EventStore\AppDbContextEventStore.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Classes\EventStore\AppInitializerEventStore.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Classes\EventStore\EventStore.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Classes\EventStore\IAppDbContext.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Classes\EventStore\IEventStore.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -435,6 +445,7 @@
     <EmbeddedResource Include="Features\EventSourcing\Models\GenerateBaseModel.txt">
       <DependentUpon>GenerateBaseModel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Features\FullStackSolution\Classes\EventStore\StoredEvent.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\Infrastructure\InfrastructureServiceCollectionExtensions.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\IntegrationTests\NoteScenarioBase.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\IntegrationTests\NoteScenarios.txt" />
