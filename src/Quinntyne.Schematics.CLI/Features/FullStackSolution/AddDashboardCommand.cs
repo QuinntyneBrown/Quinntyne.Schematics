@@ -45,17 +45,52 @@ namespace Quinntyne.Schematics.CLI.Features.FullStackSolution
             }
 
             public async Task Handle(Request request, CancellationToken cancellationToken) {
-                var models = new List<string>() { };
-                var events = new List<string>() { };
-                var cardApi = new List<string>() { };
-                var dashboardCardApi = new List<string>() { };
-                var dashboardApi = new List<string>() { };
+                var models = new List<string>() {
+                    "Card",
+                    "Dashboard",
+                    "DashboardCard"
+                };
+
+                var events = new List<string>() {
+                    "CardCreated",
+                    "CardNameChanged",
+                    "CardRemoved",
+                    "DashboardCardAddedToDashboard",
+                    "DashboardCardCreated",
+                    "DashboardCardNameChanged",
+                    "DashboardCardOptionsUpdated",
+                    "DashboardCardRemoved",
+                    "DashboardCardRemovedFromDashboard",
+                    "DashboardCreated",
+                    "DashboardNameChanged",
+                    "DashboardRemoved"
+                };
+
+                var cardApi = new List<string>() {
+
+                };
+
+                var dashboardCardApi = new List<string>() {
+
+                };
+
+                var dashboardApi = new List<string>() {
+
+                };
 
                 var classes = string.Join(",",models.Concat(events).Concat(cardApi).Concat(dashboardApi).Concat(dashboardCardApi).ToArray());
 
-                var cardClient = new List<string>() { };
-                var dashboardCardClient = new List<string>() { };
-                var dashboardClient = new List<string>() { };
+                var cardClient = new List<string>() {
+                    "card.model.ts"
+                };
+                
+                var dashboardCardClient = new List<string>() {
+
+                };
+
+                var dashboardClient = new List<string>() {
+                    "dashboard.model.ts"
+                };
 
                 var files = string.Join(",",cardClient.Concat(dashboardCardClient).Concat(dashboardClient).ToArray());
 

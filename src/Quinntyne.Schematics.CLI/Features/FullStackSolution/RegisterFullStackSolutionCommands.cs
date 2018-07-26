@@ -14,6 +14,7 @@ namespace Quinntyne.Schematics.CLI.Features.FullStackSolution
             dictionary.Add("file", new Func<IOptions, IRequest>((options) => new GenerateFileCommand.Request(options)));
             dictionary.Add("add-identity", new Func<IOptions, IRequest>((options) => new AddIdentityCommand.Request(options)));
             dictionary.Add("add-core", new Func<IOptions, IRequest>((options) => new AddClientCoreCommand.Request(options)));
+            dictionary.Add("add-dashboard", new Func<IOptions, IRequest>((options) => new AddDashboardCommand.Request(options)));
 
             RegisterSection1Commands.Register(dictionary);
         }
