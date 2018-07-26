@@ -1,0 +1,4 @@
+src\{{ rootNamespace }}.SPA\ClientApp\src\app\digital-assets\
+<mat-form-field>
+  <input matInput type="text" placeholder="{{ placeholder }}" />
+</mat-form-field>

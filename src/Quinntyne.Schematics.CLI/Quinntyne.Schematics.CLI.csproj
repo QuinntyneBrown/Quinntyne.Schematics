@@ -109,6 +109,15 @@
     <None Remove="Features\FullStackSolution\Classes\Core\Tag.txt" />
     <None Remove="Features\FullStackSolution\Classes\Core\User.txt" />
     <None Remove="Features\FullStackSolution\Classes\Core\ValidationBehaviour.txt" />
+    <None Remove="Features\FullStackSolution\Classes\DigitalAssets\DigitalAsset.txt" />
+    <None Remove="Features\FullStackSolution\Classes\DigitalAssets\DigitalAssetCreated.txt" />
+    <None Remove="Features\FullStackSolution\Classes\DigitalAssets\DigitalAssetDto.txt" />
+    <None Remove="Features\FullStackSolution\Classes\DigitalAssets\DigitalAssetsController.txt" />
+    <None Remove="Features\FullStackSolution\Classes\DigitalAssets\GetDigitalAssetByIdQuery.txt" />
+    <None Remove="Features\FullStackSolution\Classes\DigitalAssets\GetDigitalAssetsByIdsQuery.txt" />
+    <None Remove="Features\FullStackSolution\Classes\DigitalAssets\MultipartRequestHelper.txt" />
+    <None Remove="Features\FullStackSolution\Classes\DigitalAssets\StreamHelper.txt" />
+    <None Remove="Features\FullStackSolution\Classes\DigitalAssets\UploadDigitalAssetCommand.txt" />
     <None Remove="Features\FullStackSolution\Classes\EventStore\AggregateRoot.txt" />
     <None Remove="Features\FullStackSolution\Classes\EventStore\AppDbContextEventStore.txt" />
     <None Remove="Features\FullStackSolution\Classes\EventStore\AppInitializerEventStore.txt" />
@@ -180,6 +189,12 @@
     <None Remove="Features\FullStackSolution\Files\Dashboards\dashboardmodelts.txt" />
     <None Remove="Features\FullStackSolution\Files\Dashboards\dashboardservicets.txt" />
     <None Remove="Features\FullStackSolution\Files\Dashboards\dashboardsmodulets.txt" />
+    <None Remove="Features\FullStackSolution\Files\DigitalAssets\digital-asset-url-inputcomponentcss.txt" />
+    <None Remove="Features\FullStackSolution\Files\DigitalAssets\digital-asset-url-inputcomponenthtml.txt" />
+    <None Remove="Features\FullStackSolution\Files\DigitalAssets\digital-asset-url-inputcomponentts.txt" />
+    <None Remove="Features\FullStackSolution\Files\DigitalAssets\digital-assetmodelts.txt" />
+    <None Remove="Features\FullStackSolution\Files\DigitalAssets\digital-assetservicets.txt" />
+    <None Remove="Features\FullStackSolution\Files\DigitalAssets\digital-assetsmodulets.txt" />
     <None Remove="Features\FullStackSolution\Files\enjson.txt" />
     <None Remove="Features\FullStackSolution\Files\frjson.txt" />
     <None Remove="Features\FullStackSolution\Files\indexhtml.txt" />
@@ -269,6 +284,10 @@
     <None Remove="Features\EventSourcing\GenerateSaveCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateTestsCommand.txt" />
     <None Remove="publish.cmd" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Features\FullStackSolution\Classes\DigitalAssets\DigitalAssetCreated.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -370,6 +389,14 @@
     <EmbeddedResource Include="Features\FullStackSolution\Classes\Core\StringExtensions.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\Core\User.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\Core\ValidationBehaviour.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Classes\DigitalAssets\DigitalAsset.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Classes\DigitalAssets\DigitalAssetDto.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Classes\DigitalAssets\DigitalAssetsController.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Classes\DigitalAssets\GetDigitalAssetByIdQuery.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Classes\DigitalAssets\GetDigitalAssetsByIdsQuery.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Classes\DigitalAssets\MultipartRequestHelper.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Classes\DigitalAssets\StreamHelper.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Classes\DigitalAssets\UploadDigitalAssetCommand.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\EventStore\AggregateRoot.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\EventStore\AppDbContextEventStore.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\EventStore\AppInitializerEventStore.txt" />
@@ -510,6 +537,12 @@
     <EmbeddedResource Include="Features\FullStackSolution\Files\Dashboards\dashboardmodelts.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\Dashboards\dashboardservicets.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\Dashboards\dashboardsmodulets.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\DigitalAssets\digital-asset-url-inputcomponentcss.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\DigitalAssets\digital-asset-url-inputcomponenthtml.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\DigitalAssets\digital-asset-url-inputcomponentts.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\DigitalAssets\digital-assetmodelts.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\DigitalAssets\digital-assetservicets.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Files\DigitalAssets\digital-assetsmodulets.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\enjson.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\frjson.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\indexhtml.txt" />

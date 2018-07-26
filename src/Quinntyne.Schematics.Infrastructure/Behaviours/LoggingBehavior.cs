@@ -7,7 +7,7 @@ namespace Quinntyne.Schematics.Infrastructure.Behaviours
 {
     public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     {
-        private ILogger _logger;
+        private readonly ILogger _logger;
 
         public LoggingBehavior(ILogger<LoggingBehavior<TRequest, TResponse>> logger)
         {

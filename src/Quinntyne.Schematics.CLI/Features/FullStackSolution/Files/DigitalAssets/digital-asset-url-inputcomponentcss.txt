@@ -1,0 +1,4 @@
+src\{{ rootNamespace }}.SPA\ClientApp\src\app\digital-assets\
+mat-form-field {
+  width: 100%;
+}
