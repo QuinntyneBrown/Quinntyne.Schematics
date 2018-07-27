@@ -47,6 +47,7 @@ namespace Quinntyne.Schematics.CLI.Features.FullStackSolution
             public async Task Handle(Request request, CancellationToken cancellationToken)
             {
                 var classes = string.Join(",", new List<string>() {
+                    "DomainEventEventStore",
                     "IEventStore",
                     "EventStore",
                     "AppDbContextEventStore",

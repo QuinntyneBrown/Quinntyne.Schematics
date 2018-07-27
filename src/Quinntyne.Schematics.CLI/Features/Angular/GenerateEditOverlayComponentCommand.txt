@@ -9,7 +9,8 @@ import { map, switchMap, tap, takeUntil } from "rxjs/operators";
 @Component({
   templateUrl: "./{{ nameSnakeCase }}.component.html",
   styleUrls: ["./{{ nameSnakeCase }}.component.css"],
-  selector: "app-{{ nameSnakeCase }}"
+  selector: "app-{{ nameSnakeCase }}",
+  host: { 'class': 'mat-typography' }
 })
 export class {{ namePascalCase }}Component { 
   constructor(
@@ -37,7 +38,7 @@ export class {{ namePascalCase }}Component {
 
   public {{ entityNameCamelCase }}$: BehaviorSubject<{{ entityNamePascalCase }}> = new BehaviorSubject(<{{ entityNamePascalCase }}>{});
   
-  public {{ entityNameCamelCase }}Id: number;
+  public {{ entityNameCamelCase }}Id: string;
 
   public handleCancelClick() {
     this._overlay.close();
@@ -47,7 +48,7 @@ export class {{ namePascalCase }}Component {
     const {{ entityNameCamelCase }} = new {{ entityNamePascalCase }}();
     {{ entityNameCamelCase }}.{{ entityNameCamelCase }}Id = this.{{ entityNameCamelCase }}Id;
     {{ entityNameCamelCase }}.name = this.form.value.name;
-    this._{{ entityNameCamelCase }}Service.save({ {{ entityNameCamelCase }} })
+    this._{{ entityNameCamelCase }}Service.create({ {{ entityNameCamelCase }} })
       .pipe(
         map(x => {{ entityNameCamelCase }}.{{ entityNameCamelCase }}Id = x.{{ entityNameCamelCase }}Id),
         tap(x => this._overlay.close({{ entityNameCamelCase }})),

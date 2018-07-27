@@ -12,7 +12,7 @@ export class {{ namePascalCase }} {
     public _overlayRefProvider: OverlayRefProvider
   ) { }
 
-  public create(options: { {{ entityNameCamelCase }}Id?: number } = {}): Observable<any> {
+  public create(options: { {{ entityNameCamelCase }}Id?: string } = {}): Observable<any> {
     const overlayRef = this._overlayRefProvider.create();
     const overlayRefWrapper = new OverlayRefWrapper(overlayRef);
     const overlayComponent = this.attachOverlayContainer(overlayRef, overlayRefWrapper);

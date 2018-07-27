@@ -38,6 +38,7 @@
     <None Remove="Features\EventSourcing\GenerateUnitTestsCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateUpdateCommand.txt" />
     <None Remove="Features\EventSourcing\Models\GenerateBaseModel.txt" />
+    <None Remove="Features\FullStackSolution\Classes\API\ApiInitializer.txt" />
     <None Remove="Features\FullStackSolution\Classes\API\appSettings.txt" />
     <None Remove="Features\FullStackSolution\Classes\API\AuthenticateCommand.txt" />
     <None Remove="Features\FullStackSolution\Classes\API\Cards\CardDto.txt" />
@@ -65,7 +66,6 @@
     <None Remove="Features\FullStackSolution\Classes\API\Dashboards\RemoveDashboardCommand.txt" />
     <None Remove="Features\FullStackSolution\Classes\API\Dashboards\UpdateDashboardCommand.txt" />
     <None Remove="Features\FullStackSolution\Classes\API\Program.txt" />
-    <None Remove="Features\FullStackSolution\Classes\API\SeedData.txt" />
     <None Remove="Features\FullStackSolution\Classes\API\Startup.txt" />
     <None Remove="Features\FullStackSolution\Classes\API\UserApiModel.txt" />
     <None Remove="Features\FullStackSolution\Classes\API\UsersController.txt" />
@@ -108,6 +108,7 @@
     <None Remove="Features\FullStackSolution\Classes\Core\StringExtensions.txt" />
     <None Remove="Features\FullStackSolution\Classes\Core\Tag.txt" />
     <None Remove="Features\FullStackSolution\Classes\Core\User.txt" />
+    <None Remove="Features\FullStackSolution\Classes\Core\UserCreated.txt" />
     <None Remove="Features\FullStackSolution\Classes\Core\ValidationBehaviour.txt" />
     <None Remove="Features\FullStackSolution\Classes\DigitalAssets\DigitalAsset.txt" />
     <None Remove="Features\FullStackSolution\Classes\DigitalAssets\DigitalAssetCreated.txt" />
@@ -121,6 +122,7 @@
     <None Remove="Features\FullStackSolution\Classes\EventStore\AggregateRoot.txt" />
     <None Remove="Features\FullStackSolution\Classes\EventStore\AppDbContextEventStore.txt" />
     <None Remove="Features\FullStackSolution\Classes\EventStore\AppInitializerEventStore.txt" />
+    <None Remove="Features\FullStackSolution\Classes\EventStore\DomainEventEventStore.txt" />
     <None Remove="Features\FullStackSolution\Classes\EventStore\EventStore.txt" />
     <None Remove="Features\FullStackSolution\Classes\EventStore\IAppDbContext.txt" />
     <None Remove="Features\FullStackSolution\Classes\EventStore\IEventStore.txt" />
@@ -219,28 +221,8 @@
     <None Remove="Features\FullStackSolution\Files\Notes\notesservice.txt" />
     <None Remove="Features\FullStackSolution\Files\packagejson.txt" />
     <None Remove="Features\FullStackSolution\Files\packagejson_1.txt" />
-    <None Remove="Features\FullStackSolution\Files\Shared\are-you-sure-overlaycomponenthtml.txt" />
-    <None Remove="Features\FullStackSolution\Files\Shared\are-you-sure-overlaycomponentts.txt" />
-    <None Remove="Features\FullStackSolution\Files\Shared\auto-complete-chip-listcomponentcss.txt" />
-    <None Remove="Features\FullStackSolution\Files\Shared\auto-complete-chip-listcomponenthtml.txt" />
-    <None Remove="Features\FullStackSolution\Files\Shared\auto-complete-chip-listcomponentts.txt" />
-    <None Remove="Features\FullStackSolution\Files\Shared\confirm-refresh-overlaycomponenthtml.txt" />
-    <None Remove="Features\FullStackSolution\Files\Shared\confirm-refresh-overlaycomponentts.txt" />
-    <None Remove="Features\FullStackSolution\Files\Shared\delete-cellcomponenthtml.txt" />
-    <None Remove="Features\FullStackSolution\Files\Shared\delete-cellcomponentts.txt" />
-    <None Remove="Features\FullStackSolution\Files\Shared\gridcomponentcss.txt" />
-    <None Remove="Features\FullStackSolution\Files\Shared\gridcomponenthtml.txt" />
-    <None Remove="Features\FullStackSolution\Files\Shared\gridcomponentts.txt" />
-    <None Remove="Features\FullStackSolution\Files\Shared\primary-headercomponentcss.txt" />
-    <None Remove="Features\FullStackSolution\Files\Shared\primary-headercomponenthtml.txt" />
-    <None Remove="Features\FullStackSolution\Files\Shared\primary-headercomponentts.txt" />
     <None Remove="Features\FullStackSolution\Files\Shared\quill-text-editor.componenthtml.txt" />
-    <None Remove="Features\FullStackSolution\Files\Shared\quill-text-editorcomponentcss.txt" />
-    <None Remove="Features\FullStackSolution\Files\Shared\quill-text-editorcomponentts.txt" />
     <None Remove="Features\FullStackSolution\Files\Shared\sharedmodulets.txt" />
-    <None Remove="Features\FullStackSolution\Files\Shared\sharedmodulets_1.txt" />
-    <None Remove="Features\FullStackSolution\Files\Shared\un-delete-cellcomponenthtml.txt" />
-    <None Remove="Features\FullStackSolution\Files\Shared\un-delete-cellcomponentts.txt" />
     <None Remove="Features\FullStackSolution\Files\stylescss.txt" />
     <None Remove="Features\FullStackSolution\Files\stylesscss.txt" />
     <None Remove="Features\FullStackSolution\Files\Tags\add-tag-overlaycomponentcss.txt" />
@@ -287,6 +269,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Features\FullStackSolution\Classes\Core\UserCreated.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\DigitalAssets\DigitalAssetCreated.txt" />
   </ItemGroup>
 
@@ -333,7 +316,7 @@
     <EmbeddedResource Include="Features\FullStackSolution\Classes\API\SaveNoteCommand.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\API\UndoNoteDeleteCommand.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\API\Program.txt" />
-    <EmbeddedResource Include="Features\FullStackSolution\Classes\API\SeedData.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Classes\API\ApiInitializer.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\API\Startup.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\API\GetTagByIdQuery.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\API\GetTagBySlugQuery.txt" />
@@ -400,6 +383,7 @@
     <EmbeddedResource Include="Features\FullStackSolution\Classes\EventStore\AggregateRoot.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\EventStore\AppDbContextEventStore.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\EventStore\AppInitializerEventStore.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Classes\EventStore\DomainEventEventStore.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\EventStore\EventStore.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\EventStore\IAppDbContext.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\EventStore\IEventStore.txt" />
@@ -567,27 +551,7 @@
     <EmbeddedResource Include="Features\FullStackSolution\Files\Notes\notesservice.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\packagejson_1.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\packagejson.txt" />
-    <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\are-you-sure-overlaycomponenthtml.txt" />
-    <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\are-you-sure-overlaycomponentts.txt" />
-    <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\auto-complete-chip-listcomponentcss.txt" />
-    <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\auto-complete-chip-listcomponenthtml.txt" />
-    <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\auto-complete-chip-listcomponentts.txt" />
-    <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\confirm-refresh-overlaycomponenthtml.txt" />
-    <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\confirm-refresh-overlaycomponentts.txt" />
-    <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\delete-cellcomponenthtml.txt" />
-    <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\delete-cellcomponentts.txt" />
-    <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\gridcomponentcss.txt" />
-    <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\gridcomponenthtml.txt" />
-    <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\gridcomponentts.txt" />
-    <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\primary-headercomponentcss.txt" />
-    <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\primary-headercomponenthtml.txt" />
-    <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\primary-headercomponentts.txt" />
-    <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\quill-text-editorcomponentcss.txt" />
-    <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\quill-text-editorcomponentts.txt" />
-    <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\sharedmodulets_1.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\sharedmodulets.txt" />
-    <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\un-delete-cellcomponenthtml.txt" />
-    <EmbeddedResource Include="Features\FullStackSolution\Files\Shared\un-delete-cellcomponentts.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\stylescss.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\stylesscss.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Files\Tags\add-tag-overlaycomponentcss.txt" />
@@ -699,6 +663,7 @@
 
   <ItemGroup>
     <Folder Include="Features\Angular\Components\" />
+    <Folder Include="Features\FullStackSolution\Classes\Products\" />
     <Folder Include="Features\FullStackSolution\Classes\SPA\" />
     <Folder Include="Features\FullStackSolution\Files\Settings\" />
   </ItemGroup>

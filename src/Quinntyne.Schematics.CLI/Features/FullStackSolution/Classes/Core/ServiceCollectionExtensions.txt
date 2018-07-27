@@ -1,5 +1,4 @@
 src\{{ rootNamespace }}.Core\Extensions\ServiceCollectionExtensions.cs
-using {{ rootNamespace }}.Core.Exceptions;
 using {{ rootNamespace }}.Core.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
@@ -26,10 +25,8 @@ namespace {{ rootNamespace }}.Core.Extensions
     {        
         public static IMvcBuilder AddCustomMvc(this IServiceCollection services)
         {
-            return services.AddMvc(options =>
-            {
-                options.Filters.Add(typeof(HttpGlobalExceptionFilter));
-            }).AddControllersAsServices();
+            return services.AddMvc()
+                .AddControllersAsServices();
         }
 
         public static IServiceCollection AddCustomSignalR(this IServiceCollection services)

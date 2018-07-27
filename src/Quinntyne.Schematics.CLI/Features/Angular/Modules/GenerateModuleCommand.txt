@@ -6,6 +6,11 @@ import { CoreModule } from '../core/core.module';
 import { SharedModule } from '../shared/shared.module';
 
 const declarations = [
+
+];
+
+const entryComponents = [
+
 ];
 
 const providers = [
@@ -13,7 +18,8 @@ const providers = [
 ];
 
 @NgModule({
-  declarations: declarations,
+  declarations,
+  entryComponents,
   imports: [
     CommonModule,
     FormsModule,

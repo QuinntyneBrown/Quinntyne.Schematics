@@ -1,6 +1,0 @@
-src\{{ rootNamespace }}\ClientApp\src\app\shared\
-<button mat-icon-button>
-  <mat-icon>
-    check
-  </mat-icon>
-</button>

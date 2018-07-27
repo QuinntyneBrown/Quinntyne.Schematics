@@ -1,9 +1,0 @@
-src\{{ rootNamespace }}\ClientApp\src\app\shared\
-:host {
-  display: block;
-  background-color: #fff;
-}
-
-:host .editor {
-  height: calc(100% - 42px);
-}

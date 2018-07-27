@@ -47,7 +47,7 @@ namespace Quinntyne.Schematics.CLI.Features.FullStackSolution
             public async Task Handle(Request request, CancellationToken cancellationToken)
                 => await _mediator.Send(new GenerateClassCommand.Request(request.Options)
                 {
-                    ClassName = "Entity,User,AuthenticationSettings,AuthorizationHeaderParameterOperationFilter,AutoAuthenticationMiddleware,ISecurityTokenFactory,PasswordHasher,SecurityTokenFactory,AuthenticateCommand,UserApiModel,UsersController,ScenarioBase,UserScenarioBase,UserScenarios",
+                    ClassName = "UserCreated,Entity,User,AuthenticationSettings,AuthorizationHeaderParameterOperationFilter,AutoAuthenticationMiddleware,ISecurityTokenFactory,PasswordHasher,SecurityTokenFactory,AuthenticateCommand,UserApiModel,UsersController,ScenarioBase,UserScenarioBase,UserScenarios",
                     SolutionDirectory = request.SolutionDirectory
                 });
         }

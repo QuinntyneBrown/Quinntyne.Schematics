@@ -15,9 +15,6 @@ namespace {{ rootNamespace }}.Infrastructure.Extensions
 
             return services.AddDbContext<AppDbContext>(options =>
             {
-                options
-                .UseLoggerFactory(AppDbContext.ConsoleLoggerFactory);
-
                 _ = useInMemoryDatabase 
                 ? options.UseInMemoryDatabase(databaseName: "{{ rootNamespace }}")
                 : options.UseSqlServer(connectionString, b => b.MigrationsAssembly("{{ rootNamespace }}.Infrastructure"));

@@ -1,14 +1,15 @@
-src\{{ rootNamespace }}.API\Features\Users\UserApiModel.cs
+src\{{ rootNamespace }}.API\Features\Users\UserDto.cs
 using {{ rootNamespace }}.Core.Models;
+using System;
 
 namespace {{ rootNamespace }}.API.Features.Users
 {
-    public class UserApiModel
+    public class UserDto
     {
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
         public string Username { get; set; }
-        public static UserApiModel FromUser(User user)
-            => new UserApiModel
+        public static UserDto FromUser(User user)
+            => new UserDto
             {
                 UserId = user.UserId,
                 Username = user.Username

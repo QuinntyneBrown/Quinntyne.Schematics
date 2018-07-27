@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using static System.IO.Directory;
 
 namespace Quinntyne.Schematics.CLI.Features.FullStackSolution
 {
@@ -46,15 +47,14 @@ namespace Quinntyne.Schematics.CLI.Features.FullStackSolution
                 _mediator = mediator;
             }
 
+
             public async Task Handle(Request request, CancellationToken cancellationToken)
             {
                 var classDir = $@"{request.SolutionDirectory}\src\{request.RootNamespace}.API\Features\DigitalAssets\";
                 var fileDir = $@"{request.SolutionDirectory}src\{request.RootNamespace}.SPA\ClientApp\src\app\digital-assets\";
-
-                
-                if (!Directory.Exists(classDir)) Directory.CreateDirectory(classDir);
-
-                if (!Directory.Exists(fileDir)) Directory.CreateDirectory(fileDir);
+    
+                if (!Exists(classDir)) CreateDirectory(classDir);
+                if (!Exists(fileDir)) CreateDirectory(fileDir);
                 
 
                 var classes = string.Join(",", new List<string>() {

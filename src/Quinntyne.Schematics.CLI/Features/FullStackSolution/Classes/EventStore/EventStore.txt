@@ -141,6 +141,9 @@ namespace {{ rootNamespace }}.Infrastructure.Data
         }
 
         protected void Add(StoredEvent @event) {
+            if (Events == null)
+                Events = new ConcurrentDictionary<Guid, DeserializedStoredEvent>(_context.StoredEvents.Select(x => new DeserializedStoredEvent(x)).ToDictionary(x => x.StoredEventId));
+
             Events.TryAdd(@event.StoredEventId, new DeserializedStoredEvent(@event));
             _context.StoredEvents.Add(@event);
             _context.SaveChanges();

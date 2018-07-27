@@ -1,8 +1,14 @@
+using System;
+
 namespace {{ namespace }}
 {
     public class {{ namePascalCase }}: DomainEvent
     {
-        public {{ namePascalCase }}(string name) => Name = name;
+        public {{ namePascalCase }}(string name)
+        {
+             Name = name;
+        }
+
         public string Name { get; set; }
     }
 }

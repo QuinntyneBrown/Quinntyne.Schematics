@@ -5,12 +5,10 @@ using Quinntyne.Schematics.Infrastructure.Interfaces;
 using Quinntyne.Schematics.Infrastructure.Services;
 using MediatR;
 using FluentValidation;
-using System.Linq;
-using System;
 
 namespace Quinntyne.Schematics.CLI.Features.FullStackSolution
 {
-    public class AddClientSharedCommand
+    public class AddExtensionsCommand
     {
         public class Request : Options, IRequest, ICodeGeneratorCommandRequest
         {
@@ -39,23 +37,24 @@ namespace Quinntyne.Schematics.CLI.Features.FullStackSolution
         {
             private readonly IMediator _mediator;
 
-            public Handler(
-                IMediator mediator
-                )
-            {
-                _mediator = mediator;
-            }
+            public Handler(IMediator mediator) => _mediator = mediator;
 
             public async Task Handle(Request request, CancellationToken cancellationToken)
             {
+                var classes = string.Join(",", new List<string>() {
+                    "IntegrationEventsHub",
+                    "SignalRContractResolver",
+                    "ServiceCollectionExtensions",
+                    "InfrastructureServiceCollectionExtensions",
+                    "Startup",
+                    "Program",
+                    "ApiInitializer",
+                    "ValidationBehaviour"
+                });
 
-                var names = string.Join(",", new List<string> {
-                    "shared.module.ts",                    
-                    });
-
-                await _mediator.Send(new GenerateFileCommand.Request(request.Options)
+                await _mediator.Send(new GenerateClassCommand.Request(request.Options)
                 {
-                    Name = names,
+                    ClassName = classes,
                     SolutionDirectory = request.SolutionDirectory
                 });
             }

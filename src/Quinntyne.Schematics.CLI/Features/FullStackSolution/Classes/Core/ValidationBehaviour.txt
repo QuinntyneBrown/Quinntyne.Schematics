@@ -28,9 +28,8 @@ namespace {{ rootNamespace }}.Core.Behaviours
 
             if (failures.Any())
             {
-                throw new DomainException(
-                    $"Command Validation Errors for type {typeof(TRequest).Name}",
-                    new ValidationException("ValidationException", failures));
+                throw new ValidationException($"ValidationException: Command Validation Errors for type {typeof(TRequest).Name}",
+                    failures);
             }
 
             return next();
