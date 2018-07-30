@@ -3,8 +3,11 @@ using FluentValidation.AspNetCore;
 using {{ rootNamespace }}.Core;
 using {{ rootNamespace }}.Core.Behaviours;
 using {{ rootNamespace }}.Core.Extensions;
+using {{ rootNamespace }}.Core.Interfaces;
 using {{ rootNamespace }}.Core.Identity;
 using {{ rootNamespace }}.Infrastructure.Extensions;
+using {{ rootNamespace }}.Infrastructure;
+using {{ rootNamespace }}.Infrastructure.Data;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -21,6 +24,11 @@ namespace {{ rootNamespace }}.API
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IEventStore, EventStore>();
+            services.AddHttpContextAccessor();
+            services.AddHostedService<QueuedHostedService>();
+            services.AddSingleton<IBackgroundTaskQueue, BackgroundTaskQueue>();
+
             services.AddCustomMvc()
                 .AddFluentValidation(cfg => { cfg.RegisterValidatorsFromAssemblyContaining<Startup>(); });
 

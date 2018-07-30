@@ -54,7 +54,9 @@ namespace Quinntyne.Schematics.CLI.Features.FullStackSolution
                     "IAppDbContext",
                     "AppInitializerEventStore",
                     "StoredEvent",
-                    "AggregateRoot"
+                    "AggregateRoot",
+                    "BackgroundTaskQueue",
+                    "QueuedHostedService"
                 }.ToArray());
 
                 await _mediator.Send(new GenerateClassCommand.Request(request.Options)

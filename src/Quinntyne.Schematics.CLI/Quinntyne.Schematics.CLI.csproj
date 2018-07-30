@@ -126,7 +126,9 @@
     <None Remove="Features\FullStackSolution\Classes\EventStore\IAppDbContext.txt" />
     <None Remove="Features\FullStackSolution\Classes\EventStore\IEventStore.txt" />
     <None Remove="Features\FullStackSolution\Classes\EventStore\StoredEvent.txt" />
+    <None Remove="Features\FullStackSolution\Classes\Infrastructure\BackgroundTaskQueue.txt" />
     <None Remove="Features\FullStackSolution\Classes\Infrastructure\InfrastructureServiceCollectionExtensions.txt" />
+    <None Remove="Features\FullStackSolution\Classes\Infrastructure\QueuedHostedService.txt" />
     <None Remove="Features\FullStackSolution\Classes\IntegrationTests\NoteScenarioBase.txt" />
     <None Remove="Features\FullStackSolution\Classes\IntegrationTests\NoteScenarios.txt" />
     <None Remove="Features\FullStackSolution\Classes\IntegrationTests\ScenarioBase.txt" />
@@ -455,7 +457,9 @@
       <DependentUpon>GenerateBaseModel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Features\FullStackSolution\Classes\EventStore\StoredEvent.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Classes\Infrastructure\BackgroundTaskQueue.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\Infrastructure\InfrastructureServiceCollectionExtensions.txt" />
+    <EmbeddedResource Include="Features\FullStackSolution\Classes\Infrastructure\QueuedHostedService.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\IntegrationTests\NoteScenarioBase.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\IntegrationTests\NoteScenarios.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\IntegrationTests\ScenarioBase.txt" />

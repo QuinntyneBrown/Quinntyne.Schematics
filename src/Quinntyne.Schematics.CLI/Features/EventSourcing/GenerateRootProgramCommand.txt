@@ -28,31 +28,32 @@ namespace {{ namespace }}
             var services = (IServiceScopeFactory)host.Services.GetService(typeof(IServiceScopeFactory));
             
             using (var scope = services.CreateScope())
-            {                
-                if (args.Contains("seeddb"))
-                {
-                    var httpContextAccessor = GetHttpContextAccessor(scope);
-                    httpContextAccessor.HttpContext = new AppHttpContext();
-                    httpContextAccessor.HttpContext.Items["TenantId"] = "4759a504-e640-e811-9d37-0028f81d438a";
-                    httpContextAccessor.HttpContext.Items["Username"] = "system";
+            {
+                var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                var mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
+                var queue = scope.ServiceProvider.GetRequiredService<IBackgroundTaskQueue>();
+                var backgroundService = new QueuedHostedService(queue);
 
-                    SeedContext(GetDbContext(scope));
-                }
-
-                if (args.Contains("migratedb"))
-                {
-                    GetDbContext(scope).Database.Migrate();
-                }
+                var eventStore = new EventStore(context, mediator, queue,services);
+                
+                if (args.Contains("ci"))
+                    args = new string[4] { "dropdb", "migratedb", "seeddb", "stop" };
 
                 if (args.Contains("dropdb"))
-                {                    
-                    GetDbContext(scope).Database.EnsureDeleted();
-                }
+                    context.Database.EnsureDeleted();
 
-                if (args.Contains("stop"))
+                if (args.Contains("migratedb"))
+                    context.Database.Migrate();
+
+                if (args.Contains("seeddb"))
                 {
-                    Environment.Exit(0);
+                    context.Database.EnsureCreated();
+                    AppInitializer.Seed(eventStore);
+                    backgroundService.StartAsync(default(CancellationToken)).GetAwaiter().GetResult();
                 }
+                
+                if (args.Contains("stop"))
+                    Environment.Exit(0);
             }
         }
 
