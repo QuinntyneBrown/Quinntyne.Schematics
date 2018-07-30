@@ -1,5 +1,4 @@
 src\{{ rootNamespace }}.Core\Extensions\ServiceCollectionExtensions.cs
-using {{ rootNamespace }}.Core.Exceptions;
 using {{ rootNamespace }}.Core.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;

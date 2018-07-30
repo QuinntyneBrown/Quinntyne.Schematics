@@ -1,6 +1,5 @@
 src\{{ rootNamespace }}.Core\Behaviours\ValidationBehavior.cs
 using FluentValidation;
-using {{ rootNamespace }}.Core.Exceptions;
 using MediatR;
 using System.Collections.Generic;
 using System.Linq;
