@@ -1,0 +1,9 @@
+import { FormGroup, ValidatorFn, ValidationErrors } from "@angular/forms";
+
+export const {{ nameCamelCase }}Validator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
+  const ctrl = control.get('controlName');
+  
+  return !ctrl.value
+    ? { {{ nameCamelCase }}Invalid: true }
+    : null;
+};
