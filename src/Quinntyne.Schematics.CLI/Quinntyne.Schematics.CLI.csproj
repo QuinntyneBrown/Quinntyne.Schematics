@@ -38,7 +38,6 @@
     <None Remove="Features\EventSourcing\GenerateUnitTestsCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateUpdateCommand.txt" />
     <None Remove="Features\EventSourcing\Models\GenerateBaseModel.txt" />
-    <None Remove="Features\FullStackSolution\Classes\API\ApiInitializer.txt" />
     <None Remove="Features\FullStackSolution\Classes\API\appSettings.txt" />
     <None Remove="Features\FullStackSolution\Classes\API\AuthenticateCommand.txt" />
     <None Remove="Features\FullStackSolution\Classes\API\Cards\CardDto.txt" />
@@ -316,7 +315,6 @@
     <EmbeddedResource Include="Features\FullStackSolution\Classes\API\SaveNoteCommand.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\API\UndoNoteDeleteCommand.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\API\Program.txt" />
-    <EmbeddedResource Include="Features\FullStackSolution\Classes\API\ApiInitializer.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\API\Startup.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\API\GetTagByIdQuery.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\API\GetTagBySlugQuery.txt" />

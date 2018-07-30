@@ -44,11 +44,11 @@ namespace Quinntyne.Schematics.CLI.Features.FullStackSolution
                 var classes = string.Join(",", new List<string>() {
                     "IntegrationEventsHub",
                     "SignalRContractResolver",
+                    "HttpClientExtensions",
                     "ServiceCollectionExtensions",
                     "InfrastructureServiceCollectionExtensions",
                     "Startup",
                     "Program",
-                    "ApiInitializer",
                     "ValidationBehaviour"
                 });
 
