@@ -16,6 +16,7 @@
     <None Remove="Features\Angular\GenerateModuleCommand - Copy.txt" />
     <None Remove="Features\Angular\GenerateModuleCommand.txt" />
     <None Remove="Features\Angular\GenerateNgModelCommand.txt" />
+    <None Remove="Features\Angular\GenerateNgScenarioCommand.txt" />
     <None Remove="Features\Angular\GenerateOverlayServiceCommand.txt" />
     <None Remove="Features\Angular\GenerateServiceCommand.txt" />
     <None Remove="Features\Angular\GenerateValidatorCommand.txt" />
@@ -271,6 +272,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Features\Angular\GenerateNgScenarioCommand.txt" />
     <EmbeddedResource Include="Features\Angular\GenerateValidatorCommand.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\Core\UserCreated.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\DigitalAssets\DigitalAssetCreated.txt" />

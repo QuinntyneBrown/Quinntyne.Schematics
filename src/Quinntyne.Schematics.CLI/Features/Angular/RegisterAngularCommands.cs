@@ -16,6 +16,7 @@ namespace Quinntyne.Schematics.CLI.Features.Angular
             dictionary.Add("ng-overlay", new Func<IOptions, IRequest>((options) => new GenerateOverlayServiceCommand.Request(options)));
             dictionary.Add("ng-feature", new Func<IOptions, IRequest>((options) => new GenerateNgFeatureCommand.Request(options)));
             dictionary.Add("ng-validator", new Func<IOptions, IRequest>((options) => new GenerateValidatorCommand.Request(options)));
+            dictionary.Add("ng-scenario", new Func<IOptions, IRequest>((options) => new GenerateNgScenarioCommand.Request(options)));
         }
     }
 }

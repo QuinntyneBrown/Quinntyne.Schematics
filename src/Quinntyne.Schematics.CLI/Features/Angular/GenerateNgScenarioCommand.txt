@@ -1,0 +1,155 @@
+import { HubConnection, HubConnectionBuilder, IHttpConnectionOptions, ILogger, LogLevel } from "@aspnet/signalr";
+import { Subject, Observable } from "rxjs";
+import { tap, map, takeUntil } from "rxjs/operators";
+import * as uuid from "uuid/v1";
+
+const changeStates = { new: "new", deleted: "deleted", modified: "modified" };
+
+const customerKey: string = '';
+const code: string = '';
+const password: string = ''
+const clientId: string = uuid();
+const logger: ILogger = {
+  log(logLevel: LogLevel, message: string): void {
+    fetch("http://localhost:45121/api/logs", {
+      method: 'POST',
+      body: JSON.stringify({ logLevel, message, clientId }),
+      headers: { "content-type": "application/json" }
+    });
+  }
+};
+
+
+console.log(clientId);
+
+let accessToken: string;
+let userId: string;
+let licenseServerUrl: string;
+let client: HubClient;
+
+async function submit(baseUrl:string, options: { entity: any, changeState?: string }, events$: Observable<any>): Promise<any> {
+  options.entity.changeState = options.changeState;
+
+  if (!options.entity.hasOwnProperty("concurrencyVersion")) {
+    return fetch(`${baseUrl}/${options.changeState == changeStates.deleted ? 'delete' : 'submit'}`, {
+      body: options.entity
+    });
+  }
+  
+  return new Promise(async (resolve, reject) => {
+
+    options.entity.guid = uuid();
+
+    const resolved: Subject<void> = new Subject();
+
+    events$.pipe(
+      map(x => {
+        if (x.guid == options.entity.guid) {
+          resolved.next();
+          resolve(x.resolvedId);        
+        }
+      }),
+      takeUntil(resolved)
+    ).subscribe();
+
+    const body = JSON.stringify(options.entity);
+
+    logger.log(LogLevel.Trace, `submit: ${body}`);
+
+    try {
+      await fetch(`${baseUrl}/${options.changeState == changeStates.deleted ? 'delete' : 'submit'}`, {
+        method: 'POST', body: body,
+        headers: buildHeaders()
+      });
+    } catch (e) {
+      logger.log(LogLevel.Error, `error submitting: ${body}`);
+    }
+  });
+}
+
+function buildHeaders() {
+  return {
+    "UserId": userId,
+    'Authorization': `Bearer ${accessToken}`,
+    'CustomerKey': customerKey,
+    "content-type": "application/json"
+  };
+}
+
+class HubClient {
+  private _connection: HubConnection;
+  private _connect: Promise<any>;
+
+  public events$: Subject<any> = new Subject();
+
+  connect(): Promise<any> {
+    const options: IHttpConnectionOptions = {
+      accessTokenFactory: () => accessToken,
+      logMessageContent: true,
+      logger: logger
+    };
+      
+    this._connect = new Promise((resolve, reject) => {
+      this._connection = this._connection || new HubConnectionBuilder()
+        .withUrl(`${licenseServerUrl}/license?CustomerKey=${customerKey}&AuthenticatedUserId=${userId}&LicensingClient=ClientApp`, options)
+        .build();
+
+      this._connection.serverTimeoutInMilliseconds = 120000;
+
+      this._connection.on('refreshModel', value => this.events$.next(value));
+
+      this._connection.onclose(e => {
+        console.error(`Connection Close ${e ? e.message : ''}`);
+      });
+
+      this._connection.start()
+        .then(() => resolve())
+        .catch(() => reject());
+    });
+
+    return this._connect;
+  }
+}
+
+async function getCustomerSettings() {
+  const response = await fetch(`/ui/api/system/customersettings`, { headers: buildHeaders() });
+  const json = await response.json();
+  licenseServerUrl = json.result.data[0].licenseServerURL;
+}
+
+async function tryToLogin(options: { code: string; password: string }) {  
+  const response = await fetch(`/ui/api/user/signin`, {
+    method: 'POST', body: JSON.stringify(options), headers: {
+      "CustomerKey": customerKey,
+      "content-type": "application/json"
+    }
+  });
+
+  const json = await response.json();
+
+  accessToken = json.accessToken;
+  userId = json.result.data[0];
+
+  return {
+    accessToken, userId
+  };
+}
+
+async function tryToLogout() {
+  await fetch(`/ui/api/user/signout`, { headers: buildHeaders() });  
+}
+
+export async function execute() {
+
+  client = new HubClient();
+  
+  await tryToLogin({ code, password });
+
+  await getCustomerSettings();
+
+  await client.connect();
+
+  // do something
+
+  await tryToLogout();  
+}
