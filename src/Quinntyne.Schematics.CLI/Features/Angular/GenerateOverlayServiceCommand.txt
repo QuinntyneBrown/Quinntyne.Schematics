@@ -1,31 +1,14 @@
-import { Injectable, ComponentRef, Injector } from "@angular/core";
-import { OverlayRefWrapper } from "../core/overlay-ref-wrapper";
-import { PortalInjector, ComponentPortal } from "@angular/cdk/portal";
-import { {{ namePascalCase }}Component } from "./{{ nameSnakeCase }}.component";
+import { Injectable, Injector } from "@angular/core";
+import { BaseOverlayService } from "../core/base-overlay.service";
 import { OverlayRefProvider } from "../core/overlay-ref-provider";
-import { Observable } from "rxjs";
+import { {{ namePascalCase }}Component } from "./{{ nameSnakeCase }}.component";
 
 @Injectable()
-export class {{ namePascalCase }} {
+export class {{ namePascalCase }} extends BaseOverlayService<{{ namePascalCase }}Component> {
   constructor(
     public _injector: Injector,
     public _overlayRefProvider: OverlayRefProvider
-  ) { }
-
-  public create(options: { {{ entityNameCamelCase }}Id?: string } = {}): Observable<any> {
-    const overlayRef = this._overlayRefProvider.create();
-    const overlayRefWrapper = new OverlayRefWrapper(overlayRef);
-    const overlayComponent = this.attachOverlayContainer(overlayRef, overlayRefWrapper);
-    overlayComponent.{{ entityNameCamelCase }}Id = options.{{ entityNameCamelCase }}Id;
-    return overlayRefWrapper.afterClosed();
-  }
-
-  public attachOverlayContainer(overlayRef, overlayRefWrapper) {
-    const injectionTokens = new WeakMap();
-    injectionTokens.set(OverlayRefWrapper, overlayRefWrapper);
-    const injector = new PortalInjector(this._injector, injectionTokens);
-    const overlayPortal = new ComponentPortal({{ namePascalCase }}Component, null, injector);
-    const overlayPortalRef: ComponentRef<{{ namePascalCase }}Component> = overlayRef.attach(overlayPortal);
-    return overlayPortalRef.instance;
+  ) {
+    super(injector, overlayRefProvider, {{ namePascalCase }}Component);
   }
 }

@@ -12,6 +12,8 @@ dotnet new classlib -f netcoreapp2.1
 
 dotnet add package FluentValidation.AspNetCore -v 7.6.103
 
+dotnet add package BenchmarkDotNet -Version 0.11.0
+
 dotnet add package Microsoft.AspNetCore.All -v 2.1.1
 
 dotnet add package Microsoft.AspNetCore.SignalR -v 1.0.1
