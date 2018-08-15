@@ -1,12 +1,10 @@
-using System;
+using FluentValidation;
+using MediatR;
+using Quinntyne.Schematics.Infrastructure.Interfaces;
+using Quinntyne.Schematics.Infrastructure.Services;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using CommandLine;
-using Quinntyne.Schematics.Infrastructure.Interfaces;
-using Quinntyne.Schematics.Infrastructure.Services;
-using MediatR;
-using FluentValidation;
 
 namespace Quinntyne.Schematics.CLI.Features.Angular
 {
@@ -21,7 +19,6 @@ namespace Quinntyne.Schematics.CLI.Features.Angular
                 Namespace = options.Namespace;
                 RootNamespace = options.RootNamespace;
             }
-
 
             public dynamic Settings { get; set; }
         }

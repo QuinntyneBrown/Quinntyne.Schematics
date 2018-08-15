@@ -6,8 +6,8 @@ import { {{ namePascalCase }}Component } from "./{{ nameSnakeCase }}.component";
 @Injectable()
 export class {{ namePascalCase }} extends BaseOverlayService<{{ namePascalCase }}Component> {
   constructor(
-    public _injector: Injector,
-    public _overlayRefProvider: OverlayRefProvider
+    public injector: Injector,
+    public overlayRefProvider: OverlayRefProvider
   ) {
     super(injector, overlayRefProvider, {{ namePascalCase }}Component);
   }

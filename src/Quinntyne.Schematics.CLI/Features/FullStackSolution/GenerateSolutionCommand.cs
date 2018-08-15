@@ -1,16 +1,14 @@
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+using FluentValidation;
+using MediatR;
+using Newtonsoft.Json;
 using Quinntyne.Schematics.Infrastructure.Interfaces;
 using Quinntyne.Schematics.Infrastructure.Services;
-using MediatR;
-using FluentValidation;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
+using System.Threading.Tasks;
 using static System.Diagnostics.ProcessWindowStyle;
 using static System.Environment;
-using System;
-using System.Linq;
-using Newtonsoft.Json;
 
 namespace Quinntyne.Schematics.CLI.Features.FullStackSolution
 {
