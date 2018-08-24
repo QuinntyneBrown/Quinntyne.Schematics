@@ -4,11 +4,13 @@ namespace {{ namespace }}
 {
     public class {{ namePascalCase }}: DomainEvent
     {
-        public {{ namePascalCase }}(string name)
+        public {{ namePascalCase }}(Guid {{ nameCamelCase }}Id, string name)
         {
-             Name = name;
+            {{ namePascalCase }}Id = {{ nameCamelCase }}Id;
+            Name = name;
         }
 
+		public Guid {{ namePascalCase }}Id { get; set; }
         public string Name { get; set; }
     }
 }

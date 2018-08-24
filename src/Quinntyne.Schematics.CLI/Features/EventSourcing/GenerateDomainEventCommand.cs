@@ -62,6 +62,7 @@ namespace Quinntyne.Schematics.CLI.Features.EventSourcing
                 var entityNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity);
                 var entityNameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity);
                 var namePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Name);
+                var nameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Name);
                 var entityNamePascalCasePlural = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity, true);
 
                 var template = request.Name.Contains("Created") || request.Name.Contains("NameChanged")
@@ -75,6 +76,7 @@ namespace Quinntyne.Schematics.CLI.Features.EventSourcing
                     { "{{ namespace }}", request.Namespace },
                     { "{{ rootNamespace }}", request.RootNamespace },
                     { "{{ namePascalCase }}", namePascalCase },
+                    { "{{ nameCamelCase }}", nameCamelCase },
                     { "{{ entityNamePascalCasePlural }}", entityNamePascalCasePlural }
                 };
 
