@@ -20,6 +20,7 @@
     <None Remove="Features\Angular\GenerateOverlayServiceCommand.txt" />
     <None Remove="Features\Angular\GenerateServiceCommand.txt" />
     <None Remove="Features\Angular\GenerateValidatorCommand.txt" />
+    <None Remove="Features\CliSolution\GenerateCliSolutionCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateAppSettingsCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateClientCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateCreateCommand.txt" />
@@ -274,6 +275,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Features\Angular\GenerateNgScenarioCommand.txt" />
     <EmbeddedResource Include="Features\Angular\GenerateValidatorCommand.txt" />
+    <EmbeddedResource Include="Features\CliSolution\GenerateCliSolutionCommand.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\Core\UserCreated.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\DigitalAssets\DigitalAssetCreated.txt" />
   </ItemGroup>

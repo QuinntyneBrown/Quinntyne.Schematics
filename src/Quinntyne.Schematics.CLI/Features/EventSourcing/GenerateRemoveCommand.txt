@@ -3,6 +3,7 @@ using {{ rootNamespace }}.Core.Models;
 using FluentValidation;
 using MediatR;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Threading;
 
@@ -31,7 +32,7 @@ namespace {{ namespace }}
 
             public Task Handle(Request request, CancellationToken cancellationToken)
             {
-                var {{ entityNameCamelCase }} = _eventStore.Query<{{ entityNamePascalCase }}>(request.{{ entityNamePascalCase }}Id);
+				var {{ entityNameCamelCase }} = _eventStore.Query<{{ entityNamePascalCase }}>().Single(x => x.{{ entityNamePascalCase }}Id == request.{{ entityNamePascalCase }}Id);
 
                 {{ entityNameCamelCase }}.Remove();
                 

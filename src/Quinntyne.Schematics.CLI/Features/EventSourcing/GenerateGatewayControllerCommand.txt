@@ -1,11 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using {{ rootNamespace }}.Clients;
+using AzureServiceFabricPOC.ServiceFabric.SPA.Clients;
 
 namespace {{ namespace }}
 {
-    [Authorize]
     [ApiController]
     [Route("api/{{ entityNameLowerCasePlural }}")]
     public class {{ entityNamePascalCase }}Controller
@@ -15,19 +14,19 @@ namespace {{ namespace }}
         public {{ entityNamePascalCase }}Controller({{ entityNamePascalCasePlural }}Client client) => _client = client;
 
         [HttpPost]
-        public async Task<ActionResult<dynamic>> Save(dynamic {{ entityNameCamelCase }})
-            => await _client.Save({{ entityNameCamelCase }});
+        public async Task<ActionResult<dynamic>> Save(dynamic request, [FromHeader(Name = "Authorization")]string oauth2Header)
+            => await _client.Save(request, oauth2Header);
 
-        [HttpDelete("{{{ entityNameCamelCase }}Id}")]
-        public async Task Remove(int {{ entityNameCamelCase }}Id)
-            => await _client.Remove({{ entityNameCamelCase }}Id);
+        [HttpDelete("{{{ entityNameCamelCase }}Id}/{concurrencyVersion}")]
+        public async Task Remove(int {{ entityNameCamelCase }}Id, int concurrencyVersion, [FromHeader(Name = "Authorization")]string oauth2Header)
+            => await _client.Remove({{ entityNameCamelCase }}Id, concurrencyVersion, oauth2Header);
 
         [HttpGet("{{{ entityNameCamelCase }}Id}")]
-        public async Task<ActionResult<dynamic>> GetById([FromRoute]int {{ entityNameCamelCase }}Id)
-            => await _client.GetById({{ entityNameCamelCase }}Id);
+        public async Task<ActionResult<dynamic>> GetById([FromRoute]int {{ entityNameCamelCase }}Id, [FromHeader(Name = "Authorization")]string oauth2Header)
+            => await _client.GetById({{ entityNameCamelCase }}Id, oauth2Header);
 
         [HttpGet]
-        public async Task<ActionResult<dynamic>> Get()
-            => await _client.Get();
+        public async Task<ActionResult<dynamic>> Get([FromHeader(Name = "Authorization")]string oauth2Header)
+            => await _client.Get(oauth2Header);
     }
 }

@@ -14,6 +14,7 @@ using Quinntyne.Schematics.CLI.Features.AngularComponents;
 using AutoMapper;
 using Quinntyne.Schematics.Infrastructure.Services;
 using Quinntyne.Schematics.CLI.Features.FullStackSolution;
+using Quinntyne.Schematics.CLI.Features.CliSolution;
 
 namespace Quinntyne.Schematics.CLI
 {
@@ -124,6 +125,7 @@ namespace Quinntyne.Schematics.CLI
             RegisterAngularCommands.Register(dictionary);
             RegisterAngularComponentCommands.Register(dictionary);
             RegisterFullStackSolutionCommands.Register(dictionary);
+            RegisterCliSolutionCommands.Register(dictionary);
             return dictionary;
         }
     }

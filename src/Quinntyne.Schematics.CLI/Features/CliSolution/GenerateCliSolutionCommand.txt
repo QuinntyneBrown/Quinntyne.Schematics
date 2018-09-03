@@ -1,0 +1,127 @@
+npm install rimraf -g
+
+mkdir src test
+
+cd src
+
+mkdir {{ rootNamespace }}.Core {{ rootNamespace }}.CLI 
+
+cd src\{{ rootNamespace }}.Core
+
+dotnet new classlib -f netcoreapp2.1
+
+dotnet add package FluentValidation -v 7.5.0
+
+dotnet add package Humanizer.Core -v 2.2.0
+
+dotnet add package MediatR -v 4.0.1
+
+dotnet add package Microsoft.AspNetCore.All -v 2.1.1
+
+dotnet add package Newtonsoft.Json -v 11.0.2
+
+dotnet add package Microsoft.Extensions.DependencyInjection -v 2.1.1
+
+dotnet add package Microsoft.Extensions.Logging.Console -v 2.1.1
+
+dotnet add package Microsoft.AspNetCore.Hosting -v 2.1.1
+
+dotnet add package Microsoft.Extensions.FileProviders.Physical -v 2.1.1
+
+dotnet add package Microsoft.Extensions.PlatformAbstractions -v 1.1.0
+
+mkdir Behaviours
+
+mkdir Enums
+
+mkdir Exceptions
+
+mkdir Interfaces
+
+mkdir Services
+
+mkdir Extensions
+
+rimraf Class1.cs
+
+cd src\{{ rootNamespace }}.CLI
+
+dotnet new console -f netcoreapp2.1
+
+rimraf Class1.cs
+
+dotnet add package CommandLineParser -v 2.2.1
+
+dotnet add package FluentValidation -v 7.5.0
+
+dotnet add package MediatR -v 4.0.1
+
+dotnet add package Microsoft.AspNetCore.All -v 2.1.1
+
+dotnet add package MediatR.Extensions.Microsoft.DependencyInjection -v 4.0.0
+
+dotnet add package Microsoft.Extensions.DependencyInjection -v 2.1.1
+
+dotnet add package Microsoft.Extensions.Logging.Console -v 2.1.1
+
+dotnet add package Microsoft.AspNetCore.Hosting -v 2.1.1
+
+dotnet add package Microsoft.Extensions.FileProviders.Physical -v 2.1.1
+
+dotnet add package Microsoft.Extensions.PlatformAbstractions -v 1.1.0
+
+mkdir Features
+
+mkdir ProcessManagers
+
+dotnet add reference ..\{{ rootNamespace }}.Core\{{ rootNamespace }}.Core.csproj
+
+cd test
+
+mkdir IntegrationTests UnitTests
+
+cd test\IntegrationTests
+
+dotnet new xunit
+
+mkdir Features
+
+dotnet add package Microsoft.EntityFrameworkCore.InMemory -v 2.1.1
+
+dotnet add package Microsoft.AspNetCore.TestHost -v 2.1.1
+
+dotnet add package Microsoft.AspNetCore.All -v 2.1.1
+
+dotnet add package Microsoft.AspNetCore.SignalR.Client -v 1.0.1
+
+rimraf UnitTest1.cs
+
+dotnet add reference ..\..\src\{{ rootNamespace }}.Core\{{ rootNamespace }}.Core.csproj
+
+dotnet add reference ..\..\src\{{ rootNamespace }}.CLI\{{ rootNamespace }}.CLI.csproj
+
+cd test\UnitTests
+
+dotnet new xunit
+
+mkdir Core
+
+mkdir DomainEvents
+
+dotnet add package MediatR -v 4.1.0
+
+dotnet add package Moq -v 4.8.1
+
+rimraf UnitTest1.cs
+
+dotnet add reference ..\..\src\{{ rootNamespace }}.Core\{{ rootNamespace }}.Core.csproj
+
+dotnet add reference ..\..\src\{{ rootNamespace }}.CLI\{{ rootNamespace }}.CLI.csproj
+
+cd {{ currentDirectory }}
+
+dotnet new sln -n {{ rootNamespace }}
+
+dotnet sln add .\src\{{ rootNamespace }}.Core\{{ rootNamespace }}.Core.csproj .\src\{{ rootNamespace }}.CLI\{{ rootNamespace }}.CLI.csproj .\test\IntegrationTests\IntegrationTests.csproj .\test\UnitTests\UnitTests.csproj
+
+start {{ rootNamespace }}.sln

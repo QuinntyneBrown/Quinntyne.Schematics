@@ -2,7 +2,9 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Threading.Tasks;
-using {{ rootNamespace }}.Infrastructure.Extensions;
+using AzureServiceFabricPOC.Core.Extensions;
+using AzureServiceFabricPOC.ServiceFabric.SPA.Common;
+using System.Net.Http.Headers;
 
 namespace {{ namespace }}
 {
@@ -12,28 +14,26 @@ namespace {{ namespace }}
             :base(client,logger)
         { }
 
-        public async Task<dynamic> Get()
+        public async Task<dynamic> Get(string oauth2Header)
         {
-			return await _client.GetAsync<dynamic>("api/{{ entityNameLowerCasePlural }}");                
+			return await _client.GetAsync<dynamic>("", oauth2Header);                
         }
 
-        public async Task<dynamic> GetById(int {{ entityNameCamelCase }}Id)
+        public async Task<dynamic> GetById(int {{ entityNameCamelCase }}Id, string oauth2Header)
         {
-			return await _client.GetAsync<dynamic>($"api/{{ entityNameLowerCasePlural }}/{{{ entityNameCamelCase }}Id}");
+			return await _client.GetAsync<dynamic>($"{{{ entityNameCamelCase }}Id}", oauth2Header);
         }
 
-        public async Task<dynamic> Save(dynamic {{ entityNameCamelCase }})
+        public async Task<dynamic> Save(dynamic request, string oauth2Header)
         {
-            var content = new StringContent(JsonConvert.SerializeObject(new {
-                {{ entityNamePascalCase }} = {{ entityNameCamelCase }}
-            }));
+            var content = new StringContent(JsonConvert.SerializeObject(request));
 
-            return await _client.PostAsync<dynamic>("api/{{ entityNameLowerCasePlural }}",content);
+            return await _client.PostAsAsync<dynamic>("", content, oauth2Header);
         }
 
-        public async Task<dynamic> Remove(int {{ entityNameCamelCase }}Id)
+        public async Task<dynamic> Remove(int {{ entityNameCamelCase }}Id, int concurrencyVersion, string oauth2Header)
         {
-			return await _client.DeleteAsync<dynamic>($"api/{{ entityNameLowerCasePlural }}/{{{ entityNameCamelCase }}Id}");
+			return await _client.DeleteAsync<dynamic>($"{{{ entityNameCamelCase }}Id}/{concurrencyVersion}", oauth2Header);
         }
     }
 }
