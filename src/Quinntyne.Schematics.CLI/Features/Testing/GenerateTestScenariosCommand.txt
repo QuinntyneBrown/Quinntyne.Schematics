@@ -17,7 +17,7 @@ namespace {{ namespace }}
         {
             using (var server = CreateServer())
             {
-                IAppDbContext context = server.Host.Services.GetService(typeof(IAppDbContext)) as IAppDbContext;
+                IEventStore eventStore = server.Host.Services.GetService(typeof(IEventStore)) as IEventStore;
 
                 var response = await server.CreateClient()
                     .PostAsAsync<Create{{ entityNamePascalCase }}Command.Request, Create{{ entityNamePascalCase }}Command.Response>(Post.{{ entityNamePascalCasePlural }}, new Create{{ entityNamePascalCase }}Command.Request() {
@@ -27,9 +27,7 @@ namespace {{ namespace }}
                         }
                     });
      
-	            //var entity = context.{{ entityNamePascalCasePlural }}.First();
-
-                //Assert.Equal("Name", entity.Name);
+                Assert.True(response.{{ entityNamePascalCase }}Id != default(Guid));
             }
         }
 

@@ -4,35 +4,39 @@ using System;
 
 namespace {{ namespace }}
 {
-    public class {{ entityNamePascalCase }}: AggregateRoot
+    public class {{ entityNamePascalCase }}: Entity
     {
         public {{ entityNamePascalCase }}(string name)
             => Apply(new {{ entityNamePascalCase }}Created(name,{{ entityNamePascalCase }}Id));
 
         public Guid {{ entityNamePascalCase }}Id { get; set; } = Guid.NewGuid();          
 		public string Name { get; set; }        
-		public bool IsDeleted { get; set; }
+		public {{ entityNamePascalCase }}Status Status { get; set; }
+		public int Version { get; set; }
 
         protected override void EnsureValidState()
         {
             
         }
 
-        protected override void When(DomainEvent @event)
+        protected override void When(object @event)
         {
             switch (@event)
             {
                 case {{ entityNamePascalCase }}Created {{ entityNameCamelCase }}Created:
                     Name = {{ entityNameCamelCase }}Created.Name;
 					{{ entityNamePascalCase }}Id = {{ entityNameCamelCase }}Created.{{ entityNamePascalCase }}Id;
+					Status = {{ entityNamePascalCase }}Status.Active;
                     break;
 
                 case {{ entityNamePascalCase }}NameChanged {{ entityNameCamelCase }}NameChanged:
                     Name = {{ entityNameCamelCase }}NameChanged.Name;
+					Version++;
                     break;
 
                 case {{ entityNamePascalCase }}Removed {{ entityNameCamelCase }}Removed:
-                    IsDeleted = true;
+                    Status = {{ entityNamePascalCase }}Status.InActive;
+					Version++;
                     break;
             }
         }
@@ -42,5 +46,11 @@ namespace {{ namespace }}
 
         public void Remove()
             => Apply(new {{ entityNamePascalCase }}Removed());
+    }
+
+    public enum {{ entityNamePascalCase }}Status
+    {
+        Active,
+        InActive
     }
 }

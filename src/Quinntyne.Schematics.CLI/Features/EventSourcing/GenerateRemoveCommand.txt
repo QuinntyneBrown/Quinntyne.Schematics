@@ -32,7 +32,7 @@ namespace {{ namespace }}
 
             public Task Handle(Request request, CancellationToken cancellationToken)
             {
-				var {{ entityNameCamelCase }} = _eventStore.Query<{{ entityNamePascalCase }}>().Single(x => x.{{ entityNamePascalCase }}Id == request.{{ entityNamePascalCase }}Id);
+                var {{ entityNameCamelCase }} = _eventStore.Load<{{ entityNamePascalCase }}>(request.{{ entityNamePascalCase }}Id);
 
                 {{ entityNameCamelCase }}.Remove();
                 
