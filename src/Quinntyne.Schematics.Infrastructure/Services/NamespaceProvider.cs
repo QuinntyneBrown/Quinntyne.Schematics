@@ -89,6 +89,20 @@ namespace Quinntyne.Schematics.Infrastructure.Services
             return (projectFiles.FirstOrDefault() != null) ? projectFiles.First() : GetProjectPath(path, depth);
         }
 
+        public string GetWebpackConfigPath(string path, int depth = 0)
+        {
+            var directories = path.Split(DirectorySeparatorChar);
+
+            if (directories.Length <= depth)
+                return null;
+
+            var newDirectories = directories.Take(directories.Length - depth);
+            var computedPath = Join(DirectorySeparatorChar.ToString(), newDirectories);
+            var projectFiles = GetFiles(computedPath, "*.config.js");
+            depth = depth + 1;
+            return (projectFiles.FirstOrDefault() != null) ? projectFiles.First() : GetProjectPath(path, depth);
+        }
+
         public string GetSolutionPath(string path, int depth = 0)
         {
             var directories = path.Split(DirectorySeparatorChar);

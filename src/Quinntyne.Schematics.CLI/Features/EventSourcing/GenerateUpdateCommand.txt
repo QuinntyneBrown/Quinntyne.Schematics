@@ -35,7 +35,7 @@ namespace {{ namespace }}
 
             public Task<Response> Handle(Request request, CancellationToken cancellationToken)
             {                
-				var {{ entityNameCamelCase }} = _eventStore.Query<{{ entityNamePascalCase }}>().Single(x => x.{{ entityNamePascalCase }}Id == request.{{ entityNamePascalCase }}.{{ entityNamePascalCase }}Id);
+				var {{ entityNameCamelCase }} = _eventStore.Load<{{ entityNamePascalCase }}>(request.{{ entityNamePascalCase }}.{{ entityNamePascalCase }}Id);
 
                 {{ entityNameCamelCase }}.ChangeName(request.{{ entityNamePascalCase }}.Name);
 
