@@ -64,7 +64,7 @@ namespace Quinntyne.Schematics.CLI.Features.CustomElements
 
                 var tokens = new Dictionary<string, string>
                 {
-                    { "{{ nameSnakeCase }}", nameSnakeCase },                    
+                    {"{{ nameSnakeCase }}", nameSnakeCase },                    
                     {"{{ namePascalCase }}",namePascalCase },
                     {"{{ nameLowerCase }}",nameLowerCase }
 

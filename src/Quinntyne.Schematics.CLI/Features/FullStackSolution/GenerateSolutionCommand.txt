@@ -8,7 +8,7 @@ mkdir {{ rootNamespace }}.Core {{ rootNamespace }}.Infrastructure {{ rootNamespa
 
 cd src\{{ rootNamespace }}.Core
 
-dotnet new classlib -f netcoreapp2.1
+dotnet new classlib -f netcoreapp2.2
 
 dotnet add package FluentValidation.AspNetCore -v 7.6.103
 
@@ -44,7 +44,7 @@ rimraf Class1.cs
 
 cd src\{{ rootNamespace }}.Infrastructure
 
-dotnet new classlib -f netcoreapp2.1
+dotnet new classlib -f netcoreapp2.2
 
 rimraf Class1.cs
 

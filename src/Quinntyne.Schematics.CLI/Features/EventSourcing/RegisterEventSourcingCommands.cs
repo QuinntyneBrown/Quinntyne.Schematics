@@ -8,7 +8,7 @@ namespace Quinntyne.Schematics.CLI.Features.EventSourcing
     {
         public static void Register(Dictionary<string, Func<IOptions, IRequest>> dictionary)
         {
-            dictionary.Add("api-model", new Func<IOptions, IRequest>((options) => new GenerateApiModelCommand.Request(options)));
+            dictionary.Add("dto", new Func<IOptions, IRequest>((options) => new GenerateApiModelCommand.Request(options)));
             dictionary.Add("model", new Func<IOptions, IRequest>((options) => new GenerateModelCommand.Request(options)));
             dictionary.Add("create", new Func<IOptions, IRequest>((options) => new GenerateCreateCommand.Request(options)));
             dictionary.Add("update", new Func<IOptions, IRequest>((options) => new GenerateUpdateCommand.Request(options)));

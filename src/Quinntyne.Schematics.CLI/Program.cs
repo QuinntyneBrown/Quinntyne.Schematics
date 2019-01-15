@@ -16,6 +16,7 @@ using Quinntyne.Schematics.Infrastructure.Services;
 using Quinntyne.Schematics.CLI.Features.FullStackSolution;
 using Quinntyne.Schematics.CLI.Features.CliSolution;
 using Quinntyne.Schematics.CLI.Features.CustomElements;
+using Quinntyne.Schematics.CLI.Features.BasicApi;
 
 namespace Quinntyne.Schematics.CLI
 {
@@ -120,6 +121,7 @@ namespace Quinntyne.Schematics.CLI
         {
             var dictionary = new Dictionary<string, Func<IOptions, IRequest>>();
 
+            RegisterBasicApiCommands.Register(dictionary);
             RegisterCodeGeneratorCommands.Register(dictionary);
             RegisterEventSourcingCommands.Register(dictionary);
             RegisterTestingCommands.Register(dictionary);
