@@ -1,21 +1,19 @@
-using System;
+using FluentValidation;
+using MediatR;
+using Quinntyne.Schematics.Infrastructure.Interfaces;
+using Quinntyne.Schematics.Infrastructure.Services;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using CommandLine;
-using Quinntyne.Schematics.Infrastructure.Interfaces;
-using Quinntyne.Schematics.Infrastructure.Services;
-using MediatR;
-using FluentValidation;
 
-namespace Quinntyne.Schematics.CLI.Features.EventSourcing
+namespace Quinntyne.Schematics.CLI.Features.BasicApi
 {
-    public class GenerateControllerCommand
+    public class GenerateUpsertCommand
     {
-        public class Request: Options, IRequest, ICodeGeneratorCommandRequest
+        public class Request : Options, IRequest, ICodeGeneratorCommandRequest
         {
             public Request(IOptions options)
-            {                
+            {
                 Entity = options.Entity;
                 Directory = options.Directory;
                 Namespace = options.Namespace;
@@ -43,7 +41,7 @@ namespace Quinntyne.Schematics.CLI.Features.EventSourcing
             public Handler(
                 IFileWriter fileWriter,
                 INamingConventionConverter namingConventionConverter,
-                ITemplateLocator templateLocator, 
+                ITemplateLocator templateLocator,
                 ITemplateProcessor templateProcessor
                 )
             {
@@ -54,28 +52,28 @@ namespace Quinntyne.Schematics.CLI.Features.EventSourcing
             }
 
             public Task Handle(Request request, CancellationToken cancellationToken)
-            {                
+            {
                 var entityNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity);
                 var entityNameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity);
                 var entityNamePascalCasePlural = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity, true);
                 var entityNameCamelCasePlural = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity, true);
 
-                var template = _templateLocator.Get("GenerateControllerCommand");
+                var template = _templateLocator.Get("GenerateUpsertCommand");
 
                 var tokens = new Dictionary<string, string>
                 {
                     { "{{ entityNamePascalCase }}", entityNamePascalCase },
                     { "{{ entityNameCamelCase }}", entityNameCamelCase },
-                    { "{{ namespace }}", request.Namespace },
-                    { "{{ rootNamespace }}", request.RootNamespace },
                     { "{{ entityNamePascalCasePlural }}", entityNamePascalCasePlural },
                     { "{{ entityNameCamelCasePlural }}", entityNameCamelCasePlural },
+                    { "{{ namespace }}", request.Namespace },
+                    { "{{ rootNamespace }}", request.RootNamespace }
                 };
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
-                
-                _fileWriter.WriteAllLines($"{request.Directory}//{entityNamePascalCasePlural}Controller.cs", result);
-               
+
+                _fileWriter.WriteAllLines($"{request.Directory}//Upsert{entityNamePascalCase}Command.cs", result);
+
                 return Task.CompletedTask;
             }
         }

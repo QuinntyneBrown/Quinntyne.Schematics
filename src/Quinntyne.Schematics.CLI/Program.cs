@@ -4,7 +4,6 @@ using MediatR;
 using System.Collections.Generic;
 using System.Linq;
 using Quinntyne.Schematics.Extensions;
-using Quinntyne.Schematics.CLI.Features.EventSourcing;
 using Quinntyne.Schematics.CLI.Features.CodeGenerator;
 using Microsoft.Extensions.Logging;
 using CommandLine;
@@ -123,7 +122,6 @@ namespace Quinntyne.Schematics.CLI
 
             RegisterBasicApiCommands.Register(dictionary);
             RegisterCodeGeneratorCommands.Register(dictionary);
-            RegisterEventSourcingCommands.Register(dictionary);
             RegisterTestingCommands.Register(dictionary);
             RegisterAngularCommands.Register(dictionary);
             RegisterAngularComponentCommands.Register(dictionary);

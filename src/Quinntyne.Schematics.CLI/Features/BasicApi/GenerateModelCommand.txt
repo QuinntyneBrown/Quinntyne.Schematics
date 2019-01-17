@@ -1,0 +1,12 @@
+using {{ rootNamespace }}.Core.Common;
+using {{ rootNamespace }}.Core.DomainEvents;
+using System;
+
+namespace {{ namespace }}
+{
+    public class {{ entityNamePascalCase }}
+    {
+        public Guid {{ entityNamePascalCase }}Id { get; set; }
+		public string Name { get; set; }
+    }
+}

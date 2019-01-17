@@ -6,9 +6,9 @@ using Quinntyne.Schematics.Infrastructure.Services;
 using MediatR;
 using FluentValidation;
 
-namespace Quinntyne.Schematics.CLI.Features.EventSourcing
+namespace Quinntyne.Schematics.CLI.Features.BasicApi
 {
-    public class GenerateSeedConfigurationCommand
+    public class GenerateGetByIdQuery
     {
         public class Request: Options, IRequest, ICodeGeneratorCommandRequest
         {
@@ -55,22 +55,20 @@ namespace Quinntyne.Schematics.CLI.Features.EventSourcing
             {                
                 var entityNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity);
                 var entityNameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity);
-                var entityNamePascalCasePlural = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity, true);
 
-                var template = _templateLocator.Get("GenerateSeedConfigurationCommand");
+                var template = _templateLocator.Get("GenerateGetByIdQuery");
 
                 var tokens = new Dictionary<string, string>
                 {
                     { "{{ entityNamePascalCase }}", entityNamePascalCase },
                     { "{{ entityNameCamelCase }}", entityNameCamelCase },
                     { "{{ namespace }}", request.Namespace },
-                    { "{{ rootNamespace }}", request.RootNamespace },
-                    { "{{ entityNamePascalCasePlural }}", entityNamePascalCasePlural }
+                    { "{{ rootNamespace }}", request.RootNamespace }
                 };
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
                 
-                _fileWriter.WriteAllLines($"{request.Directory}//{entityNamePascalCase}Configuration.cs", result);
+                _fileWriter.WriteAllLines($"{request.Directory}//GenerateGetByIdQuery.cs", result);
                
                 return Task.CompletedTask;
             }

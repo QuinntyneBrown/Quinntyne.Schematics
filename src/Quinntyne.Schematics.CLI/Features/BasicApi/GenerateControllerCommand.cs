@@ -6,9 +6,9 @@ using Quinntyne.Schematics.Infrastructure.Services;
 using MediatR;
 using FluentValidation;
 
-namespace Quinntyne.Schematics.CLI.Features.EventSourcing
+namespace Quinntyne.Schematics.CLI.Features.BasicApi
 {
-    public class GenerateSavedEventCommand
+    public class GenerateControllerCommand
     {
         public class Request: Options, IRequest, ICodeGeneratorCommandRequest
         {
@@ -56,7 +56,7 @@ namespace Quinntyne.Schematics.CLI.Features.EventSourcing
                 var entityNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity);
                 var entityNameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity);
 
-                var template = _templateLocator.Get("GenerateSavedEventCommand");
+                var template = _templateLocator.Get("GenerateControllerCommand");
 
                 var tokens = new Dictionary<string, string>
                 {
@@ -68,7 +68,7 @@ namespace Quinntyne.Schematics.CLI.Features.EventSourcing
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
                 
-                _fileWriter.WriteAllLines($"{request.Directory}//{entityNamePascalCase}SavedEvent.cs", result);
+                _fileWriter.WriteAllLines($"{request.Directory}//GenerateControllerCommand.cs", result);
                
                 return Task.CompletedTask;
             }

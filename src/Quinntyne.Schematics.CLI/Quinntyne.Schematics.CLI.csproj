@@ -20,26 +20,14 @@
     <None Remove="Features\Angular\GenerateOverlayServiceCommand.txt" />
     <None Remove="Features\Angular\GenerateServiceCommand.txt" />
     <None Remove="Features\Angular\GenerateValidatorCommand.txt" />
+    <None Remove="Features\BasicApi\GenerateControllerCommand.txt" />
+    <None Remove="Features\BasicApi\GenerateGetByIdQuery.txt" />
+    <None Remove="Features\BasicApi\GenerateGetQueryCommand.txt" />
+    <None Remove="Features\BasicApi\GenerateModelCommand.txt" />
+    <None Remove="Features\BasicApi\GenerateRemoveCommand.txt" />
+    <None Remove="Features\BasicApi\GenerateUpsertCommand.txt" />
     <None Remove="Features\CliSolution\GenerateCliSolutionCommand.txt" />
     <None Remove="Features\CustomElements\GenerateCustomElementCommand.txt" />
-    <None Remove="Features\EventSourcing\GenerateAppSettingsCommand.txt" />
-    <None Remove="Features\EventSourcing\GenerateClientCommand.txt" />
-    <None Remove="Features\EventSourcing\GenerateDomainEventCommand.txt" />
-    <None Remove="Features\EventSourcing\GenerateDomainEventHandlerCommand.txt" />
-    <None Remove="Features\EventSourcing\GenerateEventCommand.txt" />
-    <None Remove="Features\EventSourcing\GenerateGatewayControllerCommand.txt" />
-    <None Remove="Features\EventSourcing\GenerateIntegrationEventCommand.txt" />
-    <None Remove="Features\EventSourcing\GenerateProcessManagerCommand.txt" />
-    <None Remove="Features\EventSourcing\GenerateProgramCommand.txt" />
-    <None Remove="Features\EventSourcing\GenerateRemovedEventCommand.txt" />
-    <None Remove="Features\EventSourcing\GenerateRootProgramCommand.txt" />
-    <None Remove="Features\EventSourcing\GenerateSagaCommand.txt" />
-    <None Remove="Features\EventSourcing\GenerateSavedEventCommand.txt" />
-    <None Remove="Features\EventSourcing\GenerateSeedConfigurationCommand.txt" />
-    <None Remove="Features\EventSourcing\GenerateStartUpCommand.txt" />
-    <None Remove="Features\EventSourcing\GenerateUnitTestsCommand.txt" />
-    <None Remove="Features\EventSourcing\GenerateUpdateCommand.txt" />
-    <None Remove="Features\EventSourcing\Models\GenerateBaseModel.txt" />
     <None Remove="Features\FullStackSolution\Classes\API\appSettings.txt" />
     <None Remove="Features\FullStackSolution\Classes\API\AuthenticateCommand.txt" />
     <None Remove="Features\FullStackSolution\Classes\API\Cards\CardDto.txt" />
@@ -257,23 +245,18 @@
     <None Remove="Features\Testing\GenerateTestScenariosCommand.txt" />
     <None Remove="Features\CodeGenerator\GenerateApiModelCommand.txt" />
     <None Remove="Features\CodeGenerator\GenerateCodeGeneratorCommand.txt" />
-    <None Remove="Features\EventSourcing\GenerateApiModelCommand.txt" />
-    <None Remove="Features\EventSourcing\GenerateCommand.txt" />
-    <None Remove="Features\EventSourcing\GenerateControllerCommand.txt" />
-    <None Remove="Features\EventSourcing\GenerateFeatureCommand.txt" />
-    <None Remove="Features\EventSourcing\GenerateGetByIdQueryCommand.txt" />
-    <None Remove="Features\EventSourcing\GenerateGetQueryCommand.txt" />
-    <None Remove="Features\EventSourcing\GenerateModelCommand.txt" />
-    <None Remove="Features\EventSourcing\GenerateQueryCommand.txt" />
-    <None Remove="Features\EventSourcing\GenerateRemoveCommand.txt" />
-    <None Remove="Features\EventSourcing\GenerateSaveCommand.txt" />
-    <None Remove="Features\EventSourcing\GenerateTestsCommand.txt" />
     <None Remove="publish.cmd" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Features\Angular\GenerateNgScenarioCommand.txt" />
     <EmbeddedResource Include="Features\Angular\GenerateValidatorCommand.txt" />
+    <EmbeddedResource Include="Features\BasicApi\GenerateControllerCommand.txt" />
+    <EmbeddedResource Include="Features\BasicApi\GenerateGetByIdQuery.txt" />
+    <EmbeddedResource Include="Features\BasicApi\GenerateGetQueryCommand.txt" />
+    <EmbeddedResource Include="Features\BasicApi\GenerateModelCommand.txt" />
+    <EmbeddedResource Include="Features\BasicApi\GenerateRemoveCommand.txt" />
+    <EmbeddedResource Include="Features\BasicApi\GenerateUpsertCommand.txt" />
     <EmbeddedResource Include="Features\CliSolution\GenerateCliSolutionCommand.txt" />
     <EmbeddedResource Include="Features\CustomElements\GenerateCustomElementCommand.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\Core\UserCreated.txt" />
@@ -281,8 +264,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Features\EventSourcing\GenerateProcessManagerCommand.txt" />
-    <EmbeddedResource Include="Features\EventSourcing\GenerateUpdateCommand.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\API\appSettings.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\API\AuthenticateCommand.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\API\Cards\CardDto.txt" />
@@ -413,52 +394,6 @@
     <EmbeddedResource Include="Features\Angular\GenerateServiceCommand.txt" />
     <EmbeddedResource Include="Features\Angular\Modules\GenerateModuleCommand.txt">
       <DependentUpon>GenerateModuleCommand.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Features\EventSourcing\GenerateAppSettingsCommand.txt">
-      <DependentUpon>GenerateAppSettingsCommand.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Features\EventSourcing\GenerateClientCommand.txt">
-      <DependentUpon>GenerateClientCommand.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Features\EventSourcing\GenerateDomainEventCommand.txt">
-      <DependentUpon>GenerateDomainEventCommand.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Features\EventSourcing\GenerateDomainEventHandlerCommand.txt">
-      <DependentUpon>GenerateDomainEventHandlerCommand.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Features\EventSourcing\GenerateEventCommand.txt">
-      <DependentUpon>GenerateEventCommand.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Features\EventSourcing\GenerateGatewayControllerCommand.txt">
-      <DependentUpon>GenerateGatewayControllerCommand.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Features\EventSourcing\GenerateIntegrationEventCommand.txt">
-      <DependentUpon>GenerateIntegrationEventCommand.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Features\EventSourcing\GenerateProgramCommand.txt">
-      <DependentUpon>GenerateProgramCommand.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Features\EventSourcing\GenerateRemovedEventCommand.txt">
-      <DependentUpon>GenerateRemovedEventCommand.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Features\EventSourcing\GenerateRootProgramCommand.txt">
-      <DependentUpon>GenerateRootProgramCommand.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Features\EventSourcing\GenerateSagaCommand.txt" />
-    <EmbeddedResource Include="Features\EventSourcing\GenerateSavedEventCommand.txt">
-      <DependentUpon>GenerateSavedEventCommand.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Features\EventSourcing\GenerateSeedConfigurationCommand.txt">
-      <DependentUpon>GenerateSeedConfigurationCommand.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Features\EventSourcing\GenerateStartUpCommand.txt">
-      <DependentUpon>GenerateStartUpCommand.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Features\EventSourcing\GenerateUnitTestsCommand.txt">
-      <DependentUpon>GenerateUnitTestsCommand.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Features\EventSourcing\Models\GenerateBaseModel.txt">
-      <DependentUpon>GenerateBaseModel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Features\FullStackSolution\Classes\EventStore\StoredEvent.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\Infrastructure\BackgroundTaskQueue.txt" />
@@ -613,39 +548,6 @@
     <EmbeddedResource Include="Features\CodeGenerator\GenerateCodeGeneratorCommand.txt">
       <DependentUpon>GenerateCodeGeneratorCommand.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Features\EventSourcing\GenerateApiModelCommand.txt">
-      <DependentUpon>GenerateApiModelCommand.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Features\EventSourcing\GenerateCommand.txt">
-      <DependentUpon>GenerateCommand.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Features\EventSourcing\GenerateControllerCommand.txt">
-      <DependentUpon>GenerateControllerCommand.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Features\EventSourcing\GenerateFeatureCommand.txt">
-      <DependentUpon>GenerateFeatureCommand.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Features\EventSourcing\GenerateGetByIdQueryCommand.txt">
-      <DependentUpon>GenerateGetByIdQueryCommand.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Features\EventSourcing\GenerateGetQueryCommand.txt">
-      <DependentUpon>GenerateGetQueryCommand.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Features\EventSourcing\GenerateModelCommand.txt">
-      <DependentUpon>GenerateModelCommand.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Features\EventSourcing\GenerateQueryCommand.txt">
-      <DependentUpon>GenerateQueryCommand.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Features\EventSourcing\GenerateRemoveCommand.txt">
-      <DependentUpon>GenerateRemoveCommand.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Features\EventSourcing\GenerateSaveCommand.txt">
-      <DependentUpon>GenerateSaveCommand.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Features\EventSourcing\GenerateTestsCommand.txt">
-      <DependentUpon>GenerateTestsCommand.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
@@ -672,6 +574,7 @@
     <Folder Include="Features\FullStackSolution\Classes\Products\" />
     <Folder Include="Features\FullStackSolution\Classes\SPA\" />
     <Folder Include="Features\FullStackSolution\Files\Settings\" />
+    <Folder Include="ProcessManagers\" />
   </ItemGroup>
 
   <ItemGroup>

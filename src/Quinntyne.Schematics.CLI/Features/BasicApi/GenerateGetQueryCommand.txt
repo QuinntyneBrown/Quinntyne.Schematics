@@ -19,15 +19,15 @@ namespace {{ namespace }}
 
         public class Handler : IRequestHandler<Request, Response>
         {
-            private readonly IRepository _repository;
-            
-			public Handler(IRepository repository) => _repository = repository;
+            private readonly IAppDbContext _context;
 
-            public Task<Response> Handle(Request request, CancellationToken cancellationToken)
-                => Task.FromResult(new Response()
+            public Handler(IAppDbContext context) => _context = context;
+
+            public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
+                =>  new Response()
                 {
-                    {{ entityNamePascalCasePlural }} = _repository.Query<{{ entityNamePascalCase }}>().Select(x => {{ entityNamePascalCase }}Dto.From{{ entityNamePascalCase }}(x)).ToList()
-                });
+                    Customers = await _context.Customers.Select(x => CustomerDto.FromCustomer(x)).ToArrayAsync()
+                };
         }
     }
 }
