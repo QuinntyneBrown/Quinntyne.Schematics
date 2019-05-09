@@ -1,0 +1,42 @@
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Net;
+using System.Threading.Tasks;
+
+namespace {{ namespace }}
+{
+    [Authorize]
+    [ApiController]
+    [Route("api/{{ entityNameCamelCasePlural }}")]
+    public class {{ entityNamePascalCasePlural }}Controller
+    {
+        private readonly IMediator _meditator;
+
+        public {{ entityNamePascalCasePlural }}Controller(IMediator mediator) => _meditator = mediator;
+
+        [HttpGet]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(Get{{ entityNamePascalCasePlural }}Query.Response), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<Get{{ entityNamePascalCasePlural }}Query.Response>> Get()
+            => await _meditator.Send(new Get{{ entityNamePascalCasePlural }}Query.Request());
+
+        [HttpGet("{{{ entityNameCamelCase }}Id}")]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(Get{{ entityNamePascalCase }}ByIdQuery.Response), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<Get{{ entityNamePascalCase }}ByIdQuery.Response>> GetById([FromRoute]Get{{ entityNamePascalCase }}ByIdQuery.Request request)
+            => await _meditator.Send(request);
+
+        [HttpPost]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(Upsert{{ entityNamePascalCase }}Command.Response), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<Upsert{{ entityNamePascalCase }}Command.Response>> Upsert(Upsert{{ entityNamePascalCase }}Command.Request request)
+            => await _meditator.Send(request);
+
+        [HttpDelete("{bookId}")]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(Unit), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<Unit>> Remove([FromRoute]Remove{{ entityNamePascalCase }}Command.Request request)
+            => await _meditator.Send(request);
+    }
+}

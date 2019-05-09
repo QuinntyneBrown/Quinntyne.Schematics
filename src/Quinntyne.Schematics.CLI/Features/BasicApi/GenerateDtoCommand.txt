@@ -1,0 +1,21 @@
+using {{ rootNamespace }}.Core.Models;
+using System;
+
+namespace {{ namespace }}
+{
+    public class {{ entityNamePascalCase }}Dto
+    {        
+        public Guid {{ entityNamePascalCase }}Id { get; set; }
+        public string Name { get; set; }
+    }
+
+    public static class {{ entityNamePascalCase }}Extensions
+    {        
+        public static {{ entityNamePascalCase }}Dto ToDto(this {{ entityNamePascalCase }} {{ entityNameCamelCase }})
+            => new {{ entityNamePascalCase }}Dto
+            {
+                {{ entityNamePascalCase }}Id = {{ entityNameCamelCase }}.{{ entityNamePascalCase }}Id,
+                Name = {{ entityNameCamelCase }}.Name
+            };
+    }
+}

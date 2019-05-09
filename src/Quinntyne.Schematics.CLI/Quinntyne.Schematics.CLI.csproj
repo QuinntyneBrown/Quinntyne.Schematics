@@ -21,7 +21,8 @@
     <None Remove="Features\Angular\GenerateServiceCommand.txt" />
     <None Remove="Features\Angular\GenerateValidatorCommand.txt" />
     <None Remove="Features\BasicApi\GenerateControllerCommand.txt" />
-    <None Remove="Features\BasicApi\GenerateGetByIdQuery.txt" />
+    <None Remove="Features\BasicApi\GenerateDtoCommand.txt" />
+    <None Remove="Features\BasicApi\GenerateGetByIdQueryCommand.txt" />
     <None Remove="Features\BasicApi\GenerateGetQueryCommand.txt" />
     <None Remove="Features\BasicApi\GenerateModelCommand.txt" />
     <None Remove="Features\BasicApi\GenerateRemoveCommand.txt" />
@@ -252,7 +253,8 @@
     <EmbeddedResource Include="Features\Angular\GenerateNgScenarioCommand.txt" />
     <EmbeddedResource Include="Features\Angular\GenerateValidatorCommand.txt" />
     <EmbeddedResource Include="Features\BasicApi\GenerateControllerCommand.txt" />
-    <EmbeddedResource Include="Features\BasicApi\GenerateGetByIdQuery.txt" />
+    <EmbeddedResource Include="Features\BasicApi\GenerateDtoCommand.txt" />
+    <EmbeddedResource Include="Features\BasicApi\GenerateGetByIdQueryCommand.txt" />
     <EmbeddedResource Include="Features\BasicApi\GenerateGetQueryCommand.txt" />
     <EmbeddedResource Include="Features\BasicApi\GenerateModelCommand.txt" />
     <EmbeddedResource Include="Features\BasicApi\GenerateRemoveCommand.txt" />

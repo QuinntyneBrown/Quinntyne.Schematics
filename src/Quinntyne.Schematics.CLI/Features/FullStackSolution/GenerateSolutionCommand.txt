@@ -4,11 +4,11 @@ mkdir src test
 
 cd src
 
-mkdir {{ rootNamespace }}.Core {{ rootNamespace }}.Infrastructure {{ rootNamespace }}.API {{ rootNamespace }}.SPA
+mkdir {{ rootNamespace }}.Core {{ rootNamespace }}.Infrastructure {{ rootNamespace }}.Api {{ rootNamespace }}.SPA
 
 cd src\{{ rootNamespace }}.Core
 
-dotnet new classlib -f netcoreapp2.2
+dotnet new classlib -f netcoreapp3
 
 dotnet add package FluentValidation.AspNetCore -v 7.6.103
 
@@ -44,7 +44,7 @@ rimraf Class1.cs
 
 cd src\{{ rootNamespace }}.Infrastructure
 
-dotnet new classlib -f netcoreapp2.2
+dotnet new classlib -f netcoreapp3
 
 rimraf Class1.cs
 
@@ -58,9 +58,9 @@ mkdir Extensions
 
 dotnet add reference ..\{{ rootNamespace }}.Core\{{ rootNamespace }}.Core.csproj
 
-cd src\{{ rootNamespace }}.API
+cd src\{{ rootNamespace }}.Api
 
-dotnet new webapi
+dotnet new webApi
 
 dotnet add package FluentValidation.AspNetCore -v 7.6.103
 
@@ -84,7 +84,7 @@ rimraf Controllers
 
 mkdir Features
 
-cd src\{{ rootNamespace }}.API\Features
+cd src\{{ rootNamespace }}.Api\Features
 
 mkdir Notes
 
@@ -106,7 +106,7 @@ mkdir IntegrationTests UnitTests
 
 cd test\IntegrationTests
 
-dotnet new xunit
+dotnet new xunit -f netcoreapp3
 
 mkdir Features
 
@@ -124,13 +124,13 @@ dotnet add reference ..\..\src\{{ rootNamespace }}.Core\{{ rootNamespace }}.Core
 
 dotnet add reference ..\..\src\{{ rootNamespace }}.Infrastructure\{{ rootNamespace }}.Infrastructure.csproj
 
-dotnet add reference ..\..\src\{{ rootNamespace }}.API\{{ rootNamespace }}.API.csproj
+dotnet add reference ..\..\src\{{ rootNamespace }}.Api\{{ rootNamespace }}.Api.csproj
 
 cd test\UnitTests
 
-dotnet new xunit
+dotnet new xunit -f netcoreapp3
 
-mkdir API
+mkdir Api
 
 mkdir Core
 
@@ -144,12 +144,12 @@ dotnet add reference ..\..\src\{{ rootNamespace }}.Core\{{ rootNamespace }}.Core
 
 dotnet add reference ..\..\src\{{ rootNamespace }}.Infrastructure\{{ rootNamespace }}.Infrastructure.csproj
 
-dotnet add reference ..\..\src\{{ rootNamespace }}.API\{{ rootNamespace }}.API.csproj
+dotnet add reference ..\..\src\{{ rootNamespace }}.Api\{{ rootNamespace }}.Api.csproj
 
 cd {{ currentDirectory }}
 
 dotnet new sln -n {{ rootNamespace }}
 
-dotnet sln add .\src\{{ rootNamespace }}.Core\{{ rootNamespace }}.Core.csproj .\src\{{ rootNamespace }}.Infrastructure\{{ rootNamespace }}.Infrastructure.csproj .\src\{{ rootNamespace }}.API\{{ rootNamespace }}.API.csproj .\src\{{ rootNamespace }}.SPA\{{ rootNamespace }}.SPA.csproj .\test\IntegrationTests\IntegrationTests.csproj .\test\UnitTests\UnitTests.csproj
+dotnet sln add .\src\{{ rootNamespace }}.Core\{{ rootNamespace }}.Core.csproj .\src\{{ rootNamespace }}.Infrastructure\{{ rootNamespace }}.Infrastructure.csproj .\src\{{ rootNamespace }}.Api\{{ rootNamespace }}.Api.csproj .\src\{{ rootNamespace }}.SPA\{{ rootNamespace }}.SPA.csproj .\test\IntegrationTests\IntegrationTests.csproj .\test\UnitTests\UnitTests.csproj
 
 start {{ rootNamespace }}.sln

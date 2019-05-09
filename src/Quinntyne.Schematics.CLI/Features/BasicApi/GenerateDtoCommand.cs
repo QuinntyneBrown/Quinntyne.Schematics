@@ -8,12 +8,12 @@ using FluentValidation;
 
 namespace Quinntyne.Schematics.CLI.Features.BasicApi
 {
-    public class GenerateGetByIdQuery
+    public class GenerateDtoCommand
     {
-        public class Request: Options, IRequest, ICodeGeneratorCommandRequest
+        public class Request : Options, IRequest, ICodeGeneratorCommandRequest
         {
             public Request(IOptions options)
-            {                
+            {
                 Entity = options.Entity;
                 Directory = options.Directory;
                 Namespace = options.Namespace;
@@ -41,7 +41,7 @@ namespace Quinntyne.Schematics.CLI.Features.BasicApi
             public Handler(
                 IFileWriter fileWriter,
                 INamingConventionConverter namingConventionConverter,
-                ITemplateLocator templateLocator, 
+                ITemplateLocator templateLocator,
                 ITemplateProcessor templateProcessor
                 )
             {
@@ -52,11 +52,11 @@ namespace Quinntyne.Schematics.CLI.Features.BasicApi
             }
 
             public Task Handle(Request request, CancellationToken cancellationToken)
-            {                
+            {
                 var entityNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity);
                 var entityNameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity);
 
-                var template = _templateLocator.Get("GenerateGetByIdQuery");
+                var template = _templateLocator.Get("GenerateDtoCommand");
 
                 var tokens = new Dictionary<string, string>
                 {
@@ -67,9 +67,9 @@ namespace Quinntyne.Schematics.CLI.Features.BasicApi
                 };
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
-                
-                _fileWriter.WriteAllLines($"{request.Directory}//GenerateGetByIdQuery.cs", result);
-               
+
+                _fileWriter.WriteAllLines($"{request.Directory}//{entityNamePascalCase}Dto.cs", result);
+
                 return Task.CompletedTask;
             }
         }

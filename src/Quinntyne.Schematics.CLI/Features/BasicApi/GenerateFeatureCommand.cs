@@ -14,13 +14,11 @@ namespace Quinntyne.Schematics.CLI.Features.BasicApi
         {
             public Request(IOptions options)
             {                
-                Entity = options.Entity;
-                Directory = options.Directory;
-                Namespace = options.Namespace;
-                RootNamespace = options.RootNamespace;
+                Options = options;
             }
 
             public dynamic Settings { get; set; }
+            public IOptions Options { get; set; }
         }
 
         public class Validator : AbstractValidator<Request>
@@ -33,44 +31,21 @@ namespace Quinntyne.Schematics.CLI.Features.BasicApi
 
         public class Handler : IRequestHandler<Request>
         {
-            private readonly IFileWriter _fileWriter;
-            private readonly ITemplateLocator _templateLocator;
-            private readonly ITemplateProcessor _templateProcessor;
-            private readonly INamingConventionConverter _namingConventionConverter;
+            private readonly IMediator _mediator;
 
-            public Handler(
-                IFileWriter fileWriter,
-                INamingConventionConverter namingConventionConverter,
-                ITemplateLocator templateLocator, 
-                ITemplateProcessor templateProcessor
-                )
+            public Handler(IMediator mediator)
             {
-                _fileWriter = fileWriter;
-                _namingConventionConverter = namingConventionConverter;
-                _templateProcessor = templateProcessor;
-                _templateLocator = templateLocator;
+                _mediator = mediator;
             }
 
-            public Task Handle(Request request, CancellationToken cancellationToken)
-            {                
-                var entityNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity);
-                var entityNameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity);
-
-                var template = _templateLocator.Get("GenerateFeatureCommand");
-
-                var tokens = new Dictionary<string, string>
-                {
-                    { "{{ entityNamePascalCase }}", entityNamePascalCase },
-                    { "{{ entityNameCamelCase }}", entityNameCamelCase },
-                    { "{{ namespace }}", request.Namespace },
-                    { "{{ rootNamespace }}", request.RootNamespace }
-                };
-
-                var result = _templateProcessor.ProcessTemplate(template, tokens);
-                
-                _fileWriter.WriteAllLines($"{request.Directory}//GenerateFeatureCommand.cs", result);
-               
-                return Task.CompletedTask;
+            public async Task Handle(Request request, CancellationToken cancellationToken)
+            {
+                await _mediator.Send(new GenerateDtoCommand.Request(request.Options));
+                await _mediator.Send(new GenerateRemoveCommand.Request(request.Options));
+                await _mediator.Send(new GenerateGetByIdQueryCommand.Request(request.Options));
+                await _mediator.Send(new GenerateGetQueryCommand.Request(request.Options));
+                await _mediator.Send(new GenerateUpsertCommand.Request(request.Options));                
+                await _mediator.Send(new GenerateControllerCommand.Request(request.Options));
             }
         }
     }

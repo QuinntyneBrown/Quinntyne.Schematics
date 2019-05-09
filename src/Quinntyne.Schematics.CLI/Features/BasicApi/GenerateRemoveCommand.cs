@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using CommandLine;
 using Quinntyne.Schematics.Infrastructure.Interfaces;
 using Quinntyne.Schematics.Infrastructure.Services;
 using MediatR;
@@ -10,10 +12,10 @@ namespace Quinntyne.Schematics.CLI.Features.BasicApi
 {
     public class GenerateRemoveCommand
     {
-        public class Request: Options, IRequest, ICodeGeneratorCommandRequest
+        public class Request : Options, IRequest, ICodeGeneratorCommandRequest
         {
             public Request(IOptions options)
-            {                
+            {
                 Entity = options.Entity;
                 Directory = options.Directory;
                 Namespace = options.Namespace;
@@ -41,7 +43,7 @@ namespace Quinntyne.Schematics.CLI.Features.BasicApi
             public Handler(
                 IFileWriter fileWriter,
                 INamingConventionConverter namingConventionConverter,
-                ITemplateLocator templateLocator, 
+                ITemplateLocator templateLocator,
                 ITemplateProcessor templateProcessor
                 )
             {
@@ -52,9 +54,11 @@ namespace Quinntyne.Schematics.CLI.Features.BasicApi
             }
 
             public Task Handle(Request request, CancellationToken cancellationToken)
-            {                
+            {
                 var entityNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity);
                 var entityNameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity);
+                var entityNamePascalCasePlural = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity, true);
+                var entityNameCamelCasePlural = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity, true);
 
                 var template = _templateLocator.Get("GenerateRemoveCommand");
 
@@ -62,14 +66,16 @@ namespace Quinntyne.Schematics.CLI.Features.BasicApi
                 {
                     { "{{ entityNamePascalCase }}", entityNamePascalCase },
                     { "{{ entityNameCamelCase }}", entityNameCamelCase },
+                    { "{{ entityNamePascalCasePlural }}", entityNamePascalCasePlural },
+                    { "{{ entityNameCamelCasePlural }}", entityNameCamelCasePlural },
                     { "{{ namespace }}", request.Namespace },
                     { "{{ rootNamespace }}", request.RootNamespace }
                 };
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
-                
-                _fileWriter.WriteAllLines($"{request.Directory}//GenerateRemoveCommand.cs", result);
-               
+
+                _fileWriter.WriteAllLines($"{request.Directory}//Remove{entityNamePascalCase}Command.cs", result);
+
                 return Task.CompletedTask;
             }
         }

@@ -10,7 +10,7 @@ using FluentValidation;
 
 namespace Quinntyne.Schematics.CLI.Features.BasicApi
 {
-    public class GenerateControllerCommand
+    public class GenerateGetByIdQueryCommand
     {
         public class Request : Options, IRequest, ICodeGeneratorCommandRequest
         {
@@ -60,7 +60,7 @@ namespace Quinntyne.Schematics.CLI.Features.BasicApi
                 var entityNamePascalCasePlural = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity, true);
                 var entityNameCamelCasePlural = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity, true);
 
-                var template = _templateLocator.Get("GenerateControllerCommand");
+                var template = _templateLocator.Get("GenerateGetByIdQueryCommand");
 
                 var tokens = new Dictionary<string, string>
                 {
@@ -74,7 +74,7 @@ namespace Quinntyne.Schematics.CLI.Features.BasicApi
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
 
-                _fileWriter.WriteAllLines($"{request.Directory}//{entityNamePascalCasePlural}Controller.cs", result);
+                _fileWriter.WriteAllLines($"{request.Directory}//Get{entityNamePascalCase}ByIdQuery.cs", result);
 
                 return Task.CompletedTask;
             }
