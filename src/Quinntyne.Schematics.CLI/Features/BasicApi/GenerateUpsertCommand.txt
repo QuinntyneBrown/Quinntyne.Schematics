@@ -1,5 +1,5 @@
-using {{ rootNamespace }}.Core.Interfaces;
-using {{ rootNamespace }}.Core.Models;
+using {{ rootNamespace }}.Domain.DataAccess;
+using {{ rootNamespace }}.Domain.Models;
 using FluentValidation;
 using MediatR;
 using System;
@@ -14,7 +14,8 @@ namespace {{ namespace }}
         public class Validator: AbstractValidator<Request> {
             public Validator()
             {
-                RuleFor(request => request.{{ entityNamePascalCase }}.{{ entityNamePascalCase }}Id).NotNull();
+                RuleFor(request => request.{{ entityNamePascalCase }}).NotNull();
+                RuleFor(request => request.{{ entityNamePascalCase }}).SetValidator(new {{ entityNamePascalCase }}DtoValidator());
             }
         }
 

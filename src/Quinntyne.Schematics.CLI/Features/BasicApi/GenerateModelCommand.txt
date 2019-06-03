@@ -1,12 +1,13 @@
-using {{ rootNamespace }}.Core.Common;
-using {{ rootNamespace }}.Core.DomainEvents;
-using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace {{ namespace }}
 {
     public class {{ entityNamePascalCase }}
     {
-        public Guid {{ entityNamePascalCase }}Id { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public string {{ entityNamePascalCase }}Id { get; set; }
 		public string Name { get; set; }
     }
 }

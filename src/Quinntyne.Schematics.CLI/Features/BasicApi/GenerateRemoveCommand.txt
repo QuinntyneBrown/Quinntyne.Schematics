@@ -1,4 +1,4 @@
-using {{ rootNamespace }}.Core.Interfaces;
+using {{ rootNamespace }}.Domain.DataAccess;
 using FluentValidation;
 using MediatR;
 using System;

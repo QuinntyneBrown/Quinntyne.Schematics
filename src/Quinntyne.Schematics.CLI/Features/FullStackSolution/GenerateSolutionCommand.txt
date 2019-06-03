@@ -4,45 +4,33 @@ mkdir src test
 
 cd src
 
-mkdir {{ rootNamespace }}.Core {{ rootNamespace }}.Infrastructure {{ rootNamespace }}.Api {{ rootNamespace }}.SPA
+mkdir {{ rootNamespace }}.Core {{ rootNamespace }}.Domain {{ rootNamespace }}.Api
 
 cd src\{{ rootNamespace }}.Core
 
 dotnet new classlib -f netcoreapp3
 
-dotnet add package FluentValidation.AspNetCore -v 7.6.103
+dotnet add package Microsoft.AspNetCore.Cryptography.KeyDerivation
 
-dotnet add package BenchmarkDotNet -Version 0.11.0
+dotnet add package Microsoft.EntityFrameworkCore
 
-dotnet add package Microsoft.AspNetCore.All -v 2.1.1
+dotnet add package Microsoft.Net.Http.Headers
 
-dotnet add package Microsoft.AspNetCore.SignalR -v 1.0.1
+dotnet add package System.IdentityModel.Tokens.Jwt
 
-dotnet add package MediatR -v 4.1.0
+dotnet add package FluentValidation.AspNetCore
 
-dotnet add package Microsoft.EntityFrameworkCore.SqlServer -v 2.1.1
+mkdir Test
 
-dotnet add package Swashbuckle.AspNetCore -v 2.5.0
+mkdir Validation
 
-mkdir Behaviours
-
-mkdir Common
-
-mkdir DomainEvents
-
-mkdir Exceptions
-
-mkdir Extensions
-
-mkdir Identity
-
-mkdir Interfaces
+mkdir Services
 
 mkdir Models
 
 rimraf Class1.cs
 
-cd src\{{ rootNamespace }}.Infrastructure
+cd src\{{ rootNamespace }}.Domain
 
 dotnet new classlib -f netcoreapp3
 
@@ -78,7 +66,7 @@ dotnet add package Swashbuckle.AspNetCore -v 2.5.0
 
 dotnet add reference ..\{{ rootNamespace }}.Core\{{ rootNamespace }}.Core.csproj
 
-dotnet add reference ..\{{ rootNamespace }}.Infrastructure\{{ rootNamespace }}.Infrastructure.csproj
+dotnet add reference ..\{{ rootNamespace }}.Domain\{{ rootNamespace }}.Domain.csproj
 
 rimraf Controllers
 
@@ -91,14 +79,6 @@ mkdir Notes
 mkdir Tags
 
 mkdir Users
-
-cd src\{{ rootNamespace }}.SPA
-
-dotnet new angular
-
-rimraf ClientApp
-
-ng new ClientApp
 
 cd test
 
@@ -122,7 +102,7 @@ rimraf UnitTest1.cs
 
 dotnet add reference ..\..\src\{{ rootNamespace }}.Core\{{ rootNamespace }}.Core.csproj
 
-dotnet add reference ..\..\src\{{ rootNamespace }}.Infrastructure\{{ rootNamespace }}.Infrastructure.csproj
+dotnet add reference ..\..\src\{{ rootNamespace }}.Domain\{{ rootNamespace }}.Domain.csproj
 
 dotnet add reference ..\..\src\{{ rootNamespace }}.Api\{{ rootNamespace }}.Api.csproj
 
@@ -142,7 +122,7 @@ rimraf UnitTest1.cs
 
 dotnet add reference ..\..\src\{{ rootNamespace }}.Core\{{ rootNamespace }}.Core.csproj
 
-dotnet add reference ..\..\src\{{ rootNamespace }}.Infrastructure\{{ rootNamespace }}.Infrastructure.csproj
+dotnet add reference ..\..\src\{{ rootNamespace }}.Domain\{{ rootNamespace }}.Domain.csproj
 
 dotnet add reference ..\..\src\{{ rootNamespace }}.Api\{{ rootNamespace }}.Api.csproj
 
@@ -150,6 +130,6 @@ cd {{ currentDirectory }}
 
 dotnet new sln -n {{ rootNamespace }}
 
-dotnet sln add .\src\{{ rootNamespace }}.Core\{{ rootNamespace }}.Core.csproj .\src\{{ rootNamespace }}.Infrastructure\{{ rootNamespace }}.Infrastructure.csproj .\src\{{ rootNamespace }}.Api\{{ rootNamespace }}.Api.csproj .\src\{{ rootNamespace }}.SPA\{{ rootNamespace }}.SPA.csproj .\test\IntegrationTests\IntegrationTests.csproj .\test\UnitTests\UnitTests.csproj
+dotnet sln add .\src\{{ rootNamespace }}.Core\{{ rootNamespace }}.Core.csproj .\src\{{ rootNamespace }}.Domain\{{ rootNamespace }}.Domain.csproj .\src\{{ rootNamespace }}.Api\{{ rootNamespace }}.Api.csproj .\test\IntegrationTests\IntegrationTests.csproj .\test\UnitTests\UnitTests.csproj
 
 start {{ rootNamespace }}.sln

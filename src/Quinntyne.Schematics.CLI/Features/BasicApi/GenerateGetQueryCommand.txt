@@ -1,5 +1,5 @@
-using {{ rootNamespace }}.Core.Interfaces;
-using {{ rootNamespace }}.Core.Models;
+using {{ rootNamespace }}.Domain.DataAccess;
+using {{ rootNamespace }}.Domain.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;

@@ -1,8 +1,18 @@
-using {{ rootNamespace }}.Core.Models;
+using {{ rootNamespace }}.Domain.Models;
+using FluentValidation;
 using System;
 
 namespace {{ namespace }}
 {
+    public class {{ entityNamePascalCase }}DtoValidator: AbstractValidator<{{ entityNamePascalCase }}Dto>
+    {
+        public {{ entityNamePascalCase }}DtoValidator()
+        {
+            RuleFor(x => x.{{ entityNamePascalCase }}Id).NotNull();
+            RuleFor(x => x.Name).NotNull();
+        }
+    }
+
     public class {{ entityNamePascalCase }}Dto
     {        
         public Guid {{ entityNamePascalCase }}Id { get; set; }
