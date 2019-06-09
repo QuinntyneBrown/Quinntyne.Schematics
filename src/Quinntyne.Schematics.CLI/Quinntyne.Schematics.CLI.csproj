@@ -13,6 +13,7 @@
     <None Remove="Features\Angular\GenerateComponentCommand.txt" />
     <None Remove="Features\Angular\GenerateEditOverlayCommand.txt" />
     <None Remove="Features\Angular\GenerateEditOverlayComponentCommand.txt" />
+    <None Remove="Features\Angular\GenerateInterfaceCommand.txt" />
     <None Remove="Features\Angular\GenerateModuleCommand - Copy.txt" />
     <None Remove="Features\Angular\GenerateModuleCommand.txt" />
     <None Remove="Features\Angular\GenerateNgModelCommand.txt" />
@@ -250,6 +251,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Features\Angular\GenerateInterfaceCommand.txt" />
     <EmbeddedResource Include="Features\Angular\GenerateNgScenarioCommand.txt" />
     <EmbeddedResource Include="Features\Angular\GenerateValidatorCommand.txt" />
     <EmbeddedResource Include="Features\BasicApi\GenerateControllerCommand.txt" />

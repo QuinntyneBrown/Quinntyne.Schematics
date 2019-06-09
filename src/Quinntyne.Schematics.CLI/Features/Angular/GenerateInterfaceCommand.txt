@@ -1,0 +1,4 @@
+export interface {{ entityNamePascalCase }} {
+  {{ entityNameCamelCase }}Id: number;
+  code: string;
+}
