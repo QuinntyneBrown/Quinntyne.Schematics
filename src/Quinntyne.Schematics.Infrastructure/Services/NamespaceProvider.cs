@@ -85,8 +85,16 @@ namespace Quinntyne.Schematics.Infrastructure.Services
             var newDirectories = directories.Take(directories.Length - depth);
             var computedPath = Join(DirectorySeparatorChar.ToString(), newDirectories);
             var projectFiles = GetFiles(computedPath, "*.csproj");
-            depth = depth + 1;
-            return (projectFiles.FirstOrDefault() != null) ? projectFiles.First() : GetProjectPath(path, depth);
+            var codeGeneratorJsonFiles = GetFiles(computedPath, "*.json").Where(x => x.Contains("codeGeneratorSettings.json"));
+
+            if (codeGeneratorJsonFiles.FirstOrDefault() != null && projectFiles.FirstOrDefault() == null)
+                return codeGeneratorJsonFiles.First();
+
+            depth += 1;
+
+            return (projectFiles.FirstOrDefault() != null) 
+                ? projectFiles.First() 
+                : GetProjectPath(path, depth);
         }
 
         public string GetWebpackConfigPath(string path, int depth = 0)

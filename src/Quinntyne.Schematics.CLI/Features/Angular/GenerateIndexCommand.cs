@@ -14,6 +14,11 @@ namespace Quinntyne.Schematics.CLI.Features.Angular
     {
         public class Request: Options, IRequest, ICodeGeneratorCommandRequest
         {
+            public Request()
+            {
+                Directory = System.Environment.CurrentDirectory;
+            }
+
             public Request(IOptions options)
             {                
                 Entity = options.Entity;

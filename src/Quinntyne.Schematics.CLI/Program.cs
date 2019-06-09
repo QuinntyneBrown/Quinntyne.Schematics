@@ -110,6 +110,8 @@ namespace Quinntyne.Schematics.CLI
 
             services.UseCodeGeneratorFeature();
 
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(GenerateBarralBehavior<,>));
+
             services.AddMediatR(typeof(Program));
             
             return services.BuildServiceProvider();            
