@@ -17,26 +17,26 @@ namespace {{ namespace }}
 
         [HttpGet]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        [ProducesResponseType(typeof(Get{{ entityNamePascalCasePlural }}Query.Response), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<Get{{ entityNamePascalCasePlural }}Query.Response>> Get()
-            => await _meditator.Send(new Get{{ entityNamePascalCasePlural }}Query.Request());
+        [ProducesResponseType(typeof(Get{{ entityNamePascalCasePlural }}.Response), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<Get{{ entityNamePascalCasePlural }}.Response>> Get()
+            => await _meditator.Send(new Get{{ entityNamePascalCasePlural }}.Request());
 
         [HttpGet("{{{ entityNameCamelCase }}Id}")]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        [ProducesResponseType(typeof(Get{{ entityNamePascalCase }}ByIdQuery.Response), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<Get{{ entityNamePascalCase }}ByIdQuery.Response>> GetById([FromRoute]Get{{ entityNamePascalCase }}ByIdQuery.Request request)
+        [ProducesResponseType(typeof(Get{{ entityNamePascalCase }}ById.Response), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<Get{{ entityNamePascalCase }}ById.Response>> GetById([FromRoute]Get{{ entityNamePascalCase }}ById.Request request)
             => await _meditator.Send(request);
 
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        [ProducesResponseType(typeof(Upsert{{ entityNamePascalCase }}Command.Response), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<Upsert{{ entityNamePascalCase }}Command.Response>> Upsert(Upsert{{ entityNamePascalCase }}Command.Request request)
+        [ProducesResponseType(typeof(Upsert{{ entityNamePascalCase }}.Response), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<Upsert{{ entityNamePascalCase }}.Response>> Upsert(Upsert{{ entityNamePascalCase }}.Request request)
             => await _meditator.Send(request);
 
         [HttpDelete("{bookId}")]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(Unit), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<Unit>> Remove([FromRoute]Remove{{ entityNamePascalCase }}Command.Request request)
+        public async Task<ActionResult<Unit>> Remove([FromRoute]Remove{{ entityNamePascalCase }}.Request request)
             => await _meditator.Send(request);
     }
 }

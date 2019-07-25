@@ -2,14 +2,15 @@ import { Component } from "@angular/core";
 import { Subject, BehaviorSubject } from "rxjs";
 import { FormGroup, FormControl } from "@angular/forms";
 import { OverlayRefWrapper } from "../core/overlay-ref-wrapper";
-import { {{ entityNamePascalCase }}Service } from "./{{ entityNameSnakeCase }}.service";
 import { {{ entityNamePascalCase }} } from "./{{ entityNameSnakeCase }}.model";
 import { map, switchMap, tap, takeUntil } from "rxjs/operators";
+import { OverlayRefWrapper } from '@{{ rootNamespace }}/shared';
+import { {{ entityNamePascalCase }} } from '@{{ rootNamespace }}/domain';
 
 @Component({
   templateUrl: "./{{ nameSnakeCase }}.component.html",
   styleUrls: ["./{{ nameSnakeCase }}.component.css"],
-  selector: "app-{{ nameSnakeCase }}",
+  selector: "{{ rootNamespace }}-{{ nameSnakeCase }}",
   host: { 'class': 'mat-typography' }
 })
 export class {{ namePascalCase }}Component { 
@@ -19,7 +20,7 @@ export class {{ namePascalCase }}Component {
 
   ngOnInit() {
     if (this.{{ entityNameCamelCase }}Id)
-      this._{{ entityNameCamelCase }}Service.getById({ {{ entityNameCamelCase }}Id: this.{{ entityNameCamelCase }}Id })
+      this._{{ entityNameCamelCase }}Service.getById(this.{{ entityNameCamelCase }}Id)
         .pipe(
           map(x => this.{{ entityNameCamelCase }}$.next(x)),
           switchMap(x => this.{{ entityNameCamelCase }}$),

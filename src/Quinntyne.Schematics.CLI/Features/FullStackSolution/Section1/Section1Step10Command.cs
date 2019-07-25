@@ -68,7 +68,7 @@ namespace Quinntyne.Schematics.CLI.Features.FullStackSolution.Section1
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
                 
-                _fileWriter.WriteAllLines($"{request.Directory}//Section1Step10Command.cs", result);
+                _fileWriter.WriteAllLines($"{request.Directory}//Section1Step10.cs", result);
                
                 return Task.CompletedTask;
             }

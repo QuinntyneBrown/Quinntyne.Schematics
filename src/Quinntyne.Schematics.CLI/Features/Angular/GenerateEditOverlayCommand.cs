@@ -68,7 +68,7 @@ namespace Quinntyne.Schematics.CLI.Features.Angular
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
                 
-                _fileWriter.WriteAllLines($"{request.Directory}//GenerateEditOverlayCommand.cs", result);
+                _fileWriter.WriteAllLines($"{request.Directory}//GenerateEditOverlay.cs", result);
                
                 return Task.CompletedTask;
             }

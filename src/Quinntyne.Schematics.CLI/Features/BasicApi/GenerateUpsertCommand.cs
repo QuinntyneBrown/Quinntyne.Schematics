@@ -72,7 +72,7 @@ namespace Quinntyne.Schematics.CLI.Features.BasicApi
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
 
-                _fileWriter.WriteAllLines($"{request.Directory}//Upsert{entityNamePascalCase}Command.cs", result);
+                _fileWriter.WriteAllLines($"{request.Directory}//Upsert{entityNamePascalCase}.cs", result);
 
                 return Task.CompletedTask;
             }

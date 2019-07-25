@@ -68,7 +68,7 @@ namespace Quinntyne.Schematics.CLI.Features.FullStackSolution
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
                 
-                _fileWriter.WriteAllLines($"{request.Directory}//AddAddressCommand.cs", result);
+                _fileWriter.WriteAllLines($"{request.Directory}//AddAddress.cs", result);
                
                 return Task.CompletedTask;
             }

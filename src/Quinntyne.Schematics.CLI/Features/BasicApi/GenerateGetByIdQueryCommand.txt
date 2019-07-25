@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace {{ namespace }}
 {
-    public class Get{{ entityNamePascalCase }}ByIdQuery
+    public class Get{{ entityNamePascalCase }}ById
     {
         public class Request : IRequest<Response> {
             public Guid {{ entityNamePascalCase }}Id { get; set; }

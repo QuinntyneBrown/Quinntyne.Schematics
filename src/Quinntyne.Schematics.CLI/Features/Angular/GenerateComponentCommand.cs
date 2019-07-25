@@ -75,7 +75,6 @@ namespace Quinntyne.Schematics.CLI.Features.Angular
                     { "{{ namespace }}", request.Namespace },
                     { "{{ rootNamespace }}", request.RootNamespace },
                     { "{{ nameSnakeCase }}", nameSnakeCase },
-                    { "{{ prefix }}", request.RootNamespace },
                     {"{{ namePascalCase }}",namePascalCase }
                 };
 

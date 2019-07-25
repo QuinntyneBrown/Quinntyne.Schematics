@@ -6,9 +6,9 @@ using Quinntyne.Schematics.Infrastructure.Services;
 using MediatR;
 using FluentValidation;
 
-namespace Quinntyne.Schematics.CLI.Features.FullStackSolution
+namespace Quinntyne.Schematics.CLI.Features.BasicApi
 {
-    public class AddLoggingCommand
+    public class GenerateCommandCommand
     {
         public class Request: Options, IRequest, ICodeGeneratorCommandRequest
         {
@@ -18,6 +18,7 @@ namespace Quinntyne.Schematics.CLI.Features.FullStackSolution
                 Directory = options.Directory;
                 Namespace = options.Namespace;
                 RootNamespace = options.RootNamespace;
+                Name = options.Name;
             }
 
             public dynamic Settings { get; set; }
@@ -55,11 +56,13 @@ namespace Quinntyne.Schematics.CLI.Features.FullStackSolution
             {                
                 var entityNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity);
                 var entityNameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity);
+                var namePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Name);
 
-                var template = _templateLocator.Get("AddLoggingCommand");
+                var template = _templateLocator.Get("GenerateCommandCommand");
 
                 var tokens = new Dictionary<string, string>
                 {
+                    { "{{ namePascalCase }}", namePascalCase },
                     { "{{ entityNamePascalCase }}", entityNamePascalCase },
                     { "{{ entityNameCamelCase }}", entityNameCamelCase },
                     { "{{ namespace }}", request.Namespace },
@@ -68,7 +71,7 @@ namespace Quinntyne.Schematics.CLI.Features.FullStackSolution
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
                 
-                _fileWriter.WriteAllLines($"{request.Directory}//AddLogging.cs", result);
+                _fileWriter.WriteAllLines($"{request.Directory}//{namePascalCase}.cs", result);
                
                 return Task.CompletedTask;
             }

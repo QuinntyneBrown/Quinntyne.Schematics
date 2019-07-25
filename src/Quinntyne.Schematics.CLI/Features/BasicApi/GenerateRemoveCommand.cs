@@ -74,7 +74,7 @@ namespace Quinntyne.Schematics.CLI.Features.BasicApi
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
 
-                _fileWriter.WriteAllLines($"{request.Directory}//Remove{entityNamePascalCase}Command.cs", result);
+                _fileWriter.WriteAllLines($"{request.Directory}//Remove{entityNamePascalCase}.cs", result);
 
                 return Task.CompletedTask;
             }

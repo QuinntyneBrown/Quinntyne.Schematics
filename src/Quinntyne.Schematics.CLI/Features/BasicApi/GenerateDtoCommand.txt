@@ -17,6 +17,7 @@ namespace {{ namespace }}
     {        
         public Guid {{ entityNamePascalCase }}Id { get; set; }
         public string Name { get; set; }
+        public int Version { get; set; }
     }
 
     public static class {{ entityNamePascalCase }}Extensions
@@ -25,7 +26,8 @@ namespace {{ namespace }}
             => new {{ entityNamePascalCase }}Dto
             {
                 {{ entityNamePascalCase }}Id = {{ entityNameCamelCase }}.{{ entityNamePascalCase }}Id,
-                Name = {{ entityNameCamelCase }}.Name
+                Name = {{ entityNameCamelCase }}.Name,
+                Version = {{ entityNameCamelCase }}.Version
             };
     }
 }

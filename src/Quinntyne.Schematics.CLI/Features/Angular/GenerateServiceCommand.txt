@@ -2,8 +2,8 @@ import { Injectable, Inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { baseUrl } from "../core/constants";
-import { {{ entityNamePascalCase }} } from "./{{ entityNameSnakeCase }}.model";
+import { baseUrl } from '@kids-toy-hive/core';
+import { {{ entityNamePascalCase }} } from '../models';
 
 @Injectable()
 export class {{ entityNamePascalCase }}Service {
@@ -27,14 +27,26 @@ export class {{ entityNamePascalCase }}Service {
   }
 
   public remove(options: { {{ entityNameCamelCase }}: {{ entityNamePascalCase }} }): Observable<void> {
-    return this._client.delete<void>(`${this._baseUrl}api/{{ entityNameCamelCasePlural }}/${options.{{ entityNameCamelCase }}.{{ entityNameCamelCase }}Id}`);
+    return this._client.post<void>(`${this._baseUrl}api/commands/${options.{{ entityNameCamelCase }}.{{ entityNameCamelCase }}Id}`, {
+      headers: {
+        "OperationId":"Remove{{ entityNamePascalCase }}"
+      }
+    });
   }
 
   public create(options: { {{ entityNameCamelCase }}: {{ entityNamePascalCase }} }): Observable<{ {{ entityNameCamelCase }}Id: string }> {
-    return this._client.post<{ {{ entityNameCamelCase }}Id: string }>(`${this._baseUrl}api/{{ entityNameCamelCasePlural }}`, { {{ entityNameCamelCase }}: options.{{ entityNameCamelCase }} });
+    return this._client.post<{ {{ entityNameCamelCase }}Id: string }>(`${this._baseUrl}api/commands`, { {{ entityNameCamelCase }}: options.{{ entityNameCamelCase }} }, {
+      headers: {
+        "OperationId":"Upsert{{ entityNamePascalCase }}"
+      }
+    });
   }
 
   public update(options: { {{ entityNameCamelCase }}: {{ entityNamePascalCase }} }): Observable<{ {{ entityNameCamelCase }}Id: string }> {
-    return this._client.put<{ {{ entityNameCamelCase }}Id: string }>(`${this._baseUrl}api/{{ entityNameCamelCasePlural }}`, { {{ entityNameCamelCase }}: options.{{ entityNameCamelCase }} });
+    return this._client.post<{ {{ entityNameCamelCase }}Id: string }>(`${this._baseUrl}api/commands`, { {{ entityNameCamelCase }}: options.{{ entityNameCamelCase }} }, {
+      headers: {
+        "OperationId":"Upsert{{ entityNamePascalCase }}"
+      }
+    });
   }
 }

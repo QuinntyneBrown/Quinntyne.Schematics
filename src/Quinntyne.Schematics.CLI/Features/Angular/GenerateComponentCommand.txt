@@ -4,10 +4,9 @@ import { Subject } from 'rxjs';
 @Component({
   templateUrl: './{{ nameSnakeCase }}.component.html',
   styleUrls: ['./{{ nameSnakeCase }}.component.css'],
-  selector: '{{ prefix }}-{{ nameSnakeCase }}'
+  selector: '{{ rootNamespace }}-{{ nameSnakeCase }}'
 })
 export class {{ namePascalCase }}Component implements OnDestroy  { 
-
   public onDestroy: Subject<void> = new Subject<void>();
 
   ngOnDestroy() {

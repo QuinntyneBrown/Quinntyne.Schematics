@@ -74,7 +74,7 @@ namespace Quinntyne.Schematics.CLI.Features.BasicApi
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
 
-                _fileWriter.WriteAllLines($"{request.Directory}//Get{entityNamePascalCasePlural}Query.cs", result);
+                _fileWriter.WriteAllLines($"{request.Directory}//Get{entityNamePascalCasePlural}.cs", result);
 
                 return Task.CompletedTask;
             }

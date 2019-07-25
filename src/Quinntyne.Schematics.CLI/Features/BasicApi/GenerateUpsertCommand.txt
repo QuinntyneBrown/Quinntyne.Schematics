@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace {{ namespace }}
 {
-    public class Upsert{{ entityNamePascalCase }}Command
+    public class Upsert{{ entityNamePascalCase }}
     {
 
         public class Validator: AbstractValidator<Request> {

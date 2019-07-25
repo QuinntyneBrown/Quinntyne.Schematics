@@ -1,14 +1,15 @@
-import { Injectable, Injector } from "@angular/core";
-import { BaseOverlayService } from "../core/base-overlay.service";
-import { OverlayRefProvider } from "../core/overlay-ref-provider";
-import { {{ namePascalCase }}Component } from "./{{ nameSnakeCase }}.component";
+import { Injectable, Injector } from '@angular/core';
+import { BaseOverlayService, OverlayRefProvider } from '@{{ rootNamespace }}/domain';
+import { Logger } from '@{{ rootNamespace }}/core';
+import { {{ namePascalCase }}Component } from './{{ nameSnakeCase }}.component';
 
 @Injectable()
 export class {{ namePascalCase }} extends BaseOverlayService<{{ namePascalCase }}Component> {
   constructor(
     public injector: Injector,
-    public overlayRefProvider: OverlayRefProvider
+    public overlayRefProvider: OverlayRefProvider,
+    public logger: Logger
   ) {
-    super(injector, overlayRefProvider, {{ namePascalCase }}Component);
+    super(injector, overlayRefProvider, {{ namePascalCase }}Component, logger);
   }
 }

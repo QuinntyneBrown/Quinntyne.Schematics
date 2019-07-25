@@ -21,6 +21,7 @@
     <None Remove="Features\Angular\GenerateOverlayServiceCommand.txt" />
     <None Remove="Features\Angular\GenerateServiceCommand.txt" />
     <None Remove="Features\Angular\GenerateValidatorCommand.txt" />
+    <None Remove="Features\BasicApi\GenerateCommandCommand.txt" />
     <None Remove="Features\BasicApi\GenerateControllerCommand.txt" />
     <None Remove="Features\BasicApi\GenerateDtoCommand.txt" />
     <None Remove="Features\BasicApi\GenerateGetByIdQueryCommand.txt" />
@@ -254,6 +255,7 @@
     <EmbeddedResource Include="Features\Angular\GenerateInterfaceCommand.txt" />
     <EmbeddedResource Include="Features\Angular\GenerateNgScenarioCommand.txt" />
     <EmbeddedResource Include="Features\Angular\GenerateValidatorCommand.txt" />
+    <EmbeddedResource Include="Features\BasicApi\GenerateCommandCommand.txt" />
     <EmbeddedResource Include="Features\BasicApi\GenerateControllerCommand.txt" />
     <EmbeddedResource Include="Features\BasicApi\GenerateDtoCommand.txt" />
     <EmbeddedResource Include="Features\BasicApi\GenerateGetByIdQueryCommand.txt" />
