@@ -17,6 +17,7 @@ namespace Quinntyne.Schematics.CLI.Features.BasicApi
             dictionary.Add("getbyid", new Func<IOptions, IRequest>((options) => new GenerateGetByIdQueryCommand.Request(options)));
             dictionary.Add("controller", new Func<IOptions, IRequest>((options) => new GenerateControllerCommand.Request(options)));
             dictionary.Add("command", new Func<IOptions, IRequest>((options) => new GenerateCommandCommand.Request(options)));
+            dictionary.Add("tests", new Func<IOptions, IRequest>((options) => new GenerateCommandTestsCommand.Request(options)));
         }
     }
 }
