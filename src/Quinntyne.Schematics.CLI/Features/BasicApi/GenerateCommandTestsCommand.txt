@@ -1,3 +1,4 @@
+using {{ rootNamespace }}.Api;
 using {{ rootNamespace }}.Domain.DataAccess;
 using {{ rootNamespace }}.Domain.Features.{{ entityNamePascalCasePlural }};
 using MediatR;
@@ -21,6 +22,8 @@ namespace {{ namespace }}
 
             using (var context = new AppDbContext(options, mediator))
             {
+                SeedData.Seed(context, ConfigurationHelper.Seed);
+
                 var {{ nameCamelCase }}Handler = new {{ namePascalCase }}.Handler(context);
             }
         }
