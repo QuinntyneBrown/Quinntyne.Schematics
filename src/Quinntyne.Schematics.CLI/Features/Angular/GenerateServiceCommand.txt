@@ -1,52 +1,62 @@
 import { Injectable, Inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
-import { baseUrl } from '@kids-toy-hive/core';
+import { map, catchError } from "rxjs/operators";
+import { baseUrl, ProblemDetails } from '@kids-toy-hive/core';
 import { {{ entityNamePascalCase }} } from '../models';
+import { ErrorService } from './error.service';
 
 @Injectable()
 export class {{ entityNamePascalCase }}Service {
   constructor(
     @Inject(baseUrl) private _baseUrl:string,
-    private _client: HttpClient
+    private _client: HttpClient,
+    private readonly _errorService: ErrorService
   ) { }
 
-  public get(): Observable<Array<{{ entityNamePascalCase }}>> {
+  public get(): Observable<Array<{{ entityNamePascalCase }}> | ProblemDetails> {
     return this._client.get<{ {{ entityNameCamelCasePlural }}: Array<{{ entityNamePascalCase }}> }>(`${this._baseUrl}api/{{ entityNameCamelCasePlural }}`)
       .pipe(
-        map(x => x.{{ entityNameCamelCasePlural }})
+        map(x => x.{{ entityNameCamelCasePlural }}),
+        catchError(e => this._errorService.handleHttpError(e))
       );
   }
 
-  public getById(options: { {{ entityNameCamelCase }}Id: string }): Observable<{{ entityNamePascalCase }}> {
+  public getById(options: { {{ entityNameCamelCase }}Id: string }): Observable<{{ entityNamePascalCase }} | ProblemDetails> {
     return this._client.get<{ {{ entityNameCamelCase }}: {{ entityNamePascalCase }} }>(`${this._baseUrl}api/{{ entityNameCamelCasePlural }}/${options.{{ entityNameCamelCase }}Id}`)
       .pipe(
-        map(x => x.{{ entityNameCamelCase }})
+        map(x => x.{{ entityNameCamelCase }}),
+        catchError(e => this._errorService.handleHttpError(e))
       );
   }
 
-  public remove(options: { {{ entityNameCamelCase }}: {{ entityNamePascalCase }} }): Observable<void> {
+  public remove(options: { {{ entityNameCamelCase }}: {{ entityNamePascalCase }} }): Observable<void | ProblemDetails> {
     return this._client.post<void>(`${this._baseUrl}api/commands/${options.{{ entityNameCamelCase }}.{{ entityNameCamelCase }}Id}`, {
       headers: {
         "OperationId":"Remove{{ entityNamePascalCase }}"
       }
-    });
+    }).pipe(
+      catchError(e => this._errorService.handleHttpError(e))
+    );
   }
 
-  public create(options: { {{ entityNameCamelCase }}: {{ entityNamePascalCase }} }): Observable<{ {{ entityNameCamelCase }}Id: string }> {
-    return this._client.post<{ {{ entityNameCamelCase }}Id: string }>(`${this._baseUrl}api/commands`, { {{ entityNameCamelCase }}: options.{{ entityNameCamelCase }} }, {
+  public create(options: { {{ entityNameCamelCase }}: {{ entityNamePascalCase }} }): Observable<{ {{ entityNameCamelCase }}Id: string, version: number } | ProblemDetails> {
+    return this._client.post<{ {{ entityNameCamelCase }}Id: string, version: number }>(`${this._baseUrl}api/commands`, { {{ entityNameCamelCase }}: options.{{ entityNameCamelCase }} }, {
       headers: {
         "OperationId":"Upsert{{ entityNamePascalCase }}"
       }
-    });
+    }).pipe(
+      catchError(e => this._errorService.handleHttpError(e))
+    );
   }
 
-  public update(options: { {{ entityNameCamelCase }}: {{ entityNamePascalCase }} }): Observable<{ {{ entityNameCamelCase }}Id: string }> {
-    return this._client.post<{ {{ entityNameCamelCase }}Id: string }>(`${this._baseUrl}api/commands`, { {{ entityNameCamelCase }}: options.{{ entityNameCamelCase }} }, {
+  public update(options: { {{ entityNameCamelCase }}: {{ entityNamePascalCase }} }): Observable<{ {{ entityNameCamelCase }}Id: string, version: number } | ProblemDetails> {
+    return this._client.post<{ {{ entityNameCamelCase }}Id: string, version: number }>(`${this._baseUrl}api/commands`, { {{ entityNameCamelCase }}: options.{{ entityNameCamelCase }} }, {
       headers: {
         "OperationId":"Upsert{{ entityNamePascalCase }}"
       }
-    });
+    }).pipe(
+      catchError(e => this._errorService.handleHttpError(e))
+    );
   }
 }
