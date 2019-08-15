@@ -19,6 +19,9 @@
     <None Remove="Features\Angular\GenerateNgModelCommand.txt" />
     <None Remove="Features\Angular\GenerateNgScenarioCommand.txt" />
     <None Remove="Features\Angular\GenerateOverlayServiceCommand.txt" />
+    <None Remove="Features\Angular\GenerateResponsiveComponentCommand-css.txt" />
+    <None Remove="Features\Angular\GenerateResponsiveComponentCommand-html.txt" />
+    <None Remove="Features\Angular\GenerateResponsiveComponentCommand.txt" />
     <None Remove="Features\Angular\GenerateServiceCommand.txt" />
     <None Remove="Features\Angular\GenerateValidatorCommand.txt" />
     <None Remove="Features\BasicApi\GenerateCommandCommand.txt" />
@@ -255,6 +258,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Features\Angular\GenerateInterfaceCommand.txt" />
     <EmbeddedResource Include="Features\Angular\GenerateNgScenarioCommand.txt" />
+    <EmbeddedResource Include="Features\Angular\GenerateResponsiveComponentCommand-css.txt" />
+    <EmbeddedResource Include="Features\Angular\GenerateResponsiveComponentCommand-html.txt" />
+    <EmbeddedResource Include="Features\Angular\GenerateResponsiveComponentCommand.txt" />
     <EmbeddedResource Include="Features\Angular\GenerateValidatorCommand.txt" />
     <EmbeddedResource Include="Features\BasicApi\GenerateCommandCommand.txt" />
     <EmbeddedResource Include="Features\BasicApi\GenerateCommandTestsCommand.txt" />
