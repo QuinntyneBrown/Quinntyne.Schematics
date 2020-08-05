@@ -1,0 +1,12 @@
+using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace {{ namespace }}
+{
+    public class {{ entityNamePascalCase }}
+    {
+        [Key]
+        public Guid {{ entityNamePascalCase }}Id { get; set; }
+    }
+
+}

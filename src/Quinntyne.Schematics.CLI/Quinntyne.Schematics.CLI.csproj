@@ -20,6 +20,7 @@
     <None Remove="Features\Angular\GenerateOverlayServiceCommand.txt" />
     <None Remove="Features\Angular\GenerateServiceCommand.txt" />
     <None Remove="Features\Angular\GenerateValidatorCommand.txt" />
+    <None Remove="Features\BasicApi\GenerateModelCommand.txt" />
     <None Remove="Features\CliSolution\GenerateCliSolutionCommand.txt" />
     <None Remove="Features\CustomElements\GenerateCustomElementCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateAppSettingsCommand.txt" />
@@ -263,7 +264,6 @@
     <None Remove="Features\EventSourcing\GenerateFeatureCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateGetByIdQueryCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateGetQueryCommand.txt" />
-    <None Remove="Features\EventSourcing\GenerateModelCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateQueryCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateRemoveCommand.txt" />
     <None Remove="Features\EventSourcing\GenerateSaveCommand.txt" />
@@ -274,6 +274,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Features\Angular\GenerateNgScenarioCommand.txt" />
     <EmbeddedResource Include="Features\Angular\GenerateValidatorCommand.txt" />
+    <EmbeddedResource Include="Features\BasicApi\GenerateModelCommand.txt" />
     <EmbeddedResource Include="Features\CliSolution\GenerateCliSolutionCommand.txt" />
     <EmbeddedResource Include="Features\CustomElements\GenerateCustomElementCommand.txt" />
     <EmbeddedResource Include="Features\FullStackSolution\Classes\Core\UserCreated.txt" />
@@ -630,9 +631,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Features\EventSourcing\GenerateGetQueryCommand.txt">
       <DependentUpon>GenerateGetQueryCommand.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Features\EventSourcing\GenerateModelCommand.txt">
-      <DependentUpon>GenerateModelCommand.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Features\EventSourcing\GenerateQueryCommand.txt">
       <DependentUpon>GenerateQueryCommand.cs</DependentUpon>
