@@ -6,9 +6,9 @@ using Quinntyne.Schematics.Infrastructure.Services;
 using MediatR;
 using FluentValidation;
 
-namespace Quinntyne.Schematics.CLI.Features.EventSourcing
+namespace Quinntyne.Schematics.CLI.Features.BasicApi
 {
-    public class GenerateSagaCommand
+    public class GenerateDbContextCommand
     {
         public class Request: Options, IRequest, ICodeGeneratorCommandRequest
         {
@@ -55,22 +55,20 @@ namespace Quinntyne.Schematics.CLI.Features.EventSourcing
             {                
                 var entityNamePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Entity);
                 var entityNameCamelCase = _namingConventionConverter.Convert(NamingConvention.CamelCase, request.Entity);
-                var namePascalCase = _namingConventionConverter.Convert(NamingConvention.PascalCase, request.Name);
 
-                var template = _templateLocator.Get("GenerateSagaCommand");
+                var template = _templateLocator.Get("GenerateDbContextCommand");
 
                 var tokens = new Dictionary<string, string>
                 {
                     { "{{ entityNamePascalCase }}", entityNamePascalCase },
                     { "{{ entityNameCamelCase }}", entityNameCamelCase },
                     { "{{ namespace }}", request.Namespace },
-                    { "{{ rootNamespace }}", request.RootNamespace },
-                    { "{{ namePascalCase }}", namePascalCase }
+                    { "{{ rootNamespace }}", request.RootNamespace }
                 };
 
                 var result = _templateProcessor.ProcessTemplate(template, tokens);
                 
-                _fileWriter.WriteAllLines($"{request.Directory}//{ namePascalCase }SagaCommand.cs", result);
+                _fileWriter.WriteAllLines($"{request.Directory}//GenerateDbContextCommand.cs", result);
                
                 return Task.CompletedTask;
             }
